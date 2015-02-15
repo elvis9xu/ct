@@ -13,18 +13,27 @@
                        http://www.springframework.org/schema/cache
                        http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
 
+  <bean id="respCodeProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    <property name="fileEncoding" value="UTF-8" />
+    <property name="locations">
+      <array>
+        <value>classpath:props/resp-code.properties</value>
+      </array>
+    </property>
+  </bean>
+
   <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
     <property name="fileEncoding" value="UTF-8" />
     <property name="locations">
       <array>
-        <value>classpath:props/respCode.properties</value>
+        <value>classpath:props/app.properties</value>
       </array>
     </property>
   </bean>
 
   <context:property-placeholder file-encoding="UTF-8" properties-ref="properties" />
 
-  <context:component-scan base-package="com.xjd.mol.biz" />
+  <context:component-scan base-package="com.xjd.ct.context, com.xjd.ct.respcode" />
 
   <context:annotation-config />
 
