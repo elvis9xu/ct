@@ -33,7 +33,7 @@
 
   <context:property-placeholder file-encoding="UTF-8" properties-ref="properties" />
 
-  <context:component-scan base-package="com.xjd.ct.context, com.xjd.ct.respcode" />
+  <context:component-scan base-package="com.xjd.ct.utl.context, com.xjd.ct.utl.respcode" />
 
   <context:annotation-config />
 

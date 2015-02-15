@@ -1,11 +1,11 @@
-package com.xjd.ct.util.valid.constraints;
+package com.xjd.ct.utl.valid.constraints;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.xjd.ct.util.DateUtil;
+import com.xjd.ct.utl.DateUtil;
 
 
 public class DateConstraintValidator implements ConstraintValidator<Date, String> {

@@ -1,4 +1,4 @@
-package com.xjd.ct.util.respcode;
+package com.xjd.ct.utl.respcode;
 
 /**
  * <pre>

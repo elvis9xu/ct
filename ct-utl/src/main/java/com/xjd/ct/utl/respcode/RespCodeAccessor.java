@@ -1,4 +1,4 @@
-package com.xjd.ct.util.respcode;
+package com.xjd.ct.utl.respcode;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -32,7 +32,7 @@ public class RespCodeAccessor {
 			if (log.isDebugEnabled()) {
 				StringWriter writer = new StringWriter(properties.size() * 30);
 				properties.list(new PrintWriter(writer));
-				log.debug(writer.toString());
+				log.debug("RespCode Message as follow:\r\n" + writer.toString());
 			}
 		} else {
 			log.warn("RespCode Message has bean loaded!");

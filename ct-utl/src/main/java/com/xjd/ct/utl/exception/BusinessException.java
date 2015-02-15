@@ -1,4 +1,4 @@
-package com.xjd.ct.util.exception;
+package com.xjd.ct.utl.exception;
 
 import java.util.Arrays;
 

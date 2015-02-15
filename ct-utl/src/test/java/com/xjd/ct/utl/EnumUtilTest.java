@@ -1,10 +1,10 @@
-package com.xjd.ct.util;
+package com.xjd.ct.utl;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-import com.xjd.ct.util.enums.BoolEnum;
+import com.xjd.ct.utl.enums.BoolEnum;
 
 public class EnumUtilTest {
 

@@ -1,4 +1,4 @@
-package com.xjd.ct.util.valid.constraints;
+package com.xjd.ct.utl.valid.constraints;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
@@ -14,37 +14,20 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import com.xjd.ct.util.respcode.RespCode;
+import com.xjd.ct.utl.respcode.RespCode;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = { DateConstraintValidator.class })
-public @interface Date {
+@Constraint(validatedBy = { EnumConstraintValidator.class })
+public @interface Enum {
 
-	DatePattern pattern() default DatePattern.yyyyMMddHHmmss;
+	Class enumClass();
 
-	String message() default RespCode.RESP_0002;
+	String message() default RespCode.RESP_0003;
 
 	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default {};
 
-	public static enum DatePattern {
-		yyMM("yyMM")
-		, yyyyMM("yyyyMM")
-		, yyyyMMdd("yyyyMMdd")
-		, yyyyMMddHHmmss("yyyyMMddHHmmss");
-
-		private String value;
-
-		DatePattern(String value) {
-			this.value = value;
-		}
-
-		public String getValue() {
-			return value;
-		}
-
-	}
 }

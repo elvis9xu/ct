@@ -1,4 +1,4 @@
-package com.xjd.ct.util;
+package com.xjd.ct.utl;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

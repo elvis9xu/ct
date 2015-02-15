@@ -1,4 +1,4 @@
-package com.xjd.ct.util;
+package com.xjd.ct.utl;
 
 import java.text.FieldPosition;
 import java.text.ParseException;
@@ -17,7 +17,7 @@ import org.codehaus.jackson.map.ser.BeanPropertyWriter;
 import org.codehaus.jackson.map.ser.impl.PropertySerializerMap;
 import org.codehaus.jackson.map.ser.impl.SimpleFilterProvider;
 
-import com.xjd.ct.util.context.AppContext;
+import com.xjd.ct.utl.context.AppContext;
 
 public abstract class JsonUtil {
 

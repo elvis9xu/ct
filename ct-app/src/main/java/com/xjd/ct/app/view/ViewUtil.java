@@ -9,9 +9,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.context.support.DelegatingMessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
 
-import com.xjd.ct.util.context.AppContext;
-import com.xjd.ct.util.DateUtil;
-import com.xjd.ct.util.respcode.RespCode;
+import com.xjd.ct.utl.context.AppContext;
+import com.xjd.ct.utl.DateUtil;
+import com.xjd.ct.utl.respcode.RespCode;
 
 public abstract class ViewUtil {
 	private static Logger log = LoggerFactory.getLogger(ViewUtil.class);

@@ -1,12 +1,12 @@
-package com.xjd.ct.util.valid;
+package com.xjd.ct.utl.valid;
 
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.xjd.ct.util.valid.constraints.Date;
-import com.xjd.ct.util.valid.constraints.Date.DatePattern;
-import com.xjd.ct.util.respcode.RespCode;
+import com.xjd.ct.utl.valid.constraints.Date;
+import com.xjd.ct.utl.valid.constraints.Date.DatePattern;
+import com.xjd.ct.utl.respcode.RespCode;
 
 public class ValidationBean {
 

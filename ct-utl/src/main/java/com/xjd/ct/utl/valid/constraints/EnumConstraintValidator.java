@@ -1,9 +1,9 @@
-package com.xjd.ct.util.valid.constraints;
+package com.xjd.ct.utl.valid.constraints;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.xjd.ct.util.EnumUtil;
+import com.xjd.ct.utl.EnumUtil;
 
 /**
  * <pre>

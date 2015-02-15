@@ -1,4 +1,4 @@
-package com.xjd.ct.util.valid;
+package com.xjd.ct.utl.valid;
 
 public interface ValidationProperties {
 	String TIMESTAMP = "timestamp";

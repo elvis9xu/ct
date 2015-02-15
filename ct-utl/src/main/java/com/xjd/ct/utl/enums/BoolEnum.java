@@ -1,4 +1,4 @@
-package com.xjd.ct.util.enums;
+package com.xjd.ct.utl.enums;
 
 /**
  * 布尔枚举

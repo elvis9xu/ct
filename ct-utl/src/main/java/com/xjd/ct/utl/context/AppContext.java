@@ -1,4 +1,4 @@
-package com.xjd.ct.util.context;
+package com.xjd.ct.utl.context;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -44,7 +44,7 @@ public class AppContext {
 			if (log.isDebugEnabled()) {
 				StringWriter writer = new StringWriter(properties.size() * 30);
 				properties.list(new PrintWriter(writer));
-				log.debug(writer.toString());
+				log.debug("AppContext properties as follow:\r\n" + writer.toString());
 			}
 		} else {
 			log.warn("AppContext has been inited!");
@@ -77,7 +77,7 @@ public class AppContext {
 	 */
 	public static boolean isEnvProduct() {
 		assertInited();
-		return instance == null ? null : instance.isEnvProduct;
+		return instance == null ? false : instance.isEnvProduct;
 	}
 
 	/**

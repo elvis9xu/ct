@@ -1,4 +1,4 @@
-package com.xjd.ct.util.valid;
+package com.xjd.ct.utl.valid;
 
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -17,8 +17,8 @@ import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.xjd.ct.util.respcode.RespCode;
-import com.xjd.ct.util.exception.BusinessException;
+import com.xjd.ct.utl.respcode.RespCode;
+import com.xjd.ct.utl.exception.BusinessException;
 
 public abstract class ValidationUtil implements ValidationProperties {
 	private static Logger log = LoggerFactory.getLogger(ValidationUtil.class);
