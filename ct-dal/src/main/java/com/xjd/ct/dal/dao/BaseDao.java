@@ -1,4 +1,4 @@
-package com.xjd.mol.dal.dao;
+package com.xjd.ct.dal.dao;
 
 /**
  * Created by XJD on 1/22/15.
