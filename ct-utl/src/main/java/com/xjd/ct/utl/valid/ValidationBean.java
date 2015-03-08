@@ -4,9 +4,9 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.xjd.ct.utl.respcode.RespCode;
 import com.xjd.ct.utl.valid.constraints.Date;
 import com.xjd.ct.utl.valid.constraints.Date.DatePattern;
-import com.xjd.ct.utl.respcode.RespCode;
 
 public class ValidationBean {
 
@@ -18,4 +18,19 @@ public class ValidationBean {
 	@Pattern(regexp = "^((13[0-9])|(14[5,7])|(15[^4,\\D])|(170)|(18[^4,\\D]))\\d{8}$", message = RespCode.RESP_0002)
 	private String mobile;
 
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 }

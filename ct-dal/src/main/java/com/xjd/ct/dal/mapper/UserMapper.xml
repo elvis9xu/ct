@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjd.ct.dal.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.xjd.ct.dal.model.UserDo" >
+    <id column="user_id" property="userId" jdbcType="CHAR" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="login_pwd" property="loginPwd" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email_flag" property="emailFlag" jdbcType="CHAR" />
+    <result column="mobile_flag" property="mobileFlag" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="login_fail_times" property="loginFailTimes" jdbcType="DECIMAL" />
+    <result column="last_ip" property="lastIp" jdbcType="VARCHAR" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="upd_time" property="updTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, login_name, login_pwd, nick_name, email, mobile, email_flag, mobile_flag, 
+    status, login_fail_times, last_ip, last_time, add_time, upd_time
+  </sql>
+  <insert id="insert" parameterType="com.xjd.ct.dal.model.UserDo" >
+    insert into t_user (user_id, login_name, login_pwd, 
+      nick_name, email, mobile, 
+      email_flag, mobile_flag, status, 
+      login_fail_times, last_ip, last_time, 
+      add_time, upd_time)
+    values (#{userId,jdbcType=CHAR}, #{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{emailFlag,jdbcType=CHAR}, #{mobileFlag,jdbcType=CHAR}, #{status,jdbcType=CHAR}, 
+      #{loginFailTimes,jdbcType=DECIMAL}, #{lastIp,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjd.ct.dal.model.UserDo" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="loginName != null" >
+        login_name,
+      </if>
+      <if test="loginPwd != null" >
+        login_pwd,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="emailFlag != null" >
+        email_flag,
+      </if>
+      <if test="mobileFlag != null" >
+        mobile_flag,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="loginFailTimes != null" >
+        login_fail_times,
+      </if>
+      <if test="lastIp != null" >
+        last_ip,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="updTime != null" >
+        upd_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null" >
+        #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="emailFlag != null" >
+        #{emailFlag,jdbcType=CHAR},
+      </if>
+      <if test="mobileFlag != null" >
+        #{mobileFlag,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="loginFailTimes != null" >
+        #{loginFailTimes,jdbcType=DECIMAL},
+      </if>
+      <if test="lastIp != null" >
+        #{lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List"/>
+      from t_user
+     where user_id = #{userId,jdbcType=CHAR}
+  </select>
+</mapper>

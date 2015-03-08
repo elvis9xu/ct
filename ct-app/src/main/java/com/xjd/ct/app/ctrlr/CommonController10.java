@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xjd.ct.app.view.View;
 
 @Controller
-@RequestMapping("/1.0")
+@RequestMapping("/10")
 public class CommonController10 {
 
 	@RequestMapping("/syncTips")

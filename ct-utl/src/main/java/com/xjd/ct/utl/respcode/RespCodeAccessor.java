@@ -34,6 +34,7 @@ public class RespCodeAccessor {
 				properties.list(new PrintWriter(writer));
 				log.debug("RespCode Message as follow:\r\n" + writer.toString());
 			}
+			instance = this;
 		} else {
 			log.warn("RespCode Message has bean loaded!");
 		}

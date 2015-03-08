@@ -11,10 +11,10 @@ import java.util.Map;
  */
 public class RequestContext {
 
-	private static final String KEY_CLIENT_IP = RequestContext.class.getName() + ".client.ip";
-	private static final String KEY_SERVICE_CLASS = RequestContext.class.getName() + ".service.class";
-	private static final String KEY_SERVICE_METHOD = RequestContext.class.getName() + ".service.method";
+	private static final String KEY_USER_IP = RequestContext.class.getName() + ".user.ip";
 	private static final String KEY_USER = RequestContext.class.getName() + ".user";
+	private static final String KEY_SERVICE_NAME = RequestContext.class.getName() + ".service.name";
+	private static final String KEY_SERVICE_VERSION = RequestContext.class.getName() + ".service.version";
 
 	protected static ThreadLocal<Map<String, Object>> requestThreadLocal = new ThreadLocal<Map<String, Object>>();
 
@@ -50,28 +50,28 @@ public class RequestContext {
 		return get(KEY_USER);
 	}
 
-	public static void putClientIp(String clientIp) {
-		put(KEY_CLIENT_IP, clientIp);
+	public static void putUserIp(String userIp) {
+		put(KEY_USER_IP, userIp);
 	}
 
-	public static String getClientIp() {
-		return getAsString(KEY_CLIENT_IP);
+	public static String getUserIp() {
+		return getAsString(KEY_USER_IP);
 	}
 
-	public static void putServiceClass(String clazz) {
-		put(KEY_SERVICE_CLASS, clazz);
+	public static void putServiceName(String name) {
+		put(KEY_SERVICE_NAME, name);
 	}
 
-	public static String getServiceClass() {
-		return getAsString(KEY_SERVICE_CLASS);
+	public static String getServiceName() {
+		return getAsString(KEY_SERVICE_NAME);
 	}
 
-	public static void putServiceMethod(String method) {
-		put(KEY_SERVICE_METHOD, method);
+	public static void putServiceVersion(String method) {
+		put(KEY_SERVICE_VERSION, method);
 	}
 
-	public static String getServiceMethod() {
-		return getAsString(KEY_SERVICE_METHOD);
+	public static String getServiceVersion() {
+		return getAsString(KEY_SERVICE_VERSION);
 	}
 
 }

@@ -46,4 +46,8 @@ public enum BoolEnum {
 		}
 		return true;
 	}
+
+	public static boolean parseCode(String code) {
+		return valueOfCode(code) == BoolEnum.TRUE;
+	}
 }

@@ -46,6 +46,7 @@ public class AppContext {
 				properties.list(new PrintWriter(writer));
 				log.debug("AppContext properties as follow:\r\n" + writer.toString());
 			}
+			instance = this;
 		} else {
 			log.warn("AppContext has been inited!");
 		}

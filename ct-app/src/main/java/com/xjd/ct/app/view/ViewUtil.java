@@ -1,7 +1,6 @@
 package com.xjd.ct.app.view;
 
 import java.util.Date;
-import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,16 +8,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.context.support.DelegatingMessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
 
-import com.xjd.ct.utl.context.AppContext;
 import com.xjd.ct.utl.DateUtil;
 import com.xjd.ct.utl.respcode.RespCode;
+import com.xjd.ct.utl.respcode.RespCodeAccessor;
 
 public abstract class ViewUtil {
 	private static Logger log = LoggerFactory.getLogger(ViewUtil.class);
 
 	protected static final String NONE_CODE = ViewUtil.class.getSimpleName() + ".NONECODE";
 	protected static MessageSourceAccessor messageSourceAccessor = new MessageSourceAccessor(new DelegatingMessageSource());
-	protected static Properties properties = new Properties();
 
 	public static MessageSourceAccessor getMessageSourceAccessor() {
 		return messageSourceAccessor;
@@ -26,17 +24,6 @@ public abstract class ViewUtil {
 
 	public static void setMessageSourceAccessor(MessageSourceAccessor messageSourceAccessor) {
 		ViewUtil.messageSourceAccessor = messageSourceAccessor;
-	}
-
-	public static Properties getProperties() {
-		if (AppContext.getProperties() != null) {
-			return AppContext.getProperties();
-		}
-		return properties;
-	}
-
-	public static void setProperties(Properties properties) {
-		ViewUtil.properties = properties;
 	}
 
 	public static View defaultView() {
@@ -67,7 +54,7 @@ public abstract class ViewUtil {
 		if (returnMsg != null) { // 使用传入的msg
 			msg = getMessageSourceAccessor().getMessage(NONE_CODE, args, returnMsg);
 		} else { // 查询一下
-			msg = getProperties().getProperty("resp." + returnCode);
+			msg = RespCodeAccessor.getMessage(returnCode);
 			if (msg == null) {
 				log.warn("Cannot find 'returnMsg' for 'returnCode'[{}]", returnCode);
 			} else {
@@ -75,7 +62,7 @@ public abstract class ViewUtil {
 			}
 		}
 		if (msg == null) {
-			msg = "unknown returnCode[" + returnCode + "]";
+			msg = "Unknown returnCode[" + returnCode + "]";
 		}
 		view.setReturnMsg(msg);
 		view.setOriginalCode(originalCode);

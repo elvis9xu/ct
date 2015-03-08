@@ -5,7 +5,9 @@
 
 <generatorConfiguration>
 	<!-- 修改：jdbc jar包 -->
-	<classPathEntry location="C:/Program Files (x86)/MySQL/MySQL Tools for 5.0/java/lib/mysql-connector-java-5.0.4-bin.jar" />
+	<!--<classPathEntry location="C:/Program Files (x86)/MySQL/MySQL Tools for 5.0/java/lib/mysql-connector-java-5.0.4-bin.jar" />-->
+	<classPathEntry
+		location="/Users/XJD/360yunpan/repo/maven_repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar"/>
 	<!-- 生成的class所在的根路径 -->
 	<classPathEntry location="target/classes" />
 
@@ -15,47 +17,44 @@
 			<!-- <property name="suppressDate" value="true" /> -->
 		</commentGenerator>
 
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/mol"
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/ct"
 			userId="root" password="root" />
 
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.xjd.mol.dal.domain.auto" targetProject="MAVEN">
+		<javaModelGenerator targetPackage="com.xjd.ct.dal.model" targetProject="MAVEN">
 			<property name="enableSubPackages" value="true" />
 			<property name="constructorBased" value="false" />
-			<!-- <property name="rootClass" value="com.xjd.note.dao.model.custom.BaseDo"/> -->
+			<property name="rootClass" value="com.xjd.ct.dal.model.BaseDo"/>
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.xjd.mol.dal.mapper.auto" targetProject="MAVEN">
+		<sqlMapGenerator targetPackage="com.xjd.ct.dal.mapper" targetProject="MAVEN">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.xjd.mol.dal.mapper.auto" targetProject="MAVEN">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.xjd.ct.dal.mapper" targetProject="MAVEN">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<!-- <table tableName="tbl_calendar" domainObjectName="CalendarDo">
-			<columnOverride column="week_day" javaType="java.lang.Integer" />
-			<columnOverride column="need_work" javaType="java.lang.Boolean" />
-		</table> -->
-		<table tableName="tbl_token" domainObjectName="TokenDo" />
-		<!-- <table tableName="tbl_his_today" domainObjectName="HisTodayDo">
-			<generatedKey column="evt_id" sqlStatement="MySql" identity="true" />
-		</table>
-		<table tableName="tbl_moment" domainObjectName="MomentDo">
-			<generatedKey column="mnt_id" sqlStatement="MySql" identity="true" />
-		</table>
-		<table tableName="tbl_moment_user" domainObjectName="MomentUserDo">
-		</table>
-		<table tableName="tbl_resource" domainObjectName="ResourceDo">
-			<generatedKey column="mnt_id" sqlStatement="MySql" identity="true" />
-		</table>
-		<table tableName="tbl_user" domainObjectName="UserDo">
-			<generatedKey column="user_id" sqlStatement="MySql" identity="true" />
-		</table> -->
 
+		<table tableName="t_article" domainObjectName="ArticleDo"/>
+		<table tableName="t_article_comment" domainObjectName="ArticleCommentDo"/>
+		<table tableName="t_article_comment_summary" domainObjectName="ArticleCommentSummaryDo"/>
+		<table tableName="t_article_like" domainObjectName="ArticleLikeDo"/>
+		<table tableName="t_article_liker" domainObjectName="ArticleLikerDo"/>
+		<table tableName="t_article_tag" domainObjectName="ArticleTagDo"/>
+		<table tableName="t_article_vote" domainObjectName="ArticleVoteDo"/>
+		<table tableName="t_article_voter" domainObjectName="ArticleVoterDo"/>
+		<table tableName="t_children_title" domainObjectName="ChildrenTitleDo"/>
+		<table tableName="t_rs_article_tag" domainObjectName="RsArticleTagDo"/>
+		<table tableName="t_service" domainObjectName="ServiceDo"/>
+		<table tableName="t_service_log" domainObjectName="ServiceLogDo"/>
+		<table tableName="t_token" domainObjectName="TokenDo"/>
+		<!--<table tableName="t_user" domainObjectName="UserDo">-->
+			<!--<overide-->
+		<!--</table>-->
 
 	</context>
 

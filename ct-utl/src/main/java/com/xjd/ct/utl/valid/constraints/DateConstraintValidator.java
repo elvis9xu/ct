@@ -24,13 +24,14 @@ public class DateConstraintValidator implements ConstraintValidator<Date, String
 			return true;
 		}
 
-		java.util.Date rt = DateUtil.parse(value, pattern);
+		try {
+			java.util.Date rt = DateUtil.parse(value, pattern);
 
-		if (rt != null) {
-			return true;
+		} catch (Exception e) {
+			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 }
