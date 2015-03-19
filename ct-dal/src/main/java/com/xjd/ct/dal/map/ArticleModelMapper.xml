@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjd.ct.dal.map.ArticleModelMapper" >
+  <resultMap id="BaseResultMap" type="com.xjd.ct.dal.dos.ArticleModel" >
+    <id column="ARTICLE_ID" property="articleId" jdbcType="BIGINT" />
+    <result column="ARTICLE_TITLE" property="articleTitle" jdbcType="VARCHAR" />
+    <result column="ARTICLE_IMG_RES" property="articleImgRes" jdbcType="CHAR" />
+    <result column="ARTICLE_SUMMARY" property="articleSummary" jdbcType="VARCHAR" />
+    <result column="ARTICLE_LINK" property="articleLink" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ARTICLE_ID, ARTICLE_TITLE, ARTICLE_IMG_RES, ARTICLE_SUMMARY, ARTICLE_LINK, ADD_TIME, 
+    UPD_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ArticleModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_biz_article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_biz_article
+    where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_biz_article
+    where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ArticleModelExample" >
+    delete from t_biz_article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xjd.ct.dal.dos.ArticleModel" >
+    insert into t_biz_article (ARTICLE_ID, ARTICLE_TITLE, ARTICLE_IMG_RES, 
+      ARTICLE_SUMMARY, ARTICLE_LINK, ADD_TIME, 
+      UPD_TIME)
+    values (#{articleId,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, #{articleImgRes,jdbcType=CHAR}, 
+      #{articleSummary,jdbcType=VARCHAR}, #{articleLink,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{updTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ArticleModel" >
+    insert into t_biz_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        ARTICLE_ID,
+      </if>
+      <if test="articleTitle != null" >
+        ARTICLE_TITLE,
+      </if>
+      <if test="articleImgRes != null" >
+        ARTICLE_IMG_RES,
+      </if>
+      <if test="articleSummary != null" >
+        ARTICLE_SUMMARY,
+      </if>
+      <if test="articleLink != null" >
+        ARTICLE_LINK,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="articleTitle != null" >
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleImgRes != null" >
+        #{articleImgRes,jdbcType=CHAR},
+      </if>
+      <if test="articleSummary != null" >
+        #{articleSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="articleLink != null" >
+        #{articleLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ArticleModelExample" resultType="java.lang.Integer" >
+    select count(*) from t_biz_article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_biz_article
+    <set >
+      <if test="record.articleId != null" >
+        ARTICLE_ID = #{record.articleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.articleTitle != null" >
+        ARTICLE_TITLE = #{record.articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleImgRes != null" >
+        ARTICLE_IMG_RES = #{record.articleImgRes,jdbcType=CHAR},
+      </if>
+      <if test="record.articleSummary != null" >
+        ARTICLE_SUMMARY = #{record.articleSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleLink != null" >
+        ARTICLE_LINK = #{record.articleLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updTime != null" >
+        UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_biz_article
+    set ARTICLE_ID = #{record.articleId,jdbcType=BIGINT},
+      ARTICLE_TITLE = #{record.articleTitle,jdbcType=VARCHAR},
+      ARTICLE_IMG_RES = #{record.articleImgRes,jdbcType=CHAR},
+      ARTICLE_SUMMARY = #{record.articleSummary,jdbcType=VARCHAR},
+      ARTICLE_LINK = #{record.articleLink,jdbcType=VARCHAR},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ArticleModel" >
+    update t_biz_article
+    <set >
+      <if test="articleTitle != null" >
+        ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleImgRes != null" >
+        ARTICLE_IMG_RES = #{articleImgRes,jdbcType=CHAR},
+      </if>
+      <if test="articleSummary != null" >
+        ARTICLE_SUMMARY = #{articleSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="articleLink != null" >
+        ARTICLE_LINK = #{articleLink,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ArticleModel" >
+    update t_biz_article
+    set ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
+      ARTICLE_IMG_RES = #{articleImgRes,jdbcType=CHAR},
+      ARTICLE_SUMMARY = #{articleSummary,jdbcType=VARCHAR},
+      ARTICLE_LINK = #{articleLink,jdbcType=VARCHAR},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
+    where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </update>
+</mapper>

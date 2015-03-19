@@ -4,58 +4,70 @@
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-	<!-- 修改：jdbc jar包 -->
-	<!--<classPathEntry location="C:/Program Files (x86)/MySQL/MySQL Tools for 5.0/java/lib/mysql-connector-java-5.0.4-bin.jar" />-->
-	<classPathEntry
-		location="/Users/XJD/360yunpan/repo/maven_repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar"/>
-	<!-- 生成的class所在的根路径 -->
-	<classPathEntry location="target/classes" />
+  <!-- 修改：jdbc jar包 -->
+  <classPathEntry location="C:/Program Files (x86)/MySQL/MySQL Tools for 5.0/java/lib/mysql-connector-java-5.0.4-bin.jar" />
+  <!-- <classPathEntry location="/Users/XJD/360yunpan/repo/maven_repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar"/> -->
+  <!-- 生成的class所在的根路径 -->
+  <classPathEntry location="target/classes" />
 
-	<context id="common" targetRuntime="MyBatis3">
-		<commentGenerator>
-			<property name="suppressAllComments" value="true" />
-			<!-- <property name="suppressDate" value="true" /> -->
-		</commentGenerator>
+  <context id="common" targetRuntime="MyBatis3">
+    <commentGenerator>
+      <property name="suppressAllComments" value="true" />
+      <!-- <property name="suppressDate" value="true" /> -->
+    </commentGenerator>
 
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/ct"
-			userId="root" password="root" />
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/ct"
+      userId="root" password="root" />
 
-		<javaTypeResolver>
-			<property name="forceBigDecimals" value="false" />
-		</javaTypeResolver>
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.xjd.ct.dal.model" targetProject="MAVEN">
-			<property name="enableSubPackages" value="true" />
-			<property name="constructorBased" value="false" />
-			<property name="rootClass" value="com.xjd.ct.dal.model.BaseDo"/>
-		</javaModelGenerator>
+    <javaModelGenerator targetPackage="com.xjd.ct.dal.dos" targetProject="MAVEN">
+      <property name="enableSubPackages" value="true" />
+      <property name="constructorBased" value="false" />
+      <property name="rootClass" value="com.xjd.ct.dal.dos.BaseDo" />
+    </javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.xjd.ct.dal.mapper" targetProject="MAVEN">
-			<property name="enableSubPackages" value="true" />
-		</sqlMapGenerator>
+    <sqlMapGenerator targetPackage="com.xjd.ct.dal.map" targetProject="MAVEN">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
 
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.xjd.ct.dal.mapper" targetProject="MAVEN">
-			<property name="enableSubPackages" value="true" />
-		</javaClientGenerator>
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.xjd.ct.dal.map" targetProject="MAVEN">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
 
 
-		<table tableName="t_article" domainObjectName="ArticleDo"/>
-		<table tableName="t_article_comment" domainObjectName="ArticleCommentDo"/>
-		<table tableName="t_article_comment_summary" domainObjectName="ArticleCommentSummaryDo"/>
-		<table tableName="t_article_like" domainObjectName="ArticleLikeDo"/>
-		<table tableName="t_article_liker" domainObjectName="ArticleLikerDo"/>
-		<table tableName="t_article_tag" domainObjectName="ArticleTagDo"/>
-		<table tableName="t_article_vote" domainObjectName="ArticleVoteDo"/>
-		<table tableName="t_article_voter" domainObjectName="ArticleVoterDo"/>
-		<table tableName="t_children_title" domainObjectName="ChildrenTitleDo"/>
-		<table tableName="t_rs_article_tag" domainObjectName="RsArticleTagDo"/>
-		<table tableName="t_service" domainObjectName="ServiceDo"/>
-		<table tableName="t_service_log" domainObjectName="ServiceLogDo"/>
-		<table tableName="t_token" domainObjectName="TokenDo"/>
-		<!--<table tableName="t_user" domainObjectName="UserDo">-->
-			<!--<overide-->
-		<!--</table>-->
-
-	</context>
+    <table tableName="t_biz_article" domainObjectName="ArticleModel" />
+    <table tableName="t_biz_publish" domainObjectName="PublishModel" />
+    <table tableName="t_biz_publish_res_rs" domainObjectName="PublishResRsModel" />
+    <table tableName="t_biz_recommend" domainObjectName="RecommendModel" />
+    <table tableName="t_biz_topic" domainObjectName="TopicModel" />
+    <table tableName="t_gw_app_version" domainObjectName="AppVersionModel" />
+    <table tableName="t_gw_service" domainObjectName="ServiceModel" />
+    <table tableName="t_gw_service_log" domainObjectName="ServiceLogModel" />
+    <table tableName="t_gw_token" domainObjectName="TokenModel" />
+    <table tableName="t_msg_inform" domainObjectName="MsgInformModel" />
+    <table tableName="t_object" domainObjectName="ObjectModel" />
+    <table tableName="t_object_comment" domainObjectName="ObjectCommentModel" />
+    <table tableName="t_object_comment_like" domainObjectName="ObjectCommentLikeModel" />
+    <table tableName="t_object_favor" domainObjectName="ObjectFavorModel" />
+    <table tableName="t_object_like" domainObjectName="ObjectLikeModel" />
+    <table tableName="t_object_tag" domainObjectName="ObjectTagModel" />
+    <table tableName="t_object_tag_rs" domainObjectName="ObjectTagRsModel" />
+    <table tableName="t_object_type" domainObjectName="ObjectTypeModel" />
+    <table tableName="t_object_vote" domainObjectName="ObjectVoteModel" />
+    <table tableName="t_object_vote_opt" domainObjectName="ObjectVoteOptModel" />
+    <table tableName="t_report" domainObjectName="ReportModel" />
+    <table tableName="t_resource" domainObjectName="ResourceModel" />
+    <table tableName="t_sequence" domainObjectName="SequenceModel" />
+    <table tableName="t_user" domainObjectName="UserModel" />
+    <table tableName="t_user_baby" domainObjectName="UserBabyModel" />
+    <table tableName="t_user_bind_account" domainObjectName="UserBindAccountModel" />
+    <table tableName="t_user_idol" domainObjectName="UserIdolModel" />
+    <table tableName="t_user_info" domainObjectName="UserInfoModel" />
+    <table tableName="t_user_resource_rs" domainObjectName="UserResourceRsModel" />
+    <table tableName="t_user_summary" domainObjectName="UserSummaryModel" />
+  </context>
 
 </generatorConfiguration>

@@ -3,7 +3,7 @@ package com.xjd.ct.biz.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xjd.ct.biz.model.ServiceBo;
+import com.xjd.ct.biz.bo.ServiceBo;
 import com.xjd.ct.dal.mapper.ServiceMapper;
 import com.xjd.ct.dal.model.ServiceDo;
 import com.xjd.ct.utl.enums.BoolEnum;

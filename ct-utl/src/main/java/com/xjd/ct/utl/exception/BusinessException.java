@@ -55,7 +55,8 @@ public class BusinessException extends RuntimeException {
 		this(code, null, message, cause, null, null);
 	}
 
-	public BusinessException(String code, Object[] args, String message, Throwable cause, String originalCode, String orginalMsg) {
+	public BusinessException(String code, Object[] args, String message, Throwable cause, String originalCode,
+			String orginalMsg) {
 		super(cause);
 		this.code = code;
 		this.args = args;

@@ -23,7 +23,7 @@ public class LogService {
 	 * @param requestTimestamp
 	 */
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void serviceLog(String userIp, String userId, String serviceName, String serviceVersion, Date requestTimestamp) {
+	public void serviceLog(String userIp, Long userId, String serviceName, String serviceVersion, Date requestTimestamp) {
 
 	}
 }

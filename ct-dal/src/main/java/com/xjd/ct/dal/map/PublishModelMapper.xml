@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjd.ct.dal.map.PublishModelMapper" >
+  <resultMap id="BaseResultMap" type="com.xjd.ct.dal.dos.PublishModel" >
+    <id column="PUBLISH_ID" property="publishId" jdbcType="BIGINT" />
+    <result column="PUBLISH_TITLE" property="publishTitle" jdbcType="VARCHAR" />
+    <result column="PUBLISH_TEXT" property="publishText" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PUBLISH_ID, PUBLISH_TITLE, PUBLISH_TEXT, ADD_TIME, UPD_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.PublishModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_biz_publish
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_biz_publish
+    where PUBLISH_ID = #{publishId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_biz_publish
+    where PUBLISH_ID = #{publishId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.PublishModelExample" >
+    delete from t_biz_publish
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xjd.ct.dal.dos.PublishModel" >
+    insert into t_biz_publish (PUBLISH_ID, PUBLISH_TITLE, PUBLISH_TEXT, 
+      ADD_TIME, UPD_TIME)
+    values (#{publishId,jdbcType=BIGINT}, #{publishTitle,jdbcType=VARCHAR}, #{publishText,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.PublishModel" >
+    insert into t_biz_publish
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="publishId != null" >
+        PUBLISH_ID,
+      </if>
+      <if test="publishTitle != null" >
+        PUBLISH_TITLE,
+      </if>
+      <if test="publishText != null" >
+        PUBLISH_TEXT,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="publishId != null" >
+        #{publishId,jdbcType=BIGINT},
+      </if>
+      <if test="publishTitle != null" >
+        #{publishTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="publishText != null" >
+        #{publishText,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xjd.ct.dal.dos.PublishModelExample" resultType="java.lang.Integer" >
+    select count(*) from t_biz_publish
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_biz_publish
+    <set >
+      <if test="record.publishId != null" >
+        PUBLISH_ID = #{record.publishId,jdbcType=BIGINT},
+      </if>
+      <if test="record.publishTitle != null" >
+        PUBLISH_TITLE = #{record.publishTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publishText != null" >
+        PUBLISH_TEXT = #{record.publishText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updTime != null" >
+        UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_biz_publish
+    set PUBLISH_ID = #{record.publishId,jdbcType=BIGINT},
+      PUBLISH_TITLE = #{record.publishTitle,jdbcType=VARCHAR},
+      PUBLISH_TEXT = #{record.publishText,jdbcType=VARCHAR},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.PublishModel" >
+    update t_biz_publish
+    <set >
+      <if test="publishTitle != null" >
+        PUBLISH_TITLE = #{publishTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="publishText != null" >
+        PUBLISH_TEXT = #{publishText,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PUBLISH_ID = #{publishId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.PublishModel" >
+    update t_biz_publish
+    set PUBLISH_TITLE = #{publishTitle,jdbcType=VARCHAR},
+      PUBLISH_TEXT = #{publishText,jdbcType=VARCHAR},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
+    where PUBLISH_ID = #{publishId,jdbcType=BIGINT}
+  </update>
+</mapper>

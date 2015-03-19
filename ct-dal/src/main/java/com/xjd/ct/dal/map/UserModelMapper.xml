@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjd.ct.dal.map.UserModelMapper" >
+  <resultMap id="BaseResultMap" type="com.xjd.ct.dal.dos.UserModel" >
+    <id column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="MOBILE_VERIFY_FLAG" property="mobileVerifyFlag" jdbcType="TINYINT" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="EMAIL_VERIFY_FLAG" property="emailVerifyFlag" jdbcType="TINYINT" />
+    <result column="QQ_BIND_FLAG" property="qqBindFlag" jdbcType="TINYINT" />
+    <result column="WEIXIN_BIND_FLAG" property="weixinBindFlag" jdbcType="TINYINT" />
+    <result column="SINA_WEIBO_BIND_FLAG" property="sinaWeiboBindFlag" jdbcType="TINYINT" />
+    <result column="TECENT_WEIBO_FLAG" property="tecentWeiboFlag" jdbcType="TINYINT" />
+    <result column="REAL_NAME" property="realName" jdbcType="VARCHAR" />
+    <result column="CERT_TYPE" property="certType" jdbcType="TINYINT" />
+    <result column="CERT_NO" property="certNo" jdbcType="VARCHAR" />
+    <result column="FAIL_TIMES" property="failTimes" jdbcType="SMALLINT" />
+    <result column="LAST_IP" property="lastIp" jdbcType="VARCHAR" />
+    <result column="LAST_TIME" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="LONGITUDE" property="longitude" jdbcType="DECIMAL" />
+    <result column="LATITUDE" property="latitude" jdbcType="DECIMAL" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, PASSWORD, MOBILE, MOBILE_VERIFY_FLAG, EMAIL, EMAIL_VERIFY_FLAG, QQ_BIND_FLAG, 
+    WEIXIN_BIND_FLAG, SINA_WEIBO_BIND_FLAG, TECENT_WEIBO_FLAG, REAL_NAME, CERT_TYPE, 
+    CERT_NO, FAIL_TIMES, LAST_IP, LAST_TIME, LONGITUDE, LATITUDE, ADDRESS, ADD_TIME, 
+    UPD_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.UserModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_user
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserModelExample" >
+    delete from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserModel" >
+    insert into t_user (USER_ID, PASSWORD, MOBILE, 
+      MOBILE_VERIFY_FLAG, EMAIL, EMAIL_VERIFY_FLAG, 
+      QQ_BIND_FLAG, WEIXIN_BIND_FLAG, SINA_WEIBO_BIND_FLAG, 
+      TECENT_WEIBO_FLAG, REAL_NAME, CERT_TYPE, 
+      CERT_NO, FAIL_TIMES, LAST_IP, 
+      LAST_TIME, LONGITUDE, LATITUDE, 
+      ADDRESS, ADD_TIME, UPD_TIME
+      )
+    values (#{userId,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{mobileVerifyFlag,jdbcType=TINYINT}, #{email,jdbcType=VARCHAR}, #{emailVerifyFlag,jdbcType=TINYINT}, 
+      #{qqBindFlag,jdbcType=TINYINT}, #{weixinBindFlag,jdbcType=TINYINT}, #{sinaWeiboBindFlag,jdbcType=TINYINT}, 
+      #{tecentWeiboFlag,jdbcType=TINYINT}, #{realName,jdbcType=VARCHAR}, #{certType,jdbcType=TINYINT}, 
+      #{certNo,jdbcType=VARCHAR}, #{failTimes,jdbcType=SMALLINT}, #{lastIp,jdbcType=VARCHAR}, 
+      #{lastTime,jdbcType=TIMESTAMP}, #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, 
+      #{address,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserModel" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="mobileVerifyFlag != null" >
+        MOBILE_VERIFY_FLAG,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="emailVerifyFlag != null" >
+        EMAIL_VERIFY_FLAG,
+      </if>
+      <if test="qqBindFlag != null" >
+        QQ_BIND_FLAG,
+      </if>
+      <if test="weixinBindFlag != null" >
+        WEIXIN_BIND_FLAG,
+      </if>
+      <if test="sinaWeiboBindFlag != null" >
+        SINA_WEIBO_BIND_FLAG,
+      </if>
+      <if test="tecentWeiboFlag != null" >
+        TECENT_WEIBO_FLAG,
+      </if>
+      <if test="realName != null" >
+        REAL_NAME,
+      </if>
+      <if test="certType != null" >
+        CERT_TYPE,
+      </if>
+      <if test="certNo != null" >
+        CERT_NO,
+      </if>
+      <if test="failTimes != null" >
+        FAIL_TIMES,
+      </if>
+      <if test="lastIp != null" >
+        LAST_IP,
+      </if>
+      <if test="lastTime != null" >
+        LAST_TIME,
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE,
+      </if>
+      <if test="latitude != null" >
+        LATITUDE,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileVerifyFlag != null" >
+        #{mobileVerifyFlag,jdbcType=TINYINT},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailVerifyFlag != null" >
+        #{emailVerifyFlag,jdbcType=TINYINT},
+      </if>
+      <if test="qqBindFlag != null" >
+        #{qqBindFlag,jdbcType=TINYINT},
+      </if>
+      <if test="weixinBindFlag != null" >
+        #{weixinBindFlag,jdbcType=TINYINT},
+      </if>
+      <if test="sinaWeiboBindFlag != null" >
+        #{sinaWeiboBindFlag,jdbcType=TINYINT},
+      </if>
+      <if test="tecentWeiboFlag != null" >
+        #{tecentWeiboFlag,jdbcType=TINYINT},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        #{certType,jdbcType=TINYINT},
+      </if>
+      <if test="certNo != null" >
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="failTimes != null" >
+        #{failTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="lastIp != null" >
+        #{lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserModelExample" resultType="java.lang.Integer" >
+    select count(*) from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_user
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileVerifyFlag != null" >
+        MOBILE_VERIFY_FLAG = #{record.mobileVerifyFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailVerifyFlag != null" >
+        EMAIL_VERIFY_FLAG = #{record.emailVerifyFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.qqBindFlag != null" >
+        QQ_BIND_FLAG = #{record.qqBindFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.weixinBindFlag != null" >
+        WEIXIN_BIND_FLAG = #{record.weixinBindFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.sinaWeiboBindFlag != null" >
+        SINA_WEIBO_BIND_FLAG = #{record.sinaWeiboBindFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.tecentWeiboFlag != null" >
+        TECENT_WEIBO_FLAG = #{record.tecentWeiboFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.realName != null" >
+        REAL_NAME = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certType != null" >
+        CERT_TYPE = #{record.certType,jdbcType=TINYINT},
+      </if>
+      <if test="record.certNo != null" >
+        CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.failTimes != null" >
+        FAIL_TIMES = #{record.failTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="record.lastIp != null" >
+        LAST_IP = #{record.lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastTime != null" >
+        LAST_TIME = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.longitude != null" >
+        LONGITUDE = #{record.longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.latitude != null" >
+        LATITUDE = #{record.latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updTime != null" >
+        UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_user
+    set USER_ID = #{record.userId,jdbcType=BIGINT},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      MOBILE_VERIFY_FLAG = #{record.mobileVerifyFlag,jdbcType=TINYINT},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      EMAIL_VERIFY_FLAG = #{record.emailVerifyFlag,jdbcType=TINYINT},
+      QQ_BIND_FLAG = #{record.qqBindFlag,jdbcType=TINYINT},
+      WEIXIN_BIND_FLAG = #{record.weixinBindFlag,jdbcType=TINYINT},
+      SINA_WEIBO_BIND_FLAG = #{record.sinaWeiboBindFlag,jdbcType=TINYINT},
+      TECENT_WEIBO_FLAG = #{record.tecentWeiboFlag,jdbcType=TINYINT},
+      REAL_NAME = #{record.realName,jdbcType=VARCHAR},
+      CERT_TYPE = #{record.certType,jdbcType=TINYINT},
+      CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      FAIL_TIMES = #{record.failTimes,jdbcType=SMALLINT},
+      LAST_IP = #{record.lastIp,jdbcType=VARCHAR},
+      LAST_TIME = #{record.lastTime,jdbcType=TIMESTAMP},
+      LONGITUDE = #{record.longitude,jdbcType=DECIMAL},
+      LATITUDE = #{record.latitude,jdbcType=DECIMAL},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserModel" >
+    update t_user
+    <set >
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileVerifyFlag != null" >
+        MOBILE_VERIFY_FLAG = #{mobileVerifyFlag,jdbcType=TINYINT},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailVerifyFlag != null" >
+        EMAIL_VERIFY_FLAG = #{emailVerifyFlag,jdbcType=TINYINT},
+      </if>
+      <if test="qqBindFlag != null" >
+        QQ_BIND_FLAG = #{qqBindFlag,jdbcType=TINYINT},
+      </if>
+      <if test="weixinBindFlag != null" >
+        WEIXIN_BIND_FLAG = #{weixinBindFlag,jdbcType=TINYINT},
+      </if>
+      <if test="sinaWeiboBindFlag != null" >
+        SINA_WEIBO_BIND_FLAG = #{sinaWeiboBindFlag,jdbcType=TINYINT},
+      </if>
+      <if test="tecentWeiboFlag != null" >
+        TECENT_WEIBO_FLAG = #{tecentWeiboFlag,jdbcType=TINYINT},
+      </if>
+      <if test="realName != null" >
+        REAL_NAME = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        CERT_TYPE = #{certType,jdbcType=TINYINT},
+      </if>
+      <if test="certNo != null" >
+        CERT_NO = #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="failTimes != null" >
+        FAIL_TIMES = #{failTimes,jdbcType=SMALLINT},
+      </if>
+      <if test="lastIp != null" >
+        LAST_IP = #{lastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        LAST_TIME = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        LATITUDE = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserModel" >
+    update t_user
+    set PASSWORD = #{password,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      MOBILE_VERIFY_FLAG = #{mobileVerifyFlag,jdbcType=TINYINT},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      EMAIL_VERIFY_FLAG = #{emailVerifyFlag,jdbcType=TINYINT},
+      QQ_BIND_FLAG = #{qqBindFlag,jdbcType=TINYINT},
+      WEIXIN_BIND_FLAG = #{weixinBindFlag,jdbcType=TINYINT},
+      SINA_WEIBO_BIND_FLAG = #{sinaWeiboBindFlag,jdbcType=TINYINT},
+      TECENT_WEIBO_FLAG = #{tecentWeiboFlag,jdbcType=TINYINT},
+      REAL_NAME = #{realName,jdbcType=VARCHAR},
+      CERT_TYPE = #{certType,jdbcType=TINYINT},
+      CERT_NO = #{certNo,jdbcType=VARCHAR},
+      FAIL_TIMES = #{failTimes,jdbcType=SMALLINT},
+      LAST_IP = #{lastIp,jdbcType=VARCHAR},
+      LAST_TIME = #{lastTime,jdbcType=TIMESTAMP},
+      LONGITUDE = #{longitude,jdbcType=DECIMAL},
+      LATITUDE = #{latitude,jdbcType=DECIMAL},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

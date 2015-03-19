@@ -1,6 +1,10 @@
 package com.xjd.ct.app.cmpnt;
 
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,9 +24,9 @@ import com.xjd.ct.app.util.HttpRequestUtil;
 import com.xjd.ct.app.util.RequestContext;
 import com.xjd.ct.app.view.View;
 import com.xjd.ct.app.view.ViewUtil;
-import com.xjd.ct.biz.model.ServiceBo;
-import com.xjd.ct.biz.model.TokenBo;
-import com.xjd.ct.biz.model.UserBo;
+import com.xjd.ct.biz.bo.ServiceBo;
+import com.xjd.ct.biz.bo.TokenBo;
+import com.xjd.ct.biz.bo.UserBo;
 import com.xjd.ct.biz.service.LogService;
 import com.xjd.ct.biz.service.ServiceService;
 import com.xjd.ct.biz.service.TokenService;
@@ -52,7 +56,8 @@ public class ControllerAspect {
 
 	@Around("within(com.xjd.ct.app.ctrlr.*) && @annotation(org.springframework.web.bind.annotation.RequestMapping)")
 	protected Object aroudAdivce(ProceedingJoinPoint jp) throws Throwable {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+				.getRequest();
 		String[] param = request.getRequestURI().split("/");
 		String version = param[param.length - 2];
 		String service = param[param.length - 1];
@@ -87,13 +92,11 @@ public class ControllerAspect {
 				if (!offerTokenFlag) {
 					throw new BusinessException(RespCode.RESP_0001, new Object[] { "token" });
 				}
-				if (tokenBo == null) {
-					throw new BusinessException(RespCode.RESP_0101);
-				}
+				tokenService.checkToken(tokenBo);
 			}
 
 			// 查询用户
-			if (tokenBo != null && StringUtils.isNotBlank(tokenBo.getUserId())) {
+			if (tokenBo != null && !TokenService.ANONYMOUS_USERID.equals(tokenBo.getUserId())) {
 				UserBo userBo = userService.queryUserByUserId(tokenBo.getUserId());
 				if (userBo == null) {
 					throw new BusinessException(RespCode.RESP_0110);

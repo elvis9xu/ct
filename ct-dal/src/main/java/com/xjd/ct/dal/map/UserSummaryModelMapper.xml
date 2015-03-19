@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjd.ct.dal.map.UserSummaryModelMapper" >
+  <resultMap id="BaseResultMap" type="com.xjd.ct.dal.dos.UserSummaryModel" >
+    <id column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="INFORM_COUNT" property="informCount" jdbcType="INTEGER" />
+    <result column="FAVOR_COUNT" property="favorCount" jdbcType="INTEGER" />
+    <result column="PUBLISH_COUNT" property="publishCount" jdbcType="INTEGER" />
+    <result column="IDOL_COUNT" property="idolCount" jdbcType="INTEGER" />
+    <result column="FANS_COUNT" property="fansCount" jdbcType="INTEGER" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, INFORM_COUNT, FAVOR_COUNT, PUBLISH_COUNT, IDOL_COUNT, FANS_COUNT, ADD_TIME, 
+    UPD_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.UserSummaryModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_user_summary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_summary
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_user_summary
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserSummaryModelExample" >
+    delete from t_user_summary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserSummaryModel" >
+    insert into t_user_summary (USER_ID, INFORM_COUNT, FAVOR_COUNT, 
+      PUBLISH_COUNT, IDOL_COUNT, FANS_COUNT, 
+      ADD_TIME, UPD_TIME)
+    values (#{userId,jdbcType=BIGINT}, #{informCount,jdbcType=INTEGER}, #{favorCount,jdbcType=INTEGER}, 
+      #{publishCount,jdbcType=INTEGER}, #{idolCount,jdbcType=INTEGER}, #{fansCount,jdbcType=INTEGER}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserSummaryModel" >
+    insert into t_user_summary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="informCount != null" >
+        INFORM_COUNT,
+      </if>
+      <if test="favorCount != null" >
+        FAVOR_COUNT,
+      </if>
+      <if test="publishCount != null" >
+        PUBLISH_COUNT,
+      </if>
+      <if test="idolCount != null" >
+        IDOL_COUNT,
+      </if>
+      <if test="fansCount != null" >
+        FANS_COUNT,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="informCount != null" >
+        #{informCount,jdbcType=INTEGER},
+      </if>
+      <if test="favorCount != null" >
+        #{favorCount,jdbcType=INTEGER},
+      </if>
+      <if test="publishCount != null" >
+        #{publishCount,jdbcType=INTEGER},
+      </if>
+      <if test="idolCount != null" >
+        #{idolCount,jdbcType=INTEGER},
+      </if>
+      <if test="fansCount != null" >
+        #{fansCount,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserSummaryModelExample" resultType="java.lang.Integer" >
+    select count(*) from t_user_summary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_user_summary
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.informCount != null" >
+        INFORM_COUNT = #{record.informCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.favorCount != null" >
+        FAVOR_COUNT = #{record.favorCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishCount != null" >
+        PUBLISH_COUNT = #{record.publishCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.idolCount != null" >
+        IDOL_COUNT = #{record.idolCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fansCount != null" >
+        FANS_COUNT = #{record.fansCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updTime != null" >
+        UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_user_summary
+    set USER_ID = #{record.userId,jdbcType=BIGINT},
+      INFORM_COUNT = #{record.informCount,jdbcType=INTEGER},
+      FAVOR_COUNT = #{record.favorCount,jdbcType=INTEGER},
+      PUBLISH_COUNT = #{record.publishCount,jdbcType=INTEGER},
+      IDOL_COUNT = #{record.idolCount,jdbcType=INTEGER},
+      FANS_COUNT = #{record.fansCount,jdbcType=INTEGER},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserSummaryModel" >
+    update t_user_summary
+    <set >
+      <if test="informCount != null" >
+        INFORM_COUNT = #{informCount,jdbcType=INTEGER},
+      </if>
+      <if test="favorCount != null" >
+        FAVOR_COUNT = #{favorCount,jdbcType=INTEGER},
+      </if>
+      <if test="publishCount != null" >
+        PUBLISH_COUNT = #{publishCount,jdbcType=INTEGER},
+      </if>
+      <if test="idolCount != null" >
+        IDOL_COUNT = #{idolCount,jdbcType=INTEGER},
+      </if>
+      <if test="fansCount != null" >
+        FANS_COUNT = #{fansCount,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserSummaryModel" >
+    update t_user_summary
+    set INFORM_COUNT = #{informCount,jdbcType=INTEGER},
+      FAVOR_COUNT = #{favorCount,jdbcType=INTEGER},
+      PUBLISH_COUNT = #{publishCount,jdbcType=INTEGER},
+      IDOL_COUNT = #{idolCount,jdbcType=INTEGER},
+      FANS_COUNT = #{fansCount,jdbcType=INTEGER},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

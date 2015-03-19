@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjd.ct.dal.map.ResourceModelMapper" >
+  <resultMap id="BaseResultMap" type="com.xjd.ct.dal.dos.ResourceModel" >
+    <id column="RES_ID" property="resId" jdbcType="CHAR" />
+    <result column="RES_FORMAT" property="resFormat" jdbcType="VARCHAR" />
+    <result column="RES_FORM" property="resForm" jdbcType="TINYINT" />
+    <result column="RES_PATH" property="resPath" jdbcType="VARCHAR" />
+    <result column="RES_MD5" property="resMd5" jdbcType="CHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    RES_ID, RES_FORMAT, RES_FORM, RES_PATH, RES_MD5, ADD_TIME, UPD_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ResourceModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_resource
+    where RES_ID = #{resId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_resource
+    where RES_ID = #{resId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ResourceModelExample" >
+    delete from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xjd.ct.dal.dos.ResourceModel" >
+    insert into t_resource (RES_ID, RES_FORMAT, RES_FORM, 
+      RES_PATH, RES_MD5, ADD_TIME, 
+      UPD_TIME)
+    values (#{resId,jdbcType=CHAR}, #{resFormat,jdbcType=VARCHAR}, #{resForm,jdbcType=TINYINT}, 
+      #{resPath,jdbcType=VARCHAR}, #{resMd5,jdbcType=CHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{updTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ResourceModel" >
+    insert into t_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resId != null" >
+        RES_ID,
+      </if>
+      <if test="resFormat != null" >
+        RES_FORMAT,
+      </if>
+      <if test="resForm != null" >
+        RES_FORM,
+      </if>
+      <if test="resPath != null" >
+        RES_PATH,
+      </if>
+      <if test="resMd5 != null" >
+        RES_MD5,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resId != null" >
+        #{resId,jdbcType=CHAR},
+      </if>
+      <if test="resFormat != null" >
+        #{resFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="resForm != null" >
+        #{resForm,jdbcType=TINYINT},
+      </if>
+      <if test="resPath != null" >
+        #{resPath,jdbcType=VARCHAR},
+      </if>
+      <if test="resMd5 != null" >
+        #{resMd5,jdbcType=CHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ResourceModelExample" resultType="java.lang.Integer" >
+    select count(*) from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_resource
+    <set >
+      <if test="record.resId != null" >
+        RES_ID = #{record.resId,jdbcType=CHAR},
+      </if>
+      <if test="record.resFormat != null" >
+        RES_FORMAT = #{record.resFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resForm != null" >
+        RES_FORM = #{record.resForm,jdbcType=TINYINT},
+      </if>
+      <if test="record.resPath != null" >
+        RES_PATH = #{record.resPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resMd5 != null" >
+        RES_MD5 = #{record.resMd5,jdbcType=CHAR},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updTime != null" >
+        UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_resource
+    set RES_ID = #{record.resId,jdbcType=CHAR},
+      RES_FORMAT = #{record.resFormat,jdbcType=VARCHAR},
+      RES_FORM = #{record.resForm,jdbcType=TINYINT},
+      RES_PATH = #{record.resPath,jdbcType=VARCHAR},
+      RES_MD5 = #{record.resMd5,jdbcType=CHAR},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ResourceModel" >
+    update t_resource
+    <set >
+      <if test="resFormat != null" >
+        RES_FORMAT = #{resFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="resForm != null" >
+        RES_FORM = #{resForm,jdbcType=TINYINT},
+      </if>
+      <if test="resPath != null" >
+        RES_PATH = #{resPath,jdbcType=VARCHAR},
+      </if>
+      <if test="resMd5 != null" >
+        RES_MD5 = #{resMd5,jdbcType=CHAR},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where RES_ID = #{resId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ResourceModel" >
+    update t_resource
+    set RES_FORMAT = #{resFormat,jdbcType=VARCHAR},
+      RES_FORM = #{resForm,jdbcType=TINYINT},
+      RES_PATH = #{resPath,jdbcType=VARCHAR},
+      RES_MD5 = #{resMd5,jdbcType=CHAR},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
+    where RES_ID = #{resId,jdbcType=CHAR}
+  </update>
+</mapper>

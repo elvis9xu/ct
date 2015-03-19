@@ -9,7 +9,7 @@ import com.xjd.ct.app.util.RequestContext;
 import com.xjd.ct.app.view.View;
 import com.xjd.ct.app.view.ViewUtil;
 import com.xjd.ct.app.view.body.TokenBody;
-import com.xjd.ct.biz.model.TokenBo;
+import com.xjd.ct.biz.bo.TokenBo;
 import com.xjd.ct.biz.service.TokenService;
 
 @Controller
@@ -23,7 +23,7 @@ public class UserController10 {
 	@ResponseBody
 	public View getToken() {
 		// 业务调用
-		TokenBo tokenBo = tokenService.getTokenForUserIp(RequestContext.getUserIp());
+		TokenBo tokenBo = tokenService.genTokenForUserIp(RequestContext.getUserIp());
 
 		// 结果封装
 		View view = ViewUtil.defaultView();
