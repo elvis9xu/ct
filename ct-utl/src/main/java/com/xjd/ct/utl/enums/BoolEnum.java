@@ -8,18 +8,17 @@ package com.xjd.ct.utl.enums;
  */
 public enum BoolEnum {
 
-	FALSE("0", "否")
-	, TRUE("1", "是");
+	FALSE((byte) 0, "否"), TRUE((byte) 1, "是");
 
-	String code;
+	byte code;
 	String desc;
 
-	BoolEnum(String code, String desc) {
+	BoolEnum(byte code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}
 
-	public String getCode() {
+	public byte getCode() {
 		return code;
 	}
 
@@ -31,23 +30,26 @@ public enum BoolEnum {
 		return BoolEnum.class.getSimpleName() + "[code=" + code + ", desc=" + desc + "]";
 	}
 
-	public static BoolEnum valueOfCode(String code) {
+	public static BoolEnum valueOfCode(Byte code) {
+		if (code == null) {
+			return null;
+		}
 		for (BoolEnum e : BoolEnum.values()) {
-			if (e.getCode().equals(code)) {
+			if (e.getCode() == code.byteValue()) {
 				return e;
 			}
 		}
 		return null;
 	}
 
-	public static boolean validCode(String code) {
+	public static boolean validCode(Byte code) {
 		if (valueOfCode(code) == null) {
 			return false;
 		}
 		return true;
 	}
 
-	public static boolean parseCode(String code) {
+	public static boolean parseCode(Byte code) {
 		return valueOfCode(code) == BoolEnum.TRUE;
 	}
 }

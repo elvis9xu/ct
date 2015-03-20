@@ -12,7 +12,9 @@ public abstract class DateUtil {
 	public static final String PATTERN_YEAR2MONTH = "yyyyMM";
 	public static final String PATTERN_YEAR2DAY = "yyyyMMdd";
 	public static final String PATTERN_YEAR2SECOND = "yyyyMMddHHmmss";
+	public static final String PATTERN_YEAR2MILLISECOND = "yyyyMMddHHmmssSSS";
 	public static final String PATTERN_NORMAL_YEAR2SECOND = "yyyy-MM-dd HH:mm:ss";
+	public static final String PATTERN_NORMAL_YEAR2MILLISECOND = "yyyy-MM-dd HH:mm:ss.SSS";
 
 	protected static ThreadLocal<Map<String, DateFormat>> formatLocal = new ThreadLocal<Map<String, DateFormat>>();
 

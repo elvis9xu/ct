@@ -9,17 +9,6 @@
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
-  <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-    <property name="fileEncoding" value="UTF-8" />
-    <property name="locations">
-      <array>
-        <value>classpath:props/respCode.properties</value>
-      </array>
-    </property>
-  </bean>
-
-  <context:property-placeholder file-encoding="UTF-8" properties-ref="properties" />
-
   <context:component-scan base-package="com.xjd.ct.app.cmpnt, com.xjd.ct.app.ctrlr" />
 
   <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">

@@ -2,53 +2,56 @@ package com.xjd.ct.biz.bo;
 
 import java.util.Date;
 
+/**
+ * 接口信息
+ */
 public class ServiceBo extends BaseBo {
-	private String serviceName;
+	private String name;
 
-	private String serviceVersion;
+	private String version;
 
-	private boolean loginFlag;
+	private Byte needLoginFlag;
 
-	private boolean maintainFlag;
+	private Byte inMaintainFlag;
 
 	private String maintainMsg;
 
-	private boolean validFlag;
+	private Byte validFlag;
 
 	private Date addTime;
 
 	private Date updTime;
 
-	public String getServiceName() {
-		return serviceName;
+	public String getName() {
+		return name;
 	}
 
-	public void setServiceName(String serviceName) {
-		this.serviceName = serviceName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getServiceVersion() {
-		return serviceVersion;
+	public String getVersion() {
+		return version;
 	}
 
-	public void setServiceVersion(String serviceVersion) {
-		this.serviceVersion = serviceVersion;
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
-	public boolean isLoginFlag() {
-		return loginFlag;
+	public Byte getNeedLoginFlag() {
+		return needLoginFlag;
 	}
 
-	public void setLoginFlag(boolean loginFlag) {
-		this.loginFlag = loginFlag;
+	public void setNeedLoginFlag(Byte needLoginFlag) {
+		this.needLoginFlag = needLoginFlag;
 	}
 
-	public boolean isMaintainFlag() {
-		return maintainFlag;
+	public Byte getInMaintainFlag() {
+		return inMaintainFlag;
 	}
 
-	public void setMaintainFlag(boolean maintainFlag) {
-		this.maintainFlag = maintainFlag;
+	public void setInMaintainFlag(Byte inMaintainFlag) {
+		this.inMaintainFlag = inMaintainFlag;
 	}
 
 	public String getMaintainMsg() {
@@ -59,11 +62,11 @@ public class ServiceBo extends BaseBo {
 		this.maintainMsg = maintainMsg;
 	}
 
-	public boolean isValidFlag() {
+	public Byte getValidFlag() {
 		return validFlag;
 	}
 
-	public void setValidFlag(boolean validFlag) {
+	public void setValidFlag(Byte validFlag) {
 		this.validFlag = validFlag;
 	}
 

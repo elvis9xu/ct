@@ -11,7 +11,7 @@ import com.xjd.ct.utl.valid.constraints.Date.DatePattern;
 public class ValidationBean {
 
 	@NotBlank(message = RespCode.RESP_0001)
-	@Date(pattern = DatePattern.yyyyMMddHHmmss)
+	@Date(pattern = DatePattern.yyyyMMddHHmmssSSS)
 	private String timestamp;
 
 	@NotBlank(message = RespCode.RESP_0001)

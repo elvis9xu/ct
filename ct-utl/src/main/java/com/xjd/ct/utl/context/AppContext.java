@@ -22,14 +22,17 @@ import org.springframework.stereotype.Component;
 public class AppContext {
 	private static Logger log = LoggerFactory.getLogger(AppContext.class);
 
-	public static final String KEY_ENV = AppContext.class.getName() + "app.env";
+	public static final String KEY_ENV = "app.env";
 	public static final String VAL_ENV_PRODUCT = "product";
+	public static final String KEY_SIGN_DISABLED = "app.sign.disabled";
+	public static final String VAL_SIGN_DISABLED_YES = "1";
 
 	protected static AppContext instance;
 
 	protected ApplicationContext springContext;
 	protected Properties properties;
 	protected boolean isEnvProduct;
+	protected boolean isSignDisabled;
 
 	@Autowired
 	public AppContext(ApplicationContext springContext, @Qualifier("properties") Properties properties) {
@@ -38,9 +41,11 @@ public class AppContext {
 			this.properties = properties;
 			if (this.properties != null) {
 				isEnvProduct = VAL_ENV_PRODUCT.equalsIgnoreCase(this.properties.getProperty(KEY_ENV));
+				isSignDisabled = VAL_SIGN_DISABLED_YES.equalsIgnoreCase(this.properties.getProperty(KEY_SIGN_DISABLED));
 			}
-			log.info("AppContext inited: isEnvProduct=[{}], properties.size=[{}], springContext=[{}]", isEnvProduct, this.properties.size(),
-					this.springContext);
+			log.info(
+					"AppContext inited: isEnvProduct=[{}], isSignDisabled=[{}], properties.size=[{}], springContext=[{}]",
+					isEnvProduct, isSignDisabled, this.properties.size(), this.springContext);
 			if (log.isDebugEnabled()) {
 				StringWriter writer = new StringWriter(properties.size() * 30);
 				properties.list(new PrintWriter(writer));
@@ -79,6 +84,16 @@ public class AppContext {
 	public static boolean isEnvProduct() {
 		assertInited();
 		return instance == null ? false : instance.isEnvProduct;
+	}
+
+	/**
+	 * 判断当前环境是否需要取消校验签名sign
+	 *
+	 * @return
+	 */
+	public static boolean isSignDisabled() {
+		assertInited();
+		return instance == null ? false : instance.isSignDisabled;
 	}
 
 	/**

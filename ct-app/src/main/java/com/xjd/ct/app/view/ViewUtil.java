@@ -144,7 +144,7 @@ public abstract class ViewUtil {
 		}
 
 		public ViewBuilder timestamp(Date timestamp) {
-			this.timestamp = DateUtil.format(timestamp, DateUtil.PATTERN_YEAR2SECOND);
+			this.timestamp = DateUtil.format(timestamp, DateUtil.PATTERN_YEAR2MILLISECOND);
 			return this;
 		}
 

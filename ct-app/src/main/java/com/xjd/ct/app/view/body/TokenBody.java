@@ -8,7 +8,7 @@ import com.xjd.ct.app.view.ViewBody;
  */
 public class TokenBody extends ViewBody {
 	private String token;
-	private String key;
+	private String salt;
 
 	public String getToken() {
 		return token;
@@ -18,11 +18,11 @@ public class TokenBody extends ViewBody {
 		this.token = token;
 	}
 
-	public String getKey() {
-		return key;
+	public String getSalt() {
+		return salt;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 }

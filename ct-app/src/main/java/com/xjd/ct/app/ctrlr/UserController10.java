@@ -30,7 +30,7 @@ public class UserController10 {
 
 		TokenBody body = new TokenBody();
 		body.setToken(tokenBo.getToken());
-		body.setKey(tokenBo.getSecretKey());
+		body.setSalt(tokenBo.getSalt());
 
 		view.setBody(body);
 

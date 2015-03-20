@@ -1,4 +1,4 @@
-package com.xjd.ct.biz.bo;
+package com.xjd.ct.dal.dos;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -6,8 +6,11 @@ import java.util.List;
 
 /**
  * 用户全量信息
+ * 
+ * @author elvis.xu
+ * @since 2015-03-20 13:32
  */
-public class UserBo extends BaseBo {
+public class UserDo extends BaseDo {
 	// User
 	private Long userId;
 
@@ -82,10 +85,10 @@ public class UserBo extends BaseBo {
 	private Integer fansCount;
 
 	// Babys
-	private List<UserBabyBo> babyList;
+	private List<UserBabyModel> babyList;
 
 	// BindAccounts
-	private List<UserBindAccountBo> bindAccountList;
+	private List<UserBindAccountModel> bindAccountList;
 
 	public Long getUserId() {
 		return userId;
@@ -367,19 +370,19 @@ public class UserBo extends BaseBo {
 		this.fansCount = fansCount;
 	}
 
-	public List<UserBabyBo> getBabyList() {
+	public List<UserBabyModel> getBabyList() {
 		return babyList;
 	}
 
-	public void setBabyList(List<UserBabyBo> babyList) {
+	public void setBabyList(List<UserBabyModel> babyList) {
 		this.babyList = babyList;
 	}
 
-	public List<UserBindAccountBo> getBindAccountList() {
+	public List<UserBindAccountModel> getBindAccountList() {
 		return bindAccountList;
 	}
 
-	public void setBindAccountList(List<UserBindAccountBo> bindAccountList) {
+	public void setBindAccountList(List<UserBindAccountModel> bindAccountList) {
 		this.bindAccountList = bindAccountList;
 	}
 }

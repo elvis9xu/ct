@@ -1,10 +1,6 @@
 package com.xjd.ct.app.cmpnt;
 
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,6 +31,7 @@ import com.xjd.ct.utl.DateUtil;
 import com.xjd.ct.utl.DigestUtil;
 import com.xjd.ct.utl.JsonUtil;
 import com.xjd.ct.utl.context.AppContext;
+import com.xjd.ct.utl.enums.BoolEnum;
 import com.xjd.ct.utl.exception.BusinessException;
 import com.xjd.ct.utl.respcode.RespCode;
 import com.xjd.ct.utl.valid.ValidationUtil;
@@ -85,8 +82,8 @@ public class ControllerAspect {
 			}
 
 			// 先log
-			logService.serviceLog(userIp, tokenBo == null ? null : tokenBo.getUserId(), service, version,
-					DateUtil.now());
+			logService.serviceLog(userIp, tokenBo == null ? null : tokenBo.getUserId(), token, service,
+					version, DateUtil.now());
 
 			if (!"getToken".equals(service)) {
 				if (!offerTokenFlag) {
@@ -105,18 +102,22 @@ public class ControllerAspect {
 			}
 
 			// == sign == //
-			String sign = request.getParameter("sign");
-			if (StringUtils.isEmpty(sign)) {
-				throw new BusinessException(RespCode.RESP_0010);
-			}
-			Map<String, String> map = new TreeMap<String, String>();
-			for (Enumeration<String> enu = request.getParameterNames(); enu.hasMoreElements();) {
-				String key = enu.nextElement();
-				map.put(key, request.getParameter(key));
-			}
-			map.remove("sign");
-			if (!checkSign(sign, map, tokenBo == null ? "" : tokenBo.getSecretKey())) {
-				throw new BusinessException(RespCode.RESP_0011);
+			if (!AppContext.isSignDisabled()) {
+				String sign = request.getParameter("sign");
+				if (StringUtils.isEmpty(sign)) {
+					throw new BusinessException(RespCode.RESP_0010);
+				}
+				Map<String, String> map = new TreeMap<String, String>();
+				for (Enumeration<String> enu = request.getParameterNames(); enu.hasMoreElements();) {
+					String key = enu.nextElement();
+					map.put(key, request.getParameter(key));
+				}
+				map.remove("sign");
+				if (!checkSign(sign, map, tokenBo == null ? "" : tokenBo.getSalt())) {
+					throw new BusinessException(RespCode.RESP_0011);
+				}
+			} else {
+				log.debug("check sign disabled!");
 			}
 
 			// == timestamp == //
@@ -128,14 +129,14 @@ public class ControllerAspect {
 			if (serviceBo == null) {
 				throw new BusinessException(RespCode.RESP_9980);
 			}
-			if (!serviceBo.isValidFlag()) {
+			if (!BoolEnum.parseCode(serviceBo.getValidFlag())) {
 				throw new BusinessException(RespCode.RESP_9981);
 			}
-			if (serviceBo.isMaintainFlag()) {
+			if (BoolEnum.parseCode(serviceBo.getInMaintainFlag())) {
 				throw new BusinessException(RespCode.RESP_9982, StringUtils.isBlank(serviceBo.getMaintainMsg()) ? null
 						: serviceBo.getMaintainMsg());
 			}
-			if (serviceBo.isLoginFlag()) {
+			if (BoolEnum.parseCode(serviceBo.getNeedLoginFlag())) {
 				if (RequestContext.getUser() == null) {
 					throw new BusinessException(RespCode.RESP_0111);
 				}
@@ -160,7 +161,7 @@ public class ControllerAspect {
 
 		rt = ViewUtil.builder(rt).service(service).version(version).timestamp(DateUtil.now()).build();
 		log.info("请求返回: {}, result={}", fixLogString,
-				JsonUtil.toStringIncludeIgnoredProperties(rt, DateUtil.PATTERN_NORMAL_YEAR2SECOND));
+				JsonUtil.toStringIncludeIgnoredProperties(rt, DateUtil.PATTERN_YEAR2MILLISECOND));
 
 		return rt;
 	}
@@ -175,7 +176,7 @@ public class ControllerAspect {
 				paramMap.put(entry.getKey(), val);
 			}
 		}
-		return JsonUtil.toString(paramMap, DateUtil.PATTERN_NORMAL_YEAR2SECOND);
+		return JsonUtil.toString(paramMap, DateUtil.PATTERN_YEAR2MILLISECOND);
 	}
 
 	protected Object unarray(String[] array) {

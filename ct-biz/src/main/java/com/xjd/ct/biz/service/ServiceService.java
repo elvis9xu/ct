@@ -1,12 +1,12 @@
 package com.xjd.ct.biz.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xjd.ct.biz.bo.ServiceBo;
-import com.xjd.ct.dal.mapper.ServiceMapper;
-import com.xjd.ct.dal.model.ServiceDo;
-import com.xjd.ct.utl.enums.BoolEnum;
+import com.xjd.ct.dal.dao.ServiceDao;
+import com.xjd.ct.dal.dos.ServiceModel;
 
 /**
  * Service的管理
@@ -18,7 +18,7 @@ import com.xjd.ct.utl.enums.BoolEnum;
 public class ServiceService {
 
 	@Autowired
-	ServiceMapper serviceMapper;
+	ServiceDao serviceDao;
 
 	/**
 	 * 根据name和version查询Service配置
@@ -28,7 +28,7 @@ public class ServiceService {
 	 * @return
 	 */
 	public ServiceBo queryServiceByNameAndVersion(String serviceName, String serviceVersion) {
-		ServiceDo serviceDo = serviceMapper.selectByServiceNameAndVersion(serviceName, serviceVersion);
+		ServiceModel serviceDo = serviceDao.selectByNameAndVersion(serviceName, serviceVersion);
 
 		return transferServiceDoToServiceBo(serviceDo);
 	}
@@ -39,20 +39,12 @@ public class ServiceService {
 	 * @param serviceDo
 	 * @return
 	 */
-	public static ServiceBo transferServiceDoToServiceBo(ServiceDo serviceDo) {
+	public static ServiceBo transferServiceDoToServiceBo(ServiceModel serviceDo) {
 		if (serviceDo == null) {
 			return null;
 		}
-
 		ServiceBo serviceBo = new ServiceBo();
-		serviceBo.setServiceName(serviceDo.getServiceName());
-		serviceBo.setServiceVersion(serviceDo.getServiceVersion());
-		serviceBo.setAddTime(serviceDo.getAddTime());
-		serviceBo.setUpdTime(serviceDo.getUpdTime());
-		serviceBo.setLoginFlag(BoolEnum.parseCode(serviceDo.getLoginFlag()));
-		serviceBo.setMaintainFlag(BoolEnum.parseCode(serviceDo.getMaintainFlag()));
-		serviceBo.setMaintainMsg(serviceDo.getMaintainMsg());
-		serviceBo.setValidFlag(BoolEnum.parseCode(serviceDo.getValidFlag()));
+		BeanUtils.copyProperties(serviceDo, serviceBo);
 		return serviceBo;
 	}
 }
