@@ -5,18 +5,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.map.JsonSerializer;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializerProvider;
-import org.codehaus.jackson.map.introspect.Annotated;
-import org.codehaus.jackson.map.introspect.AnnotatedClass;
-import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
-import org.codehaus.jackson.map.ser.BeanPropertyFilter;
-import org.codehaus.jackson.map.ser.BeanPropertyWriter;
-import org.codehaus.jackson.map.ser.impl.PropertySerializerMap;
-import org.codehaus.jackson.map.ser.impl.SimpleFilterProvider;
-
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.introspect.Annotated;
+import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
+import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
+import com.fasterxml.jackson.databind.ser.BeanPropertyWriter;
+import com.fasterxml.jackson.databind.ser.impl.PropertySerializerMap;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.xjd.ct.utl.context.AppContext;
 
 public abstract class JsonUtil {
@@ -117,7 +116,7 @@ public abstract class JsonUtil {
 		}
 
 		@Override
-		public String[] findPropertiesToIgnore(AnnotatedClass ac) {
+		public String[] findPropertiesToIgnore(Annotated ac) {
 			return null;
 		}
 
@@ -127,16 +126,22 @@ public abstract class JsonUtil {
 		}
 	}
 
-	public static class FilterPwdBeanPropertyFilter implements BeanPropertyFilter {
+	public static class FilterPwdBeanPropertyFilter extends SimpleBeanPropertyFilter {
+		@Override
+		protected boolean include(BeanPropertyWriter writer) {
+			return true;
+		}
+
 		@Override
 		public void serializeAsField(Object bean, JsonGenerator jgen, SerializerProvider prov, BeanPropertyWriter writer) throws Exception {
-			String name = writer.getName();
-
-			if (AppContext.isPwdField(name)) {
-				FilterPwdBeanPropertyWriter filterPwdBeanPropertyWriter = new FilterPwdBeanPropertyWriter(writer);
-				filterPwdBeanPropertyWriter.serializeAsField(bean, jgen, prov);
-			} else {
-				writer.serializeAsField(bean, jgen, prov);
+			if (include(writer)) {
+				String name = writer.getName();
+				if (AppContext.isPwdField(name)) {
+					FilterPwdBeanPropertyWriter filterPwdBeanPropertyWriter = new FilterPwdBeanPropertyWriter(writer);
+					filterPwdBeanPropertyWriter.serializeAsField(bean, jgen, prov);
+				} else {
+					writer.serializeAsField(bean, jgen, prov);
+				}
 			}
 		}
 	}
@@ -152,20 +157,13 @@ public abstract class JsonUtil {
 			Object value = AppContext.getPwdMask(); // 密码
 			// Null handling is bit different, check that first
 			if (value == null) {
-				if (!_suppressNulls) {
+				if (_nullSerializer != null) {
 					jgen.writeFieldName(_name);
-					prov.defaultSerializeNull(jgen);
+					_nullSerializer.serialize(null, jgen, prov);
 				}
 				return;
 			}
-			// For non-nulls, first: simple check for direct cycles
-			if (value == bean) {
-				_reportSelfReference(bean);
-			}
-			if (_suppressableValue != null && _suppressableValue.equals(value)) {
-				return;
-			}
-
+			// then find serializer to use
 			JsonSerializer<Object> ser = _serializer;
 			if (ser == null) {
 				Class<?> cls = value.getClass();
@@ -174,6 +172,20 @@ public abstract class JsonUtil {
 				if (ser == null) {
 					ser = _findAndAddDynamic(map, cls, prov);
 				}
+			}
+			// and then see if we must suppress certain values (default, empty)
+			if (_suppressableValue != null) {
+				if (MARKER_FOR_EMPTY == _suppressableValue) {
+					if (ser.isEmpty(value)) {
+						return;
+					}
+				} else if (_suppressableValue.equals(value)) {
+					return;
+				}
+			}
+			// For non-nulls: simple check for direct cycles
+			if (value == bean) {
+				_handleSelfReference(bean, ser);
 			}
 			jgen.writeFieldName(_name);
 			if (_typeSerializer == null) {
