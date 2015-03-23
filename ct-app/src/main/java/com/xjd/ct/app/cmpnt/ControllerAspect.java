@@ -23,13 +23,14 @@ import com.xjd.ct.app.view.ViewUtil;
 import com.xjd.ct.biz.bo.ServiceBo;
 import com.xjd.ct.biz.bo.TokenBo;
 import com.xjd.ct.biz.bo.UserBo;
+import com.xjd.ct.biz.service.AuthService;
 import com.xjd.ct.biz.service.LogService;
 import com.xjd.ct.biz.service.ServiceService;
-import com.xjd.ct.biz.service.TokenService;
 import com.xjd.ct.biz.service.UserService;
 import com.xjd.ct.utl.DateUtil;
 import com.xjd.ct.utl.DigestUtil;
 import com.xjd.ct.utl.JsonUtil;
+import com.xjd.ct.utl.constant.AppConstant;
 import com.xjd.ct.utl.context.AppContext;
 import com.xjd.ct.utl.enums.BoolEnum;
 import com.xjd.ct.utl.exception.BusinessException;
@@ -45,7 +46,7 @@ public class ControllerAspect {
 	@Autowired
 	LogService logService;
 	@Autowired
-	TokenService tokenService;
+	AuthService authService;
 	@Autowired
 	UserService userService;
 	@Autowired
@@ -67,7 +68,7 @@ public class ControllerAspect {
 		String paramString = paramString(request);
 		String fixLogString = "version=" + version + ", service=" + service + ", userIp=" + userIp + ", param="
 				+ paramString;
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
 		log.info("请求开始...: {}", fixLogString);
 		logHeaders(request);
 
@@ -78,22 +79,23 @@ public class ControllerAspect {
 			boolean offerTokenFlag = StringUtils.isNotEmpty(token);
 			TokenBo tokenBo = null;
 			if (offerTokenFlag) {
-				tokenBo = tokenService.queryTokenByToken(token);
+				tokenBo = authService.queryTokenByToken(token);
 			}
 
 			// 先log
-			logService.serviceLog(userIp, tokenBo == null ? null : tokenBo.getUserId(), token, service,
+			logService.serviceLog(userIp, tokenBo == null ? AppConstant.ANONYMOUS_USERID : tokenBo.getUserId(), token, service,
 					version, DateUtil.now());
 
 			if (!"getToken".equals(service)) {
 				if (!offerTokenFlag) {
 					throw new BusinessException(RespCode.RESP_0001, new Object[] { "token" });
 				}
-				tokenService.checkToken(tokenBo);
+				authService.checkToken(tokenBo);
+				authService.updateToken(token);
 			}
 
 			// 查询用户
-			if (tokenBo != null && !TokenService.ANONYMOUS_USERID.equals(tokenBo.getUserId())) {
+			if (tokenBo != null && !AppConstant.ANONYMOUS_USERID.equals(tokenBo.getUserId())) {
 				UserBo userBo = userService.queryUserByUserId(tokenBo.getUserId());
 				if (userBo == null) {
 					throw new BusinessException(RespCode.RESP_0110);
@@ -137,9 +139,7 @@ public class ControllerAspect {
 						: serviceBo.getMaintainMsg());
 			}
 			if (BoolEnum.parseCode(serviceBo.getNeedLoginFlag())) {
-				if (RequestContext.getUser() == null) {
-					throw new BusinessException(RespCode.RESP_0111);
-				}
+				RequestContext.checkAndGetUser();
 			}
 
 			rt = (View) jp.proceed();

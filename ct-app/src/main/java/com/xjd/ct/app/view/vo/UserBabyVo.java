@@ -1,14 +1,12 @@
-package com.xjd.ct.biz.bo;
+package com.xjd.ct.app.view.vo;
 
 import java.util.Date;
 
 /**
- * 用户的小孩
- * 
  * @author elvis.xu
- * @since 2015-03-20 13:41
+ * @since 2015-03-23 18:11
  */
-public class UserBabyBo extends BaseBo {
+public class UserBabyVo {
 	private Long babyId;
 
 	private Long userId;

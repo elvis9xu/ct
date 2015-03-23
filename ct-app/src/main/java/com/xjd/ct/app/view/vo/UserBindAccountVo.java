@@ -1,13 +1,12 @@
-package com.xjd.ct.biz.bo;
+package com.xjd.ct.app.view.vo;
 
 import java.util.Date;
 
 /**
- * 用户绑定的第三方账户信息
  * @author elvis.xu
- * @since 2015-03-20 13:43
+ * @since 2015-03-23 18:11
  */
-public class UserBindAccountBo extends BaseBo {
+public class UserBindAccountVo {
 	private Long accountId;
 
 	private Long userId;

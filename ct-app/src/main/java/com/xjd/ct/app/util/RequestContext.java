@@ -3,6 +3,10 @@ package com.xjd.ct.app.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.xjd.ct.biz.bo.UserBo;
+import com.xjd.ct.utl.exception.BusinessException;
+import com.xjd.ct.utl.respcode.RespCode;
+
 /**
  * 请求上下文
  * 
@@ -42,12 +46,20 @@ public class RequestContext {
 		return (String) get().get(key);
 	}
 
-	public static void putUser(Object userObj) {
+	public static void putUser(UserBo userObj) {
 		put(KEY_USER, userObj);
 	}
 
-	public static Object getUser() {
-		return get(KEY_USER);
+	public static UserBo getUser() {
+		return (UserBo) get(KEY_USER);
+	}
+
+	public static UserBo checkAndGetUser() {
+		UserBo userBo = getUser();
+		if (userBo == null) {
+			throw new BusinessException(RespCode.RESP_0111);
+		}
+		return userBo;
 	}
 
 	public static void putUserIp(String userIp) {

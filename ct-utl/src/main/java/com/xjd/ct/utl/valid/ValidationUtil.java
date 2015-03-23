@@ -55,7 +55,7 @@ public abstract class ValidationUtil implements ValidationProperties {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public static boolean valid(String[] array) {
+	public static boolean valid(String... array) {
 		Map map = MapUtils.putAll(new HashMap(), array);
 		return valid(map);
 	}

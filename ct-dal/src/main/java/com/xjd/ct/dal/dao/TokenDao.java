@@ -1,5 +1,6 @@
 package com.xjd.ct.dal.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +87,22 @@ public class TokenDao {
 	 */
 	public TokenModel selectByToken(String token) {
 		return tokenModelMapper.selectByPrimaryKey(token);
+	}
+
+	/**
+	 * 更新token的upd_time字段
+	 *
+	 * @param time
+	 * @param token
+	 * @return
+	 */
+	public int updateUpdTimeByToken(Date time, String token) {
+		TokenModel tokenModel = new TokenModel();
+		tokenModel.setUpdTime(time);
+
+		TokenModelExample example = new TokenModelExample();
+		example.or().andTokenEqualTo(token);
+
+		return tokenModelMapper.updateByExampleSelective(tokenModel, example);
 	}
 }

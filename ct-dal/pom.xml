@@ -99,7 +99,7 @@
       </properties>
     </profile>
     <profile>
-      <id>deploy</id>
+      <id>product</id>
       <properties>
         <!-- data -->
         <data.dataSource.type>jndi</data.dataSource.type>

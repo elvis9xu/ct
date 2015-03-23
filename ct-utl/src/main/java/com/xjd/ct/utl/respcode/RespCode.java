@@ -43,6 +43,16 @@ public interface RespCode {
 	String RESP_0110 = "0110";
 	/** 您尚未登录 */
 	String RESP_0111 = "0111";
+	/** 账号或密码输入错误 */
+	String RESP_0112 = "0112";
+	/** 密码输入错误 */
+	String RESP_0113 = "0113";
+	/** 用户名请填写手机或邮箱 */
+	String RESP_0120 = "0120";
+	/** 该手机已注册 */
+	String RESP_0121 = "0121";
+	/** 该邮箱已注册 */
+	String RESP_0122 = "0122";
 
 	// ==== 9901 ~ 9999	系统错误  ==== //
 	

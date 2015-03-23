@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xjd.ct.biz.bo.UserBabyBo;
+import com.xjd.ct.biz.bo.UserBasicBo;
 import com.xjd.ct.biz.bo.UserBindAccountBo;
 import com.xjd.ct.biz.bo.UserBo;
 import com.xjd.ct.dal.dao.UserDao;
 import com.xjd.ct.dal.dos.UserBabyModel;
 import com.xjd.ct.dal.dos.UserBindAccountModel;
 import com.xjd.ct.dal.dos.UserDo;
+import com.xjd.ct.dal.dos.UserModel;
 
 /**
  * 用户管理
@@ -37,6 +39,34 @@ public class UserService {
 		UserDo userDo = userDao.selectByUserId(userId);
 
 		return transferUserDoToUserBo(userDo);
+	}
+
+	/**
+	 * 根据用户ID查询用户基本授权信息
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public UserBasicBo queryUserBasicByUserId(Long userId) {
+		UserModel userBasicDo = userDao.selectUserBasicBoByUserId(userId);
+
+		return transferUserBasicDoToUserBasicBo(userBasicDo);
+	}
+
+	/**
+	 * Do -> Bo
+	 * 
+	 * @param userBasicDo
+	 * @return
+	 */
+	private UserBasicBo transferUserBasicDoToUserBasicBo(UserModel userBasicDo) {
+		if (userBasicDo == null) {
+			return null;
+		}
+
+		UserBasicBo userBasicBo = new UserBasicBo();
+		BeanUtils.copyProperties(userBasicDo, userBasicBo);
+		return userBasicBo;
 	}
 
 	/**
