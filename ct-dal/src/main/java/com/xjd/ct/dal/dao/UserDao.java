@@ -34,6 +34,8 @@ public class UserDao {
 	UserBabyModelMapper userBabyModelMapper;
 	@Autowired
 	UserBindAccountModelMapper userBindAccountModelMapper;
+	@Autowired
+	UserIdolModelMapper userIdolModelMapper;
 
 	/**
 	 * 通过UserId查询用户全量数据
@@ -263,5 +265,125 @@ public class UserDao {
 	 */
 	public int insertUserBaby(UserBabyModel babyModel) {
 		return userBabyModelMapper.insert(babyModel);
+	}
+
+	/**
+	 * 查询关注信息
+	 *
+	 * @param userId
+	 * @param idolUserId
+	 * @return
+	 */
+	public UserIdolModel selectUserIdolByUserIdAndIdolUserId(Long userId, Long idolUserId) {
+		UserIdolModelKey key = new UserIdolModelKey();
+		key.setUserId(userId);
+		key.setIdolUserId(idolUserId);
+
+		return userIdolModelMapper.selectByPrimaryKey(key);
+	}
+
+	/**
+	 * 插入一条关注信息
+	 *
+	 * @param userIdolModel
+	 * @return
+	 */
+	public int insertUserIdol(UserIdolModel userIdolModel) {
+		return userIdolModelMapper.insert(userIdolModel);
+	}
+
+	/**
+	 * 删除一条关注信息
+	 *
+	 * @param userId
+	 * @param idolUserId
+	 * @return
+	 */
+	public int deleteUserIdolByUserIdAndIdolUserId(Long userId, Long idolUserId) {
+		UserIdolModelKey key = new UserIdolModelKey();
+		key.setUserId(userId);
+		key.setIdolUserId(idolUserId);
+		return userIdolModelMapper.deleteByPrimaryKey(key);
+	}
+
+	/**
+	 * 用户关注记数加1
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public int increaseIdolCountByUserId(Long userId) {
+		UserSummaryModel userSummaryModel = userSummaryModelMapper.selectByPrimaryKey(userId);
+
+		UserSummaryModel upd = new UserSummaryModel();
+		upd.setUserId(userId);
+		upd.setIdolCount(userSummaryModel.getIdolCount() + 1);
+		upd.setUpdTime(DateUtil.now());
+
+		return userSummaryModelMapper.updateByPrimaryKeySelective(upd);
+	}
+
+	/**
+	 * 用户粉丝记数加1
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public int increaseFansCountByUserId(Long userId) {
+		UserSummaryModel userSummaryModel = userSummaryModelMapper.selectByPrimaryKey(userId);
+
+		UserSummaryModel upd = new UserSummaryModel();
+		upd.setUserId(userId);
+		upd.setFansCount(userSummaryModel.getFansCount() + 1);
+		upd.setUpdTime(DateUtil.now());
+
+		return userSummaryModelMapper.updateByPrimaryKeySelective(upd);
+	}
+
+	/**
+	 * 用户关注记数减1
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public int decreaseIdolCountByUserId(Long userId) {
+		UserSummaryModel userSummaryModel = userSummaryModelMapper.selectByPrimaryKey(userId);
+
+		UserSummaryModel upd = new UserSummaryModel();
+		upd.setUserId(userId);
+		upd.setIdolCount(userSummaryModel.getIdolCount() - 1);
+		upd.setUpdTime(DateUtil.now());
+
+		return userSummaryModelMapper.updateByPrimaryKeySelective(upd);
+	}
+
+	/**
+	 * 用户粉丝记数减1
+	 *
+	 * @param userId
+	 * @return
+	 */
+	public int decreaseFansCountByUserId(Long userId) {
+		UserSummaryModel userSummaryModel = userSummaryModelMapper.selectByPrimaryKey(userId);
+
+		UserSummaryModel upd = new UserSummaryModel();
+		upd.setUserId(userId);
+		upd.setFansCount(userSummaryModel.getFansCount() - 1);
+		upd.setUpdTime(DateUtil.now());
+
+		return userSummaryModelMapper.updateByPrimaryKeySelective(upd);
+	}
+
+	/**
+	 * 查询用户的所有关注信息
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public List<UserIdolModel> selectUserIdolByUserId(Long userId) {
+		UserIdolModelExample example = new UserIdolModelExample();
+		example.or().andUserIdEqualTo(userId);
+
+		return userIdolModelMapper.selectByExample(example);
 	}
 }

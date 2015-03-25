@@ -5,6 +5,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.xjd.ct.utl.enums.IdolOperEnum;
 import com.xjd.ct.utl.enums.UserSexEnum;
 import com.xjd.ct.utl.respcode.RespCode;
 import com.xjd.ct.utl.valid.constraints.Date;
@@ -46,6 +47,10 @@ public class ValidationBean {
 	@NotBlank(message = RespCode.RESP_0001)
 	@com.xjd.ct.utl.valid.constraints.Enum(enumClass = UserSexEnum.class)
 	private String babySex;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@com.xjd.ct.utl.valid.constraints.Enum(enumClass = IdolOperEnum.class)
+	private String idolOper;
 
 	public String getTimestamp() {
 		return timestamp;
@@ -117,5 +122,13 @@ public class ValidationBean {
 
 	public void setBabySex(String babySex) {
 		this.babySex = babySex;
+	}
+
+	public String getIdolOper() {
+		return idolOper;
+	}
+
+	public void setIdolOper(String idolOper) {
+		this.idolOper = idolOper;
 	}
 }

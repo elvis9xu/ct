@@ -1,19 +1,19 @@
 package com.xjd.ct.utl.enums;
 
 /**
- * 布尔枚举
+ * 关注/取消关注动作
  * 
  * @author elvis.xu
  * @since 2014-9-18
  */
-public enum BoolEnum {
+public enum IdolOperEnum {
 
-	FALSE((byte) 0, "否"), TRUE((byte) 1, "是");
+	CANCEL((byte) 0, "取消"), ADD((byte) 1, "添加");
 
 	byte code;
 	String desc;
 
-	BoolEnum(byte code, String desc) {
+	IdolOperEnum(byte code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}
@@ -27,14 +27,14 @@ public enum BoolEnum {
 	}
 
 	public String toString() {
-		return BoolEnum.class.getSimpleName() + "[code=" + code + ", desc=" + desc + "]";
+		return IdolOperEnum.class.getSimpleName() + "[code=" + code + ", desc=" + desc + "]";
 	}
 
-	public static BoolEnum valueOfCode(Byte code) {
+	public static IdolOperEnum valueOfCode(Byte code) {
 		if (code == null) {
 			return null;
 		}
-		for (BoolEnum e : BoolEnum.values()) {
+		for (IdolOperEnum e : IdolOperEnum.values()) {
 			if (e.getCode() == code.byteValue()) {
 				return e;
 			}
@@ -55,7 +55,4 @@ public enum BoolEnum {
 		return true;
 	}
 
-	public static boolean parseCode(Byte code) {
-		return valueOfCode(code) == BoolEnum.TRUE;
-	}
 }

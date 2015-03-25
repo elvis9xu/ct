@@ -201,4 +201,87 @@ public class UserService {
 		String rt = day + StringUtils.leftPad(seq, 10, '0');
 		return Long.valueOf(rt);
 	}
+
+	/**
+	 * 关注用户
+	 * 
+	 * @param userId
+	 * @param idolUserId
+	 */
+	@Transactional
+	public void addIdol(Long userId, Long idolUserId) {
+		if (userId.equals(idolUserId)) {
+			throw new BusinessException(RespCode.RESP_0132);
+		}
+
+		// 判断是否已关注
+		UserIdolModel userIdolModel = userDao.selectUserIdolByUserIdAndIdolUserId(userId, idolUserId);
+		if (userIdolModel != null) {
+			throw new BusinessException(RespCode.RESP_0130);
+		}
+
+		// 关注
+		userIdolModel = new UserIdolModel();
+		userIdolModel.setUserId(userId);
+		userIdolModel.setIdolUserId(idolUserId);
+		userIdolModel.setAddTime(DateUtil.now());
+		userDao.insertUserIdol(userIdolModel);
+
+		// 关注记数
+		userDao.increaseIdolCountByUserId(userId);
+
+		// 粉丝记数
+		userDao.increaseFansCountByUserId(idolUserId);
+
+		// 生成消息 TODO
+	}
+
+	/**
+	 * 取消关注
+	 * 
+	 * @param userId
+	 * @param idolUserId
+	 */
+	@Transactional
+	public void cancelIdol(Long userId, Long idolUserId) {
+		if (userId.equals(idolUserId)) {
+			throw new BusinessException(RespCode.RESP_0132);
+		}
+
+		// 判断是否已关注
+		UserIdolModel userIdolModel = userDao.selectUserIdolByUserIdAndIdolUserId(userId, idolUserId);
+		if (userIdolModel == null) {
+			throw new BusinessException(RespCode.RESP_0131);
+		}
+
+		// 取消关注
+		userDao.deleteUserIdolByUserIdAndIdolUserId(userId, idolUserId);
+
+		// 关注记数
+		userDao.decreaseIdolCountByUserId(userId);
+
+		// 粉丝记数
+		userDao.decreaseFansCountByUserId(idolUserId);
+
+		// 生成消息 TODO
+	}
+
+	/**
+	 * 查询用户所有已关注用户信息 TODO 分页查询, 一个SQL
+	 *
+	 * @param userId
+	 * @return
+	 */
+	public List<UserBo> listIdolsByUserId(Long userId) {
+
+		List<UserIdolModel> idolModelList = userDao.selectUserIdolByUserId(userId);
+
+		List<UserBo> userBoList = new ArrayList<UserBo>(idolModelList.size());
+		for (UserIdolModel userIdolModel : idolModelList) {
+			UserBo userBo = queryUserByUserId(userIdolModel.getIdolUserId());
+			userBoList.add(userBo);
+		}
+
+		return userBoList;
+	}
 }

@@ -2,12 +2,13 @@ package com.xjd.ct.utl.valid;
 
 public interface ValidationProperties {
 	String TIMESTAMP = "timestamp";
-	String BABYBIRTH = "babyBirth";
+	String BABY_BIRTH = "babyBirth";
 	String MOBILE = "mobile";
 	String EMAIL = "email";
 	String USERNAME = "username";
 	String PASSWORD = "password";
-	String USERID = "userId";
+	String USER_ID = "userId";
 	String SEX = "sex";
-	String BABYSEX = "babySex";
+	String BABY_SEX = "babySex";
+	String IDOL_OPER = "idolOper";
 }

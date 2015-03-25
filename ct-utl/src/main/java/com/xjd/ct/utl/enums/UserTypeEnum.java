@@ -42,8 +42,14 @@ public enum UserTypeEnum {
 		return null;
 	}
 
-	public static boolean validCode(Byte code) {
-		if (valueOfCode(code) == null) {
+	public static boolean validCode(String code) {
+		Byte val = null;
+		try {
+			val = Byte.valueOf(code);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		if (valueOfCode(val) == null) {
 			return false;
 		}
 		return true;

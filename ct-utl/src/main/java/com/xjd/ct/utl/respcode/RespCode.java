@@ -57,6 +57,12 @@ public interface RespCode {
 	String RESP_0121 = "0121";
 	/** 该邮箱已注册 */
 	String RESP_0122 = "0122";
+	/** 您已关注了该用户 */
+	String RESP_0130 = "0130";
+	/** 您尚未关注该用户 */
+	String RESP_0131 = "0131";
+	/** 不能关注自己 */
+	String RESP_0132 = "0132";
 
 	// ==== 9901 ~ 9999	系统错误  ==== //
 	
