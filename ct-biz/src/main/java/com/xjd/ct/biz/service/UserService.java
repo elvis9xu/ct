@@ -1,21 +1,25 @@
 package com.xjd.ct.biz.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xjd.ct.biz.bo.UserBabyBo;
 import com.xjd.ct.biz.bo.UserBasicBo;
 import com.xjd.ct.biz.bo.UserBindAccountBo;
 import com.xjd.ct.biz.bo.UserBo;
+import com.xjd.ct.dal.dao.SequenceDao;
 import com.xjd.ct.dal.dao.UserDao;
-import com.xjd.ct.dal.dos.UserBabyModel;
-import com.xjd.ct.dal.dos.UserBindAccountModel;
-import com.xjd.ct.dal.dos.UserDo;
-import com.xjd.ct.dal.dos.UserModel;
+import com.xjd.ct.dal.dos.*;
+import com.xjd.ct.utl.DateUtil;
+import com.xjd.ct.utl.exception.BusinessException;
+import com.xjd.ct.utl.respcode.RespCode;
 
 /**
  * 用户管理
@@ -28,6 +32,8 @@ public class UserService {
 
 	@Autowired
 	UserDao userDao;
+	@Autowired
+	SequenceDao sequenceDao;
 
 	/**
 	 * 通过userId查询用户 查询不到时返回null
@@ -51,6 +57,56 @@ public class UserService {
 		UserModel userBasicDo = userDao.selectUserBasicBoByUserId(userId);
 
 		return transferUserBasicDoToUserBasicBo(userBasicDo);
+	}
+
+	/**
+	 * 设置用户信息
+	 * 
+	 * @param userId
+	 * @param headImgRes
+	 * @param nickname
+	 * @param sex
+	 * @param moodWords
+	 * @param babyBirth
+	 * @param babySex
+	 */
+	@Transactional
+	public void setUserInfo(Long userId, String headImgRes, String nickname, Byte sex, String moodWords,
+			Date babyBirth, Byte babySex) {
+		UserInfoModel userInfoModel = userDao.selectUserInfoByUserId(userId);
+
+		if (userInfoModel == null) {
+			throw new BusinessException(RespCode.RESP_0110);
+		}
+
+		Date now = DateUtil.now();
+		userInfoModel.setHeadImgRes(headImgRes);
+		userInfoModel.setNickname(nickname);
+		userInfoModel.setSex(sex);
+		userInfoModel.setMoodWords(moodWords);
+		userInfoModel.setMoodWordsTime(now);
+		userInfoModel.setUpdTime(now);
+		userDao.updateUserInfoByUserId(userInfoModel);
+
+		List<UserBabyModel> babyModelList = userDao.selectUserBabyByUserId(userId);
+		if (babyModelList.size() > 0) {
+			// 更新
+			UserBabyModel babyModel = babyModelList.get(0);
+			babyModel.setBabySex(babySex);
+			babyModel.setBabyBirth(babyBirth);
+			babyModel.setUpdTime(now);
+			userDao.updateUserBabyByBabyId(babyModel);
+		} else {
+			// 插入
+			UserBabyModel babyModel = new UserBabyModel();
+			babyModel.setBabyId(generateBabyId());
+			babyModel.setUserId(userId);
+			babyModel.setBabySex(babySex);
+			babyModel.setBabyBirth(babyBirth);
+			babyModel.setAddTime(now);
+			babyModel.setUpdTime(now);
+			userDao.insertUserBaby(babyModel);
+		}
 	}
 
 	/**
@@ -132,5 +188,17 @@ public class UserService {
 		UserBindAccountBo userBindAccountBo = new UserBindAccountBo();
 		BeanUtils.copyProperties(userBindAccountDo, userBindAccountBo);
 		return userBindAccountBo;
+	}
+
+	/**
+	 * 生成一个新的BabyID
+	 *
+	 * @return
+	 */
+	protected Long generateBabyId() {
+		String day = DateUtil.format(DateUtil.now(), DateUtil.PATTERN_YEAR2DAY);
+		String seq = sequenceDao.getSequence(SequenceDao.SEQ_USER_BABY_ID) + "";
+		String rt = day + StringUtils.leftPad(seq, 10, '0');
+		return Long.valueOf(rt);
 	}
 }

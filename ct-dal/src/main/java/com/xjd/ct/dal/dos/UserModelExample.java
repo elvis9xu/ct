@@ -1435,6 +1435,66 @@ public class UserModelExample {
             addCriterion("UPD_TIME not between", value1, value2, "updTime");
             return (Criteria) this;
         }
+
+        public Criteria andUserStatusIsNull() {
+            addCriterion("USER_STATUS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusIsNotNull() {
+            addCriterion("USER_STATUS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusEqualTo(Byte value) {
+            addCriterion("USER_STATUS =", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusNotEqualTo(Byte value) {
+            addCriterion("USER_STATUS <>", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusGreaterThan(Byte value) {
+            addCriterion("USER_STATUS >", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("USER_STATUS >=", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusLessThan(Byte value) {
+            addCriterion("USER_STATUS <", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("USER_STATUS <=", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusIn(List<Byte> values) {
+            addCriterion("USER_STATUS in", values, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusNotIn(List<Byte> values) {
+            addCriterion("USER_STATUS not in", values, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusBetween(Byte value1, Byte value2) {
+            addCriterion("USER_STATUS between", value1, value2, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("USER_STATUS not between", value1, value2, "userStatus");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -47,6 +47,8 @@ public class UserBo extends BaseBo {
 
 	private String address;
 
+	private Byte userStatus;
+
 	private Date addTime;
 
 	// User Info
@@ -381,5 +383,13 @@ public class UserBo extends BaseBo {
 
 	public void setBindAccountList(List<UserBindAccountBo> bindAccountList) {
 		this.bindAccountList = bindAccountList;
+	}
+
+	public Byte getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(Byte userStatus) {
+		this.userStatus = userStatus;
 	}
 }

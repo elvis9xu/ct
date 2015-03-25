@@ -83,12 +83,14 @@ public class AuthController10 {
 	@RequestMapping("/signin")
 	@ResponseBody
 	public View signin(@RequestParam(value = "username", required = false) String username,
-			@RequestParam(value = "password", required = false) String password) {
+			@RequestParam(value = "password", required = false) String password,
+			@RequestParam(value = "token", required = false) String token) {
 		// 参数校验
 		ValidationUtil.check(ValidationUtil.USERNAME, username, ValidationUtil.PASSWORD, password);
 
 		// 业务调用
 		TokenBo tokenBo = authService.signin(username, password, RequestContext.getUserIp());
+		authService.deleteToken(token); // 登录成功后需要作废原来的token
 
 		// 结果封装
 		TokenBody body = new TokenBody();

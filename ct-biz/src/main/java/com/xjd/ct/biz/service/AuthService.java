@@ -17,12 +17,14 @@ import com.xjd.ct.dal.dao.TokenDao;
 import com.xjd.ct.dal.dao.UserDao;
 import com.xjd.ct.dal.dos.TokenModel;
 import com.xjd.ct.dal.dos.UserDo;
+import com.xjd.ct.dal.dos.UserModel;
 import com.xjd.ct.utl.AppUtil;
 import com.xjd.ct.utl.DateUtil;
 import com.xjd.ct.utl.DigestUtil;
 import com.xjd.ct.utl.constant.AppConstant;
 import com.xjd.ct.utl.enums.BoolEnum;
 import com.xjd.ct.utl.enums.UserSexEnum;
+import com.xjd.ct.utl.enums.UserStatusEnum;
 import com.xjd.ct.utl.enums.UserTypeEnum;
 import com.xjd.ct.utl.exception.BusinessException;
 import com.xjd.ct.utl.respcode.RespCode;
@@ -133,6 +135,10 @@ public class AuthService {
 		tokenDao.updateUpdTimeByToken(DateUtil.now(), token);
 	}
 
+	public void deleteToken(String token) {
+		tokenDao.deleteByToken(token);
+	}
+
 	/**
 	 * 判断Token是否有效
 	 * 
@@ -204,6 +210,7 @@ public class AuthService {
 		userDo.setSinaWeiboBindFlag(BoolEnum.FALSE.getCode());
 		userDo.setTecentWeiboFlag(BoolEnum.FALSE.getCode());
 		userDo.setFailTimes((short) 0);
+		userDo.setUserStatus(UserStatusEnum.NORMAL.getCode());
 		userDo.setAddTime(DateUtil.now());
 
 		userDo.setUserType(UserTypeEnum.NORMAL.getCode());
@@ -274,17 +281,35 @@ public class AuthService {
 	 * @param userIp
 	 * @return
 	 */
-	@Transactional
 	public TokenBo signin(String username, String password, String userIp) {
-		String pwd = encryptPassword(password);
-
-		Long userId = userDao.selectUserIdByUsernameAndPassword(username, pwd);
-
-		if (userId == null) { // 用户名或密码错误
+		UserModel userModel = userDao.selectUserBasicBoByUsername(username);
+		if (userModel == null) { // 用户名或密码错误
 			throw new BusinessException(RespCode.RESP_0112);
 		}
 
-		TokenBo tokenBo = genTokenForUser(userIp, userId);
+		UserStatusEnum statusEnum = UserStatusEnum.valueOfCode(userModel.getUserStatus());
+		if (statusEnum == UserStatusEnum.LOCKED) {
+			throw new BusinessException(RespCode.RESP_0114);
+
+		} else if (statusEnum == UserStatusEnum.NON_ACTIVE) {
+			throw new BusinessException(RespCode.RESP_0115);
+		}
+
+		String pwd = encryptPassword(password);
+		if (!StringUtils.equals(pwd, userModel.getPassword())) {
+			// 更新登录失败次数
+			userDao.increaseFailTimesByUserId(userModel.getUserId());
+			// 超过指定次数锁定账户 TODO
+
+			throw new BusinessException(RespCode.RESP_0112);
+		}
+
+		if (userModel.getFailTimes() > 0) {
+			// 清零
+			userDao.clearFailTimesByUserId(userModel.getUserId());
+		}
+
+		TokenBo tokenBo = genTokenForUser(userIp, userModel.getUserId());
 
 		return tokenBo;
 	}

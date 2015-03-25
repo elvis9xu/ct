@@ -48,6 +48,8 @@ public class UserVo {
 
 	private String address;
 
+	private Byte userStatus;
+
 	private Date addTime;
 
 	// User Info
@@ -374,5 +376,13 @@ public class UserVo {
 
 	public void setBindAccountList(List<UserBindAccountVo> bindAccountList) {
 		this.bindAccountList = bindAccountList;
+	}
+
+	public Byte getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(Byte userStatus) {
+		this.userStatus = userStatus;
 	}
 }

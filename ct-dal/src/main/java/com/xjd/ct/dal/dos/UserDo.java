@@ -50,6 +50,8 @@ public class UserDo extends BaseDo {
 
 	private String address;
 
+	private Byte userStatus;
+
 	private Date addTime;
 
 	// User Info
@@ -384,5 +386,13 @@ public class UserDo extends BaseDo {
 
 	public void setBindAccountList(List<UserBindAccountModel> bindAccountList) {
 		this.bindAccountList = bindAccountList;
+	}
+
+	public Byte getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(Byte userStatus) {
+		this.userStatus = userStatus;
 	}
 }

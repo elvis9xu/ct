@@ -47,6 +47,10 @@ public interface RespCode {
 	String RESP_0112 = "0112";
 	/** 密码输入错误 */
 	String RESP_0113 = "0113";
+	/** 怅号被锁定, 请联系管理员 */
+	String RESP_0114 = "0114";
+	/** 怅号未被激活, 请先激活账号 */
+	String RESP_0115 = "0115";
 	/** 用户名请填写手机或邮箱 */
 	String RESP_0120 = "0120";
 	/** 该手机已注册 */

@@ -1,7 +1,7 @@
 package com.xjd.ct.utl.enums;
 
 /**
- * 布尔枚举
+ * 用户性别
  * 
  * @author elvis.xu
  * @since 2014-9-18

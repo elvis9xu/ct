@@ -47,6 +47,8 @@ public class UserBasicBo {
 
 	private String address;
 
+	private Byte userStatus;
+
 	private Date addTime;
 
 	private Date updTime;
@@ -217,5 +219,13 @@ public class UserBasicBo {
 
 	public void setUpdTime(Date updTime) {
 		this.updTime = updTime;
+	}
+
+	public Byte getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(Byte userStatus) {
+		this.userStatus = userStatus;
 	}
 }

@@ -105,4 +105,14 @@ public class TokenDao {
 
 		return tokenModelMapper.updateByExampleSelective(tokenModel, example);
 	}
+
+	/**
+	 * 通过token删除记录
+	 *
+	 * @param token
+	 * @return
+	 */
+	public int deleteByToken(String token) {
+		return tokenModelMapper.deleteByPrimaryKey(token);
+	}
 }

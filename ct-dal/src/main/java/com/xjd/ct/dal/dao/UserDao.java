@@ -149,6 +149,23 @@ public class UserDao {
 	}
 
 	/**
+	 * 根据用户名(手机号或邮箱)查询用户的基本信息(授权信息)
+	 *
+	 * @param username
+	 * @return
+	 */
+	public UserModel selectUserBasicBoByUsername(String username) {
+		UserModelExample example = new UserModelExample();
+		example.or().andMobileEqualTo(username);
+		example.or().andEmailEqualTo(username);
+
+		List<UserModel> list = userModelMapper.selectByExample(example);
+		QueryResultUtil.assertReturn0Or1(list, username);
+
+		return list.size() > 0 ? list.get(0) : null;
+	}
+
+	/**
 	 * 通过用户ID更新密码
 	 * 
 	 * @param password
@@ -161,5 +178,90 @@ public class UserDao {
 		userModel.setUserId(userId);
 		userModel.setUpdTime(DateUtil.now());
 		return userModelMapper.updateByPrimaryKeySelective(userModel);
+	}
+
+	/**
+	 * 用户FailTimes加1
+	 *
+	 * @param userId
+	 * @return
+	 */
+	public int increaseFailTimesByUserId(Long userId) {
+		UserModel userModel = userModelMapper.selectByPrimaryKey(userId);
+
+		UserModel upd = new UserModel();
+		upd.setUserId(userId);
+		upd.setFailTimes((short) (userModel.getFailTimes() + 1));
+		upd.setUpdTime(DateUtil.now());
+
+		return userModelMapper.updateByPrimaryKeySelective(upd);
+	}
+
+	/**
+	 * 清0用户的FailTImes
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public int clearFailTimesByUserId(Long userId) {
+		UserModel upd = new UserModel();
+		upd.setUserId(userId);
+		upd.setFailTimes((short) 0);
+		upd.setUpdTime(DateUtil.now());
+
+		return userModelMapper.updateByPrimaryKeySelective(upd);
+	}
+
+	/**
+	 * 根据用户ID查询用户信息
+	 *
+	 * @param userId
+	 * @return
+	 */
+	public UserInfoModel selectUserInfoByUserId(Long userId) {
+		return userInfoModelMapper.selectByPrimaryKey(userId);
+	}
+
+	/**
+	 * 根据用户ID更新用户信息
+	 *
+	 * @param userInfoModel
+	 * @return
+	 */
+	public int updateUserInfoByUserId(UserInfoModel userInfoModel) {
+		return userInfoModelMapper.updateByPrimaryKey(userInfoModel);
+	}
+
+	/**
+	 * 根据用户ID查询用户的Baby
+	 *
+	 * @param userId
+	 * @return
+	 */
+	public List<UserBabyModel> selectUserBabyByUserId(Long userId) {
+		UserBabyModelExample example = new UserBabyModelExample();
+		example.or().andUserIdEqualTo(userId);
+
+		return userBabyModelMapper.selectByExample(example);
+	}
+
+	/**
+	 * 根据宝宝ID更新宝宝信息
+	 * 
+	 * @param babyModel
+	 * @return
+	 */
+	public int updateUserBabyByBabyId(UserBabyModel babyModel) {
+		return userBabyModelMapper.updateByPrimaryKey(babyModel);
+	}
+
+	/**
+	 * 插入宝宝信息
+	 * 
+	 * @param babyModel
+	 * @return
+	 */
+	public int insertUserBaby(UserBabyModel babyModel) {
+		return userBabyModelMapper.insert(babyModel);
 	}
 }

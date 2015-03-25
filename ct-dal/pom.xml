@@ -99,6 +99,17 @@
       </properties>
     </profile>
     <profile>
+      <id>test</id>
+      <properties>
+        <!-- data -->
+        <data.dataSource.type>jdbc</data.dataSource.type>
+        <data.jdbc.driverClass>com.mysql.jdbc.Driver</data.jdbc.driverClass>
+        <data.jdbc.url>jdbc:mysql://172.246.220.254:3306/ct</data.jdbc.url>
+        <data.jdbc.username>xjd</data.jdbc.username>
+        <data.jdbc.password>Elvis9xu</data.jdbc.password>
+      </properties>
+    </profile>
+    <profile>
       <id>product</id>
       <properties>
         <!-- data -->

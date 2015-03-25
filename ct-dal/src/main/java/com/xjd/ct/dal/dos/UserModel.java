@@ -46,6 +46,8 @@ public class UserModel extends BaseDo {
 
     private Date updTime;
 
+    private Byte userStatus;
+
     public Long getUserId() {
         return userId;
     }
@@ -212,5 +214,13 @@ public class UserModel extends BaseDo {
 
     public void setUpdTime(Date updTime) {
         this.updTime = updTime;
+    }
+
+    public Byte getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(Byte userStatus) {
+        this.userStatus = userStatus;
     }
 }

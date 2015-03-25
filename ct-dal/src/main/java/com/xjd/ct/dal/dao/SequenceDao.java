@@ -19,6 +19,7 @@ public class SequenceDao {
 
 	public static final String SEQ_SERVICE_LOG_ID = "SEQ_SERVICE_LOG_ID";
 	public static final String SEQ_USER_ID = "SEQ_USER_ID";
+	public static final String SEQ_USER_BABY_ID = "SEQ_USER_BABY_ID";
 	public static final String SEQ_USER_BIND_ACCOUNT_ID = "SEQ_USER_BIND_ACCOUNT_ID";
 	public static final String SEQ_INFORM_ID = "SEQ_INFORM_ID";
 
