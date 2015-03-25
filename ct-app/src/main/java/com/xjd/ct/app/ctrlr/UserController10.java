@@ -159,7 +159,8 @@ public class UserController10 {
 			babyBirthDate = DateUtil.parse(babyBirth, DateUtil.PATTERN_YEAR2DAY);
 		}
 
-		userService.setUserInfo(, headImgRes, nickname, sex, moodWords, babyBirth, babySex);
+		userService.setUserInfo(RequestContext.checkAndGetUser().getUserId(), headImgRes, nickname, sexB, moodWords,
+				babyBirthDate, babySexB);
 
 		View view = ViewUtil.defaultView();
 		return view;
