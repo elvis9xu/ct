@@ -249,6 +249,66 @@ public class MsgInformModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andInformTypeIsNull() {
+            addCriterion("INFORM_TYPE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInformTypeIsNotNull() {
+            addCriterion("INFORM_TYPE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInformTypeEqualTo(Byte value) {
+            addCriterion("INFORM_TYPE =", value, "informType");
+            return (Criteria) this;
+        }
+
+        public Criteria andInformTypeNotEqualTo(Byte value) {
+            addCriterion("INFORM_TYPE <>", value, "informType");
+            return (Criteria) this;
+        }
+
+        public Criteria andInformTypeGreaterThan(Byte value) {
+            addCriterion("INFORM_TYPE >", value, "informType");
+            return (Criteria) this;
+        }
+
+        public Criteria andInformTypeGreaterThanOrEqualTo(Byte value) {
+            addCriterion("INFORM_TYPE >=", value, "informType");
+            return (Criteria) this;
+        }
+
+        public Criteria andInformTypeLessThan(Byte value) {
+            addCriterion("INFORM_TYPE <", value, "informType");
+            return (Criteria) this;
+        }
+
+        public Criteria andInformTypeLessThanOrEqualTo(Byte value) {
+            addCriterion("INFORM_TYPE <=", value, "informType");
+            return (Criteria) this;
+        }
+
+        public Criteria andInformTypeIn(List<Byte> values) {
+            addCriterion("INFORM_TYPE in", values, "informType");
+            return (Criteria) this;
+        }
+
+        public Criteria andInformTypeNotIn(List<Byte> values) {
+            addCriterion("INFORM_TYPE not in", values, "informType");
+            return (Criteria) this;
+        }
+
+        public Criteria andInformTypeBetween(Byte value1, Byte value2) {
+            addCriterion("INFORM_TYPE between", value1, value2, "informType");
+            return (Criteria) this;
+        }
+
+        public Criteria andInformTypeNotBetween(Byte value1, Byte value2) {
+            addCriterion("INFORM_TYPE not between", value1, value2, "informType");
+            return (Criteria) this;
+        }
+
         public Criteria andInformTitleIsNull() {
             addCriterion("INFORM_TITLE is null");
             return (Criteria) this;

@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_token
+    from T_TOKEN
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,21 +88,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from t_token
+    from T_TOKEN
     where TOKEN = #{token,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from t_token
+    delete from T_TOKEN
     where TOKEN = #{token,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.TokenModelExample" >
-    delete from t_token
+    delete from T_TOKEN
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.TokenModel" >
-    insert into t_token (TOKEN, SALT, USER_IP, 
+    insert into T_TOKEN (TOKEN, SALT, USER_IP, 
       USER_ID, ADD_TIME, UPD_TIME
       )
     values (#{token,jdbcType=CHAR}, #{salt,jdbcType=CHAR}, #{userIp,jdbcType=VARCHAR}, 
@@ -110,7 +110,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.TokenModel" >
-    insert into t_token
+    insert into T_TOKEN
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="token != null" >
         TOKEN,
@@ -153,13 +153,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.TokenModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_token
+    select count(*) from T_TOKEN
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_token
+    update T_TOKEN
     <set >
       <if test="record.token != null" >
         TOKEN = #{record.token,jdbcType=CHAR},
@@ -185,7 +185,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_token
+    update T_TOKEN
     set TOKEN = #{record.token,jdbcType=CHAR},
       SALT = #{record.salt,jdbcType=CHAR},
       USER_IP = #{record.userIp,jdbcType=VARCHAR},
@@ -197,7 +197,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.TokenModel" >
-    update t_token
+    update T_TOKEN
     <set >
       <if test="salt != null" >
         SALT = #{salt,jdbcType=CHAR},
@@ -218,7 +218,7 @@
     where TOKEN = #{token,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.TokenModel" >
-    update t_token
+    update T_TOKEN
     set SALT = #{salt,jdbcType=CHAR},
       USER_IP = #{userIp,jdbcType=VARCHAR},
       USER_ID = #{userId,jdbcType=BIGINT},

@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_biz_article
+    from T_BIZ_ARTICLE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,21 +90,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_biz_article
+    from T_BIZ_ARTICLE
     where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_biz_article
+    delete from T_BIZ_ARTICLE
     where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ArticleModelExample" >
-    delete from t_biz_article
+    delete from T_BIZ_ARTICLE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ArticleModel" >
-    insert into t_biz_article (ARTICLE_ID, ARTICLE_TITLE, ARTICLE_IMG_RES, 
+    insert into T_BIZ_ARTICLE (ARTICLE_ID, ARTICLE_TITLE, ARTICLE_IMG_RES, 
       ARTICLE_SUMMARY, ARTICLE_LINK, ADD_TIME, 
       UPD_TIME)
     values (#{articleId,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, #{articleImgRes,jdbcType=CHAR}, 
@@ -112,7 +112,7 @@
       #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ArticleModel" >
-    insert into t_biz_article
+    insert into T_BIZ_ARTICLE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="articleId != null" >
         ARTICLE_ID,
@@ -161,13 +161,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ArticleModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_biz_article
+    select count(*) from T_BIZ_ARTICLE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_biz_article
+    update T_BIZ_ARTICLE
     <set >
       <if test="record.articleId != null" >
         ARTICLE_ID = #{record.articleId,jdbcType=BIGINT},
@@ -196,7 +196,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_biz_article
+    update T_BIZ_ARTICLE
     set ARTICLE_ID = #{record.articleId,jdbcType=BIGINT},
       ARTICLE_TITLE = #{record.articleTitle,jdbcType=VARCHAR},
       ARTICLE_IMG_RES = #{record.articleImgRes,jdbcType=CHAR},
@@ -209,7 +209,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ArticleModel" >
-    update t_biz_article
+    update T_BIZ_ARTICLE
     <set >
       <if test="articleTitle != null" >
         ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
@@ -233,7 +233,7 @@
     where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ArticleModel" >
-    update t_biz_article
+    update T_BIZ_ARTICLE
     set ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
       ARTICLE_IMG_RES = #{articleImgRes,jdbcType=CHAR},
       ARTICLE_SUMMARY = #{articleSummary,jdbcType=VARCHAR},

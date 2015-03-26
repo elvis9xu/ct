@@ -81,7 +81,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_object_comment
+    from T_OBJECT_COMMENT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,21 +93,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_object_comment
+    from T_OBJECT_COMMENT
     where COMMENT_ID = #{commentId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_object_comment
+    delete from T_OBJECT_COMMENT
     where COMMENT_ID = #{commentId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ObjectCommentModelExample" >
-    delete from t_object_comment
+    delete from T_OBJECT_COMMENT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ObjectCommentModel" >
-    insert into t_object_comment (COMMENT_ID, OBJECT_ID, USER_ID, 
+    insert into T_OBJECT_COMMENT (COMMENT_ID, OBJECT_ID, USER_ID, 
       TO_COMMENT_ID, COMMENT_CONTENT, ACCEPT_FLAG, 
       YES_COUNT, NO_COUNT, ADD_TIME, 
       UPD_TIME)
@@ -117,7 +117,7 @@
       #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ObjectCommentModel" >
-    insert into t_object_comment
+    insert into T_OBJECT_COMMENT
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="commentId != null" >
         COMMENT_ID,
@@ -184,13 +184,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ObjectCommentModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_object_comment
+    select count(*) from T_OBJECT_COMMENT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_object_comment
+    update T_OBJECT_COMMENT
     <set >
       <if test="record.commentId != null" >
         COMMENT_ID = #{record.commentId,jdbcType=BIGINT},
@@ -228,7 +228,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_object_comment
+    update T_OBJECT_COMMENT
     set COMMENT_ID = #{record.commentId,jdbcType=BIGINT},
       OBJECT_ID = #{record.objectId,jdbcType=BIGINT},
       USER_ID = #{record.userId,jdbcType=BIGINT},
@@ -244,7 +244,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ObjectCommentModel" >
-    update t_object_comment
+    update T_OBJECT_COMMENT
     <set >
       <if test="objectId != null" >
         OBJECT_ID = #{objectId,jdbcType=BIGINT},
@@ -277,7 +277,7 @@
     where COMMENT_ID = #{commentId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ObjectCommentModel" >
-    update t_object_comment
+    update T_OBJECT_COMMENT
     set OBJECT_ID = #{objectId,jdbcType=BIGINT},
       USER_ID = #{userId,jdbcType=BIGINT},
       TO_COMMENT_ID = #{toCommentId,jdbcType=BIGINT},

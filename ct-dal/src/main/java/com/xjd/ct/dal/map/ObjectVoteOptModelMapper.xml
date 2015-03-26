@@ -7,7 +7,9 @@
     <result column="OPT_TITLE" property="optTitle" jdbcType="VARCHAR" />
     <result column="OPT_DESC" property="optDesc" jdbcType="VARCHAR" />
     <result column="YES_FLAG" property="yesFlag" jdbcType="TINYINT" />
+    <result column="YES_COUNT" property="yesCount" jdbcType="INTEGER" />
     <result column="NO_FLAG" property="noFlag" jdbcType="TINYINT" />
+    <result column="NO_COUNT" property="noCount" jdbcType="INTEGER" />
     <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
     <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    OBJECT_ID, OPT_CODE, OPT_TITLE, OPT_DESC, YES_FLAG, NO_FLAG, ADD_TIME, UPD_TIME
+    OBJECT_ID, OPT_CODE, OPT_TITLE, OPT_DESC, YES_FLAG, YES_COUNT, NO_FLAG, NO_COUNT, 
+    ADD_TIME, UPD_TIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ObjectVoteOptModelExample" >
     select
@@ -78,7 +81,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_object_vote_opt
+    from T_OBJECT_VOTE_OPT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,31 +93,33 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ObjectVoteOptModelKey" >
     select 
     <include refid="Base_Column_List" />
-    from t_object_vote_opt
+    from T_OBJECT_VOTE_OPT
     where OBJECT_ID = #{objectId,jdbcType=BIGINT}
       and OPT_CODE = #{optCode,jdbcType=TINYINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ObjectVoteOptModelKey" >
-    delete from t_object_vote_opt
+    delete from T_OBJECT_VOTE_OPT
     where OBJECT_ID = #{objectId,jdbcType=BIGINT}
       and OPT_CODE = #{optCode,jdbcType=TINYINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ObjectVoteOptModelExample" >
-    delete from t_object_vote_opt
+    delete from T_OBJECT_VOTE_OPT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ObjectVoteOptModel" >
-    insert into t_object_vote_opt (OBJECT_ID, OPT_CODE, OPT_TITLE, 
-      OPT_DESC, YES_FLAG, NO_FLAG, 
-      ADD_TIME, UPD_TIME)
+    insert into T_OBJECT_VOTE_OPT (OBJECT_ID, OPT_CODE, OPT_TITLE, 
+      OPT_DESC, YES_FLAG, YES_COUNT, 
+      NO_FLAG, NO_COUNT, ADD_TIME, 
+      UPD_TIME)
     values (#{objectId,jdbcType=BIGINT}, #{optCode,jdbcType=TINYINT}, #{optTitle,jdbcType=VARCHAR}, 
-      #{optDesc,jdbcType=VARCHAR}, #{yesFlag,jdbcType=TINYINT}, #{noFlag,jdbcType=TINYINT}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
+      #{optDesc,jdbcType=VARCHAR}, #{yesFlag,jdbcType=TINYINT}, #{yesCount,jdbcType=INTEGER}, 
+      #{noFlag,jdbcType=TINYINT}, #{noCount,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ObjectVoteOptModel" >
-    insert into t_object_vote_opt
+    insert into T_OBJECT_VOTE_OPT
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="objectId != null" >
         OBJECT_ID,
@@ -131,8 +136,14 @@
       <if test="yesFlag != null" >
         YES_FLAG,
       </if>
+      <if test="yesCount != null" >
+        YES_COUNT,
+      </if>
       <if test="noFlag != null" >
         NO_FLAG,
+      </if>
+      <if test="noCount != null" >
+        NO_COUNT,
       </if>
       <if test="addTime != null" >
         ADD_TIME,
@@ -157,8 +168,14 @@
       <if test="yesFlag != null" >
         #{yesFlag,jdbcType=TINYINT},
       </if>
+      <if test="yesCount != null" >
+        #{yesCount,jdbcType=INTEGER},
+      </if>
       <if test="noFlag != null" >
         #{noFlag,jdbcType=TINYINT},
+      </if>
+      <if test="noCount != null" >
+        #{noCount,jdbcType=INTEGER},
       </if>
       <if test="addTime != null" >
         #{addTime,jdbcType=TIMESTAMP},
@@ -169,13 +186,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ObjectVoteOptModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_object_vote_opt
+    select count(*) from T_OBJECT_VOTE_OPT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_object_vote_opt
+    update T_OBJECT_VOTE_OPT
     <set >
       <if test="record.objectId != null" >
         OBJECT_ID = #{record.objectId,jdbcType=BIGINT},
@@ -192,8 +209,14 @@
       <if test="record.yesFlag != null" >
         YES_FLAG = #{record.yesFlag,jdbcType=TINYINT},
       </if>
+      <if test="record.yesCount != null" >
+        YES_COUNT = #{record.yesCount,jdbcType=INTEGER},
+      </if>
       <if test="record.noFlag != null" >
         NO_FLAG = #{record.noFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.noCount != null" >
+        NO_COUNT = #{record.noCount,jdbcType=INTEGER},
       </if>
       <if test="record.addTime != null" >
         ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
@@ -207,13 +230,15 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_object_vote_opt
+    update T_OBJECT_VOTE_OPT
     set OBJECT_ID = #{record.objectId,jdbcType=BIGINT},
       OPT_CODE = #{record.optCode,jdbcType=TINYINT},
       OPT_TITLE = #{record.optTitle,jdbcType=VARCHAR},
       OPT_DESC = #{record.optDesc,jdbcType=VARCHAR},
       YES_FLAG = #{record.yesFlag,jdbcType=TINYINT},
+      YES_COUNT = #{record.yesCount,jdbcType=INTEGER},
       NO_FLAG = #{record.noFlag,jdbcType=TINYINT},
+      NO_COUNT = #{record.noCount,jdbcType=INTEGER},
       ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
       UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -221,7 +246,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ObjectVoteOptModel" >
-    update t_object_vote_opt
+    update T_OBJECT_VOTE_OPT
     <set >
       <if test="optTitle != null" >
         OPT_TITLE = #{optTitle,jdbcType=VARCHAR},
@@ -232,8 +257,14 @@
       <if test="yesFlag != null" >
         YES_FLAG = #{yesFlag,jdbcType=TINYINT},
       </if>
+      <if test="yesCount != null" >
+        YES_COUNT = #{yesCount,jdbcType=INTEGER},
+      </if>
       <if test="noFlag != null" >
         NO_FLAG = #{noFlag,jdbcType=TINYINT},
+      </if>
+      <if test="noCount != null" >
+        NO_COUNT = #{noCount,jdbcType=INTEGER},
       </if>
       <if test="addTime != null" >
         ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
@@ -246,11 +277,13 @@
       and OPT_CODE = #{optCode,jdbcType=TINYINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ObjectVoteOptModel" >
-    update t_object_vote_opt
+    update T_OBJECT_VOTE_OPT
     set OPT_TITLE = #{optTitle,jdbcType=VARCHAR},
       OPT_DESC = #{optDesc,jdbcType=VARCHAR},
       YES_FLAG = #{yesFlag,jdbcType=TINYINT},
+      YES_COUNT = #{yesCount,jdbcType=INTEGER},
       NO_FLAG = #{noFlag,jdbcType=TINYINT},
+      NO_COUNT = #{noCount,jdbcType=INTEGER},
       ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
       UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
     where OBJECT_ID = #{objectId,jdbcType=BIGINT}

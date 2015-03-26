@@ -52,6 +52,14 @@ public class ValidationBean {
 	@com.xjd.ct.utl.valid.constraints.Enum(enumClass = IdolOperEnum.class)
 	private String idolOper;
 
+	@NotBlank(message = RespCode.RESP_0001)
+	@Digits(integer = 18, fraction = 0, message = RespCode.RESP_0002)
+	private String offset;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@Digits(integer = 3, fraction = 0, message = RespCode.RESP_0002)
+	private String count;
+
 	public String getTimestamp() {
 		return timestamp;
 	}
@@ -130,5 +138,21 @@ public class ValidationBean {
 
 	public void setIdolOper(String idolOper) {
 		this.idolOper = idolOper;
+	}
+
+	public String getOffset() {
+		return offset;
+	}
+
+	public void setOffset(String offset) {
+		this.offset = offset;
+	}
+
+	public String getCount() {
+		return count;
+	}
+
+	public void setCount(String count) {
+		this.count = count;
 	}
 }

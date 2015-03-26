@@ -15,11 +15,19 @@ public class ObjectModel extends BaseDo {
 
     private Byte likeYesFlag;
 
+    private Integer likeYesCount;
+
     private Byte likeNoFlag;
+
+    private Integer likeNoCount;
 
     private Byte commentFlag;
 
+    private Integer commentCount;
+
     private Byte favorFlag;
+
+    private Integer favorCount;
 
     private Date addTime;
 
@@ -73,12 +81,28 @@ public class ObjectModel extends BaseDo {
         this.likeYesFlag = likeYesFlag;
     }
 
+    public Integer getLikeYesCount() {
+        return likeYesCount;
+    }
+
+    public void setLikeYesCount(Integer likeYesCount) {
+        this.likeYesCount = likeYesCount;
+    }
+
     public Byte getLikeNoFlag() {
         return likeNoFlag;
     }
 
     public void setLikeNoFlag(Byte likeNoFlag) {
         this.likeNoFlag = likeNoFlag;
+    }
+
+    public Integer getLikeNoCount() {
+        return likeNoCount;
+    }
+
+    public void setLikeNoCount(Integer likeNoCount) {
+        this.likeNoCount = likeNoCount;
     }
 
     public Byte getCommentFlag() {
@@ -89,12 +113,28 @@ public class ObjectModel extends BaseDo {
         this.commentFlag = commentFlag;
     }
 
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
     public Byte getFavorFlag() {
         return favorFlag;
     }
 
     public void setFavorFlag(Byte favorFlag) {
         this.favorFlag = favorFlag;
+    }
+
+    public Integer getFavorCount() {
+        return favorCount;
+    }
+
+    public void setFavorCount(Integer favorCount) {
+        this.favorCount = favorCount;
     }
 
     public Date getAddTime() {

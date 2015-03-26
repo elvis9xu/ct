@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_object_tag
+    from T_OBJECT_TAG
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,21 +88,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_object_tag
+    from T_OBJECT_TAG
     where TAG_ID = #{tagId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_object_tag
+    delete from T_OBJECT_TAG
     where TAG_ID = #{tagId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ObjectTagModelExample" >
-    delete from t_object_tag
+    delete from T_OBJECT_TAG
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ObjectTagModel" >
-    insert into t_object_tag (TAG_ID, OBJECT_TYPE, TAG_NAME, 
+    insert into T_OBJECT_TAG (TAG_ID, OBJECT_TYPE, TAG_NAME, 
       TAG_DESC, ADD_TIME, UPD_TIME
       )
     values (#{tagId,jdbcType=BIGINT}, #{objectType,jdbcType=TINYINT}, #{tagName,jdbcType=VARCHAR}, 
@@ -110,7 +110,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ObjectTagModel" >
-    insert into t_object_tag
+    insert into T_OBJECT_TAG
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="tagId != null" >
         TAG_ID,
@@ -153,13 +153,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ObjectTagModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_object_tag
+    select count(*) from T_OBJECT_TAG
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_object_tag
+    update T_OBJECT_TAG
     <set >
       <if test="record.tagId != null" >
         TAG_ID = #{record.tagId,jdbcType=BIGINT},
@@ -185,7 +185,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_object_tag
+    update T_OBJECT_TAG
     set TAG_ID = #{record.tagId,jdbcType=BIGINT},
       OBJECT_TYPE = #{record.objectType,jdbcType=TINYINT},
       TAG_NAME = #{record.tagName,jdbcType=VARCHAR},
@@ -197,7 +197,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ObjectTagModel" >
-    update t_object_tag
+    update T_OBJECT_TAG
     <set >
       <if test="objectType != null" >
         OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
@@ -218,7 +218,7 @@
     where TAG_ID = #{tagId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ObjectTagModel" >
-    update t_object_tag
+    update T_OBJECT_TAG
     set OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
       TAG_NAME = #{tagName,jdbcType=VARCHAR},
       TAG_DESC = #{tagDesc,jdbcType=VARCHAR},

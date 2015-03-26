@@ -449,6 +449,66 @@ public class ObjectVoteOptModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andYesCountIsNull() {
+            addCriterion("YES_COUNT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesCountIsNotNull() {
+            addCriterion("YES_COUNT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesCountEqualTo(Integer value) {
+            addCriterion("YES_COUNT =", value, "yesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesCountNotEqualTo(Integer value) {
+            addCriterion("YES_COUNT <>", value, "yesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesCountGreaterThan(Integer value) {
+            addCriterion("YES_COUNT >", value, "yesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("YES_COUNT >=", value, "yesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesCountLessThan(Integer value) {
+            addCriterion("YES_COUNT <", value, "yesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesCountLessThanOrEqualTo(Integer value) {
+            addCriterion("YES_COUNT <=", value, "yesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesCountIn(List<Integer> values) {
+            addCriterion("YES_COUNT in", values, "yesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesCountNotIn(List<Integer> values) {
+            addCriterion("YES_COUNT not in", values, "yesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesCountBetween(Integer value1, Integer value2) {
+            addCriterion("YES_COUNT between", value1, value2, "yesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andYesCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("YES_COUNT not between", value1, value2, "yesCount");
+            return (Criteria) this;
+        }
+
         public Criteria andNoFlagIsNull() {
             addCriterion("NO_FLAG is null");
             return (Criteria) this;
@@ -506,6 +566,66 @@ public class ObjectVoteOptModelExample {
 
         public Criteria andNoFlagNotBetween(Byte value1, Byte value2) {
             addCriterion("NO_FLAG not between", value1, value2, "noFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountIsNull() {
+            addCriterion("NO_COUNT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountIsNotNull() {
+            addCriterion("NO_COUNT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountEqualTo(Integer value) {
+            addCriterion("NO_COUNT =", value, "noCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountNotEqualTo(Integer value) {
+            addCriterion("NO_COUNT <>", value, "noCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountGreaterThan(Integer value) {
+            addCriterion("NO_COUNT >", value, "noCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("NO_COUNT >=", value, "noCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountLessThan(Integer value) {
+            addCriterion("NO_COUNT <", value, "noCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountLessThanOrEqualTo(Integer value) {
+            addCriterion("NO_COUNT <=", value, "noCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountIn(List<Integer> values) {
+            addCriterion("NO_COUNT in", values, "noCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountNotIn(List<Integer> values) {
+            addCriterion("NO_COUNT not in", values, "noCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountBetween(Integer value1, Integer value2) {
+            addCriterion("NO_COUNT between", value1, value2, "noCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("NO_COUNT not between", value1, value2, "noCount");
             return (Criteria) this;
         }
 

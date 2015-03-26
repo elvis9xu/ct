@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.xjd.ct.dal.dos.MsgInformModel" >
     <id column="INFORM_ID" property="informId" jdbcType="BIGINT" />
     <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="INFORM_TYPE" property="informType" jdbcType="TINYINT" />
     <result column="INFORM_TITLE" property="informTitle" jdbcType="VARCHAR" />
     <result column="INFORM_DETAIL" property="informDetail" jdbcType="VARCHAR" />
     <result column="INFORM_INFO" property="informInfo" jdbcType="VARCHAR" />
@@ -70,8 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    INFORM_ID, USER_ID, INFORM_TITLE, INFORM_DETAIL, INFORM_INFO, READ_FLAG, ADD_TIME, 
-    UPD_TIME
+    INFORM_ID, USER_ID, INFORM_TYPE, INFORM_TITLE, INFORM_DETAIL, INFORM_INFO, READ_FLAG, 
+    ADD_TIME, UPD_TIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.MsgInformModelExample" >
     select
@@ -79,7 +80,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_msg_inform
+    from T_MSG_INFORM
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,35 +92,40 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_msg_inform
+    from T_MSG_INFORM
     where INFORM_ID = #{informId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_msg_inform
+    delete from T_MSG_INFORM
     where INFORM_ID = #{informId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.MsgInformModelExample" >
-    delete from t_msg_inform
+    delete from T_MSG_INFORM
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.MsgInformModel" >
-    insert into t_msg_inform (INFORM_ID, USER_ID, INFORM_TITLE, 
-      INFORM_DETAIL, INFORM_INFO, READ_FLAG, 
-      ADD_TIME, UPD_TIME)
-    values (#{informId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{informTitle,jdbcType=VARCHAR}, 
-      #{informDetail,jdbcType=VARCHAR}, #{informInfo,jdbcType=VARCHAR}, #{readFlag,jdbcType=TINYINT}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
+    insert into T_MSG_INFORM (INFORM_ID, USER_ID, INFORM_TYPE, 
+      INFORM_TITLE, INFORM_DETAIL, INFORM_INFO, 
+      READ_FLAG, ADD_TIME, UPD_TIME
+      )
+    values (#{informId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{informType,jdbcType=TINYINT}, 
+      #{informTitle,jdbcType=VARCHAR}, #{informDetail,jdbcType=VARCHAR}, #{informInfo,jdbcType=VARCHAR}, 
+      #{readFlag,jdbcType=TINYINT}, #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.MsgInformModel" >
-    insert into t_msg_inform
+    insert into T_MSG_INFORM
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="informId != null" >
         INFORM_ID,
       </if>
       <if test="userId != null" >
         USER_ID,
+      </if>
+      <if test="informType != null" >
+        INFORM_TYPE,
       </if>
       <if test="informTitle != null" >
         INFORM_TITLE,
@@ -147,6 +153,9 @@
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>
+      <if test="informType != null" >
+        #{informType,jdbcType=TINYINT},
+      </if>
       <if test="informTitle != null" >
         #{informTitle,jdbcType=VARCHAR},
       </if>
@@ -168,19 +177,22 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.MsgInformModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_msg_inform
+    select count(*) from T_MSG_INFORM
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_msg_inform
+    update T_MSG_INFORM
     <set >
       <if test="record.informId != null" >
         INFORM_ID = #{record.informId,jdbcType=BIGINT},
       </if>
       <if test="record.userId != null" >
         USER_ID = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.informType != null" >
+        INFORM_TYPE = #{record.informType,jdbcType=TINYINT},
       </if>
       <if test="record.informTitle != null" >
         INFORM_TITLE = #{record.informTitle,jdbcType=VARCHAR},
@@ -206,9 +218,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_msg_inform
+    update T_MSG_INFORM
     set INFORM_ID = #{record.informId,jdbcType=BIGINT},
       USER_ID = #{record.userId,jdbcType=BIGINT},
+      INFORM_TYPE = #{record.informType,jdbcType=TINYINT},
       INFORM_TITLE = #{record.informTitle,jdbcType=VARCHAR},
       INFORM_DETAIL = #{record.informDetail,jdbcType=VARCHAR},
       INFORM_INFO = #{record.informInfo,jdbcType=VARCHAR},
@@ -220,10 +233,13 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.MsgInformModel" >
-    update t_msg_inform
+    update T_MSG_INFORM
     <set >
       <if test="userId != null" >
         USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="informType != null" >
+        INFORM_TYPE = #{informType,jdbcType=TINYINT},
       </if>
       <if test="informTitle != null" >
         INFORM_TITLE = #{informTitle,jdbcType=VARCHAR},
@@ -247,8 +263,9 @@
     where INFORM_ID = #{informId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.MsgInformModel" >
-    update t_msg_inform
+    update T_MSG_INFORM
     set USER_ID = #{userId,jdbcType=BIGINT},
+      INFORM_TYPE = #{informType,jdbcType=TINYINT},
       INFORM_TITLE = #{informTitle,jdbcType=VARCHAR},
       INFORM_DETAIL = #{informDetail,jdbcType=VARCHAR},
       INFORM_INFO = #{informInfo,jdbcType=VARCHAR},

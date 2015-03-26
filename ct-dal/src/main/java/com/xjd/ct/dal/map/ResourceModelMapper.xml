@@ -77,7 +77,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_resource
+    from T_RESOURCE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,21 +89,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from t_resource
+    from T_RESOURCE
     where RES_ID = #{resId,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from t_resource
+    delete from T_RESOURCE
     where RES_ID = #{resId,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ResourceModelExample" >
-    delete from t_resource
+    delete from T_RESOURCE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ResourceModel" >
-    insert into t_resource (RES_ID, RES_FORMAT, RES_FORM, 
+    insert into T_RESOURCE (RES_ID, RES_FORMAT, RES_FORM, 
       RES_PATH, RES_MD5, ADD_TIME, 
       UPD_TIME)
     values (#{resId,jdbcType=CHAR}, #{resFormat,jdbcType=VARCHAR}, #{resForm,jdbcType=TINYINT}, 
@@ -111,7 +111,7 @@
       #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ResourceModel" >
-    insert into t_resource
+    insert into T_RESOURCE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="resId != null" >
         RES_ID,
@@ -160,13 +160,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ResourceModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_resource
+    select count(*) from T_RESOURCE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_resource
+    update T_RESOURCE
     <set >
       <if test="record.resId != null" >
         RES_ID = #{record.resId,jdbcType=CHAR},
@@ -195,7 +195,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_resource
+    update T_RESOURCE
     set RES_ID = #{record.resId,jdbcType=CHAR},
       RES_FORMAT = #{record.resFormat,jdbcType=VARCHAR},
       RES_FORM = #{record.resForm,jdbcType=TINYINT},
@@ -208,7 +208,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ResourceModel" >
-    update t_resource
+    update T_RESOURCE
     <set >
       <if test="resFormat != null" >
         RES_FORMAT = #{resFormat,jdbcType=VARCHAR},
@@ -232,7 +232,7 @@
     where RES_ID = #{resId,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ResourceModel" >
-    update t_resource
+    update T_RESOURCE
     set RES_FORMAT = #{resFormat,jdbcType=VARCHAR},
       RES_FORM = #{resForm,jdbcType=TINYINT},
       RES_PATH = #{resPath,jdbcType=VARCHAR},

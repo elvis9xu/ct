@@ -75,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_object_comment_like
+    from T_OBJECT_COMMENT_LIKE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,29 +87,29 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ObjectCommentLikeModelKey" >
     select 
     <include refid="Base_Column_List" />
-    from t_object_comment_like
+    from T_OBJECT_COMMENT_LIKE
     where COMMENT_ID = #{commentId,jdbcType=BIGINT}
       and USER_ID = #{userId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ObjectCommentLikeModelKey" >
-    delete from t_object_comment_like
+    delete from T_OBJECT_COMMENT_LIKE
     where COMMENT_ID = #{commentId,jdbcType=BIGINT}
       and USER_ID = #{userId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ObjectCommentLikeModelExample" >
-    delete from t_object_comment_like
+    delete from T_OBJECT_COMMENT_LIKE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ObjectCommentLikeModel" >
-    insert into t_object_comment_like (COMMENT_ID, USER_ID, YES_NO, 
+    insert into T_OBJECT_COMMENT_LIKE (COMMENT_ID, USER_ID, YES_NO, 
       ADD_TIME, UPD_TIME)
     values (#{commentId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{yesNo,jdbcType=TINYINT}, 
       #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ObjectCommentLikeModel" >
-    insert into t_object_comment_like
+    insert into T_OBJECT_COMMENT_LIKE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="commentId != null" >
         COMMENT_ID,
@@ -146,13 +146,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ObjectCommentLikeModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_object_comment_like
+    select count(*) from T_OBJECT_COMMENT_LIKE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_object_comment_like
+    update T_OBJECT_COMMENT_LIKE
     <set >
       <if test="record.commentId != null" >
         COMMENT_ID = #{record.commentId,jdbcType=BIGINT},
@@ -175,7 +175,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_object_comment_like
+    update T_OBJECT_COMMENT_LIKE
     set COMMENT_ID = #{record.commentId,jdbcType=BIGINT},
       USER_ID = #{record.userId,jdbcType=BIGINT},
       YES_NO = #{record.yesNo,jdbcType=TINYINT},
@@ -186,7 +186,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ObjectCommentLikeModel" >
-    update t_object_comment_like
+    update T_OBJECT_COMMENT_LIKE
     <set >
       <if test="yesNo != null" >
         YES_NO = #{yesNo,jdbcType=TINYINT},
@@ -202,7 +202,7 @@
       and USER_ID = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ObjectCommentLikeModel" >
-    update t_object_comment_like
+    update T_OBJECT_COMMENT_LIKE
     set YES_NO = #{yesNo,jdbcType=TINYINT},
       ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
       UPD_TIME = #{updTime,jdbcType=TIMESTAMP}

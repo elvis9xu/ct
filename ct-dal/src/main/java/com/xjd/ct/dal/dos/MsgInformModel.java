@@ -7,6 +7,8 @@ public class MsgInformModel extends BaseDo {
 
     private Long userId;
 
+    private Byte informType;
+
     private String informTitle;
 
     private String informDetail;
@@ -33,6 +35,14 @@ public class MsgInformModel extends BaseDo {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Byte getInformType() {
+        return informType;
+    }
+
+    public void setInformType(Byte informType) {
+        this.informType = informType;
     }
 
     public String getInformTitle() {

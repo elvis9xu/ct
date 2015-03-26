@@ -3,6 +3,7 @@
 <mapper namespace="com.xjd.ct.dal.map.PublishModelMapper" >
   <resultMap id="BaseResultMap" type="com.xjd.ct.dal.dos.PublishModel" >
     <id column="PUBLISH_ID" property="publishId" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
     <result column="PUBLISH_TITLE" property="publishTitle" jdbcType="VARCHAR" />
     <result column="PUBLISH_TEXT" property="publishText" jdbcType="VARCHAR" />
     <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    PUBLISH_ID, PUBLISH_TITLE, PUBLISH_TEXT, ADD_TIME, UPD_TIME
+    PUBLISH_ID, USER_ID, PUBLISH_TITLE, PUBLISH_TEXT, ADD_TIME, UPD_TIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.PublishModelExample" >
     select
@@ -75,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_biz_publish
+    from T_BIZ_PUBLISH
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,30 +88,35 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_biz_publish
+    from T_BIZ_PUBLISH
     where PUBLISH_ID = #{publishId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_biz_publish
+    delete from T_BIZ_PUBLISH
     where PUBLISH_ID = #{publishId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.PublishModelExample" >
-    delete from t_biz_publish
+    delete from T_BIZ_PUBLISH
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.PublishModel" >
-    insert into t_biz_publish (PUBLISH_ID, PUBLISH_TITLE, PUBLISH_TEXT, 
-      ADD_TIME, UPD_TIME)
-    values (#{publishId,jdbcType=BIGINT}, #{publishTitle,jdbcType=VARCHAR}, #{publishText,jdbcType=VARCHAR}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
+    insert into T_BIZ_PUBLISH (PUBLISH_ID, USER_ID, PUBLISH_TITLE, 
+      PUBLISH_TEXT, ADD_TIME, UPD_TIME
+      )
+    values (#{publishId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{publishTitle,jdbcType=VARCHAR}, 
+      #{publishText,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.PublishModel" >
-    insert into t_biz_publish
+    insert into T_BIZ_PUBLISH
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="publishId != null" >
         PUBLISH_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
       </if>
       <if test="publishTitle != null" >
         PUBLISH_TITLE,
@@ -129,6 +135,9 @@
       <if test="publishId != null" >
         #{publishId,jdbcType=BIGINT},
       </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
       <if test="publishTitle != null" >
         #{publishTitle,jdbcType=VARCHAR},
       </if>
@@ -144,16 +153,19 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.PublishModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_biz_publish
+    select count(*) from T_BIZ_PUBLISH
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_biz_publish
+    update T_BIZ_PUBLISH
     <set >
       <if test="record.publishId != null" >
         PUBLISH_ID = #{record.publishId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.publishTitle != null" >
         PUBLISH_TITLE = #{record.publishTitle,jdbcType=VARCHAR},
@@ -173,8 +185,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_biz_publish
+    update T_BIZ_PUBLISH
     set PUBLISH_ID = #{record.publishId,jdbcType=BIGINT},
+      USER_ID = #{record.userId,jdbcType=BIGINT},
       PUBLISH_TITLE = #{record.publishTitle,jdbcType=VARCHAR},
       PUBLISH_TEXT = #{record.publishText,jdbcType=VARCHAR},
       ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
@@ -184,8 +197,11 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.PublishModel" >
-    update t_biz_publish
+    update T_BIZ_PUBLISH
     <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
       <if test="publishTitle != null" >
         PUBLISH_TITLE = #{publishTitle,jdbcType=VARCHAR},
       </if>
@@ -202,8 +218,9 @@
     where PUBLISH_ID = #{publishId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.PublishModel" >
-    update t_biz_publish
-    set PUBLISH_TITLE = #{publishTitle,jdbcType=VARCHAR},
+    update T_BIZ_PUBLISH
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      PUBLISH_TITLE = #{publishTitle,jdbcType=VARCHAR},
       PUBLISH_TEXT = #{publishText,jdbcType=VARCHAR},
       ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
       UPD_TIME = #{updTime,jdbcType=TIMESTAMP}

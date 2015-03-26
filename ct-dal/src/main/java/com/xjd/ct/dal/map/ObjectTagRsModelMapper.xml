@@ -73,7 +73,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_object_tag_rs
+    from T_OBJECT_TAG_RS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,19 +83,19 @@
     <include refid="MysqlPageSuffix" />
   </select>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ObjectTagRsModelExample" >
-    delete from t_object_tag_rs
+    delete from T_OBJECT_TAG_RS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ObjectTagRsModel" >
-    insert into t_object_tag_rs (OBJECT_ID, TAG_ID, ADD_TIME
+    insert into T_OBJECT_TAG_RS (OBJECT_ID, TAG_ID, ADD_TIME
       )
     values (#{objectId,jdbcType=BIGINT}, #{tagId,jdbcType=BIGINT}, #{addTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ObjectTagRsModel" >
-    insert into t_object_tag_rs
+    insert into T_OBJECT_TAG_RS
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="objectId != null" >
         OBJECT_ID,
@@ -120,13 +120,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ObjectTagRsModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_object_tag_rs
+    select count(*) from T_OBJECT_TAG_RS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_object_tag_rs
+    update T_OBJECT_TAG_RS
     <set >
       <if test="record.objectId != null" >
         OBJECT_ID = #{record.objectId,jdbcType=BIGINT},
@@ -143,7 +143,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_object_tag_rs
+    update T_OBJECT_TAG_RS
     set OBJECT_ID = #{record.objectId,jdbcType=BIGINT},
       TAG_ID = #{record.tagId,jdbcType=BIGINT},
       ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}

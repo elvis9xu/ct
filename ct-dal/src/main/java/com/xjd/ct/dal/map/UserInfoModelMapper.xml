@@ -84,7 +84,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user_info
+    from T_USER_INFO
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,21 +96,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_user_info
+    from T_USER_INFO
     where USER_ID = #{userId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_user_info
+    delete from T_USER_INFO
     where USER_ID = #{userId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserInfoModelExample" >
-    delete from t_user_info
+    delete from T_USER_INFO
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserInfoModel" >
-    insert into t_user_info (USER_ID, USER_TYPE, GRADE_EXP, 
+    insert into T_USER_INFO (USER_ID, USER_TYPE, GRADE_EXP, 
       GRADE_LEVEL, POINT, NICKNAME, 
       HEAD_IMG_RES, SEX, BIRTH, 
       MOOD_WORDS, MOOD_WORDS_TIME, ADD_TIME, 
@@ -122,7 +122,7 @@
       #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserInfoModel" >
-    insert into t_user_info
+    insert into T_USER_INFO
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         USER_ID,
@@ -207,13 +207,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserInfoModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_user_info
+    select count(*) from T_USER_INFO
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_user_info
+    update T_USER_INFO
     <set >
       <if test="record.userId != null" >
         USER_ID = #{record.userId,jdbcType=BIGINT},
@@ -260,7 +260,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_user_info
+    update T_USER_INFO
     set USER_ID = #{record.userId,jdbcType=BIGINT},
       USER_TYPE = #{record.userType,jdbcType=TINYINT},
       GRADE_EXP = #{record.gradeExp,jdbcType=INTEGER},
@@ -279,7 +279,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserInfoModel" >
-    update t_user_info
+    update T_USER_INFO
     <set >
       <if test="userType != null" >
         USER_TYPE = #{userType,jdbcType=TINYINT},
@@ -321,7 +321,7 @@
     where USER_ID = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserInfoModel" >
-    update t_user_info
+    update T_USER_INFO
     set USER_TYPE = #{userType,jdbcType=TINYINT},
       GRADE_EXP = #{gradeExp,jdbcType=INTEGER},
       GRADE_LEVEL = #{gradeLevel,jdbcType=TINYINT},

@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_subscribe
+    from T_SUBSCRIBE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,21 +90,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_subscribe
+    from T_SUBSCRIBE
     where SUBSCRIBE_ID = #{subscribeId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_subscribe
+    delete from T_SUBSCRIBE
     where SUBSCRIBE_ID = #{subscribeId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.SubscribeModelExample" >
-    delete from t_subscribe
+    delete from T_SUBSCRIBE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.SubscribeModel" >
-    insert into t_subscribe (SUBSCRIBE_ID, SUBSCRIBE_NAME, SUBSCRIBE_DESC, 
+    insert into T_SUBSCRIBE (SUBSCRIBE_ID, SUBSCRIBE_NAME, SUBSCRIBE_DESC, 
       MUST_AGE_START, MUST_AGE_END, ADD_TIME, 
       UPD_TIME)
     values (#{subscribeId,jdbcType=BIGINT}, #{subscribeName,jdbcType=VARCHAR}, #{subscribeDesc,jdbcType=VARCHAR}, 
@@ -112,7 +112,7 @@
       #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.SubscribeModel" >
-    insert into t_subscribe
+    insert into T_SUBSCRIBE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="subscribeId != null" >
         SUBSCRIBE_ID,
@@ -161,13 +161,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.SubscribeModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_subscribe
+    select count(*) from T_SUBSCRIBE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_subscribe
+    update T_SUBSCRIBE
     <set >
       <if test="record.subscribeId != null" >
         SUBSCRIBE_ID = #{record.subscribeId,jdbcType=BIGINT},
@@ -196,7 +196,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_subscribe
+    update T_SUBSCRIBE
     set SUBSCRIBE_ID = #{record.subscribeId,jdbcType=BIGINT},
       SUBSCRIBE_NAME = #{record.subscribeName,jdbcType=VARCHAR},
       SUBSCRIBE_DESC = #{record.subscribeDesc,jdbcType=VARCHAR},
@@ -209,7 +209,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.SubscribeModel" >
-    update t_subscribe
+    update T_SUBSCRIBE
     <set >
       <if test="subscribeName != null" >
         SUBSCRIBE_NAME = #{subscribeName,jdbcType=VARCHAR},
@@ -233,7 +233,7 @@
     where SUBSCRIBE_ID = #{subscribeId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.SubscribeModel" >
-    update t_subscribe
+    update T_SUBSCRIBE
     set SUBSCRIBE_NAME = #{subscribeName,jdbcType=VARCHAR},
       SUBSCRIBE_DESC = #{subscribeDesc,jdbcType=VARCHAR},
       MUST_AGE_START = #{mustAgeStart,jdbcType=TINYINT},

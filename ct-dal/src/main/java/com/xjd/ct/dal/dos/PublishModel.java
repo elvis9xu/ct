@@ -5,6 +5,8 @@ import java.util.Date;
 public class PublishModel extends BaseDo {
     private Long publishId;
 
+    private Long userId;
+
     private String publishTitle;
 
     private String publishText;
@@ -19,6 +21,14 @@ public class PublishModel extends BaseDo {
 
     public void setPublishId(Long publishId) {
         this.publishId = publishId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getPublishTitle() {

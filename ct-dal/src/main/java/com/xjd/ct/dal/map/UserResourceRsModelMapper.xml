@@ -73,7 +73,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user_resource_rs
+    from T_USER_RESOURCE_RS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,29 +85,29 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.UserResourceRsModelKey" >
     select 
     <include refid="Base_Column_List" />
-    from t_user_resource_rs
+    from T_USER_RESOURCE_RS
     where USER_ID = #{userId,jdbcType=BIGINT}
       and RES_ID = #{resId,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserResourceRsModelKey" >
-    delete from t_user_resource_rs
+    delete from T_USER_RESOURCE_RS
     where USER_ID = #{userId,jdbcType=BIGINT}
       and RES_ID = #{resId,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserResourceRsModelExample" >
-    delete from t_user_resource_rs
+    delete from T_USER_RESOURCE_RS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserResourceRsModel" >
-    insert into t_user_resource_rs (USER_ID, RES_ID, ADD_TIME
+    insert into T_USER_RESOURCE_RS (USER_ID, RES_ID, ADD_TIME
       )
     values (#{userId,jdbcType=BIGINT}, #{resId,jdbcType=CHAR}, #{addTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserResourceRsModel" >
-    insert into t_user_resource_rs
+    insert into T_USER_RESOURCE_RS
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         USER_ID,
@@ -132,13 +132,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserResourceRsModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_user_resource_rs
+    select count(*) from T_USER_RESOURCE_RS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_user_resource_rs
+    update T_USER_RESOURCE_RS
     <set >
       <if test="record.userId != null" >
         USER_ID = #{record.userId,jdbcType=BIGINT},
@@ -155,7 +155,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_user_resource_rs
+    update T_USER_RESOURCE_RS
     set USER_ID = #{record.userId,jdbcType=BIGINT},
       RES_ID = #{record.resId,jdbcType=CHAR},
       ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
@@ -164,7 +164,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserResourceRsModel" >
-    update t_user_resource_rs
+    update T_USER_RESOURCE_RS
     <set >
       <if test="addTime != null" >
         ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
@@ -174,7 +174,7 @@
       and RES_ID = #{resId,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserResourceRsModel" >
-    update t_user_resource_rs
+    update T_USER_RESOURCE_RS
     set ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
     where USER_ID = #{userId,jdbcType=BIGINT}
       and RES_ID = #{resId,jdbcType=CHAR}

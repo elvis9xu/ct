@@ -75,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_gw_feedback
+    from T_GW_FEEDBACK
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,27 +87,27 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_gw_feedback
+    from T_GW_FEEDBACK
     where FEEDBACK_ID = #{feedbackId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_gw_feedback
+    delete from T_GW_FEEDBACK
     where FEEDBACK_ID = #{feedbackId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.FeedbackModelExample" >
-    delete from t_gw_feedback
+    delete from T_GW_FEEDBACK
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.FeedbackModel" >
-    insert into t_gw_feedback (FEEDBACK_ID, USER_ID, FEEDBACK_CONTENT, 
+    insert into T_GW_FEEDBACK (FEEDBACK_ID, USER_ID, FEEDBACK_CONTENT, 
       ADD_TIME, UPD_TIME)
     values (#{feedbackId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{feedbackContent,jdbcType=VARCHAR}, 
       #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.FeedbackModel" >
-    insert into t_gw_feedback
+    insert into T_GW_FEEDBACK
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="feedbackId != null" >
         FEEDBACK_ID,
@@ -144,13 +144,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.FeedbackModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_gw_feedback
+    select count(*) from T_GW_FEEDBACK
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_gw_feedback
+    update T_GW_FEEDBACK
     <set >
       <if test="record.feedbackId != null" >
         FEEDBACK_ID = #{record.feedbackId,jdbcType=BIGINT},
@@ -173,7 +173,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_gw_feedback
+    update T_GW_FEEDBACK
     set FEEDBACK_ID = #{record.feedbackId,jdbcType=BIGINT},
       USER_ID = #{record.userId,jdbcType=BIGINT},
       FEEDBACK_CONTENT = #{record.feedbackContent,jdbcType=VARCHAR},
@@ -184,7 +184,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.FeedbackModel" >
-    update t_gw_feedback
+    update T_GW_FEEDBACK
     <set >
       <if test="userId != null" >
         USER_ID = #{userId,jdbcType=BIGINT},
@@ -202,7 +202,7 @@
     where FEEDBACK_ID = #{feedbackId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.FeedbackModel" >
-    update t_gw_feedback
+    update T_GW_FEEDBACK
     set USER_ID = #{userId,jdbcType=BIGINT},
       FEEDBACK_CONTENT = #{feedbackContent,jdbcType=VARCHAR},
       ADD_TIME = #{addTime,jdbcType=TIMESTAMP},

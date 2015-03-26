@@ -11,4 +11,7 @@ public interface ValidationProperties {
 	String SEX = "sex";
 	String BABY_SEX = "babySex";
 	String IDOL_OPER = "idolOper";
+	String OFFSET = "offset";
+	String COUNT = "count";
+
 }

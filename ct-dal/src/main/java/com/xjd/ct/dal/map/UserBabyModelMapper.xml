@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user_baby
+    from T_USER_BABY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,21 +90,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_user_baby
+    from T_USER_BABY
     where BABY_ID = #{babyId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_user_baby
+    delete from T_USER_BABY
     where BABY_ID = #{babyId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserBabyModelExample" >
-    delete from t_user_baby
+    delete from T_USER_BABY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserBabyModel" >
-    insert into t_user_baby (BABY_ID, USER_ID, BABY_NICKNAME, 
+    insert into T_USER_BABY (BABY_ID, USER_ID, BABY_NICKNAME, 
       BABY_SEX, BABY_BIRTH, BABY_REALNAME, 
       ADD_TIME, UPD_TIME)
     values (#{babyId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{babyNickname,jdbcType=VARCHAR}, 
@@ -112,7 +112,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserBabyModel" >
-    insert into t_user_baby
+    insert into T_USER_BABY
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="babyId != null" >
         BABY_ID,
@@ -167,13 +167,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserBabyModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_user_baby
+    select count(*) from T_USER_BABY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_user_baby
+    update T_USER_BABY
     <set >
       <if test="record.babyId != null" >
         BABY_ID = #{record.babyId,jdbcType=BIGINT},
@@ -205,7 +205,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_user_baby
+    update T_USER_BABY
     set BABY_ID = #{record.babyId,jdbcType=BIGINT},
       USER_ID = #{record.userId,jdbcType=BIGINT},
       BABY_NICKNAME = #{record.babyNickname,jdbcType=VARCHAR},
@@ -219,7 +219,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserBabyModel" >
-    update t_user_baby
+    update T_USER_BABY
     <set >
       <if test="userId != null" >
         USER_ID = #{userId,jdbcType=BIGINT},
@@ -246,7 +246,7 @@
     where BABY_ID = #{babyId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserBabyModel" >
-    update t_user_baby
+    update T_USER_BABY
     set USER_ID = #{userId,jdbcType=BIGINT},
       BABY_NICKNAME = #{babyNickname,jdbcType=VARCHAR},
       BABY_SEX = #{babySex,jdbcType=TINYINT},

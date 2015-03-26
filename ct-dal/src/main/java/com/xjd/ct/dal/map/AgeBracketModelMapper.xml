@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_age_bracket
+    from T_AGE_BRACKET
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,21 +90,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_age_bracket
+    from T_AGE_BRACKET
     where AGE_BRACKET_ID = #{ageBracketId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_age_bracket
+    delete from T_AGE_BRACKET
     where AGE_BRACKET_ID = #{ageBracketId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.AgeBracketModelExample" >
-    delete from t_age_bracket
+    delete from T_AGE_BRACKET
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.AgeBracketModel" >
-    insert into t_age_bracket (AGE_BRACKET_ID, AGE_BRACKET_NAME, AGE_BRACKET_DESC, 
+    insert into T_AGE_BRACKET (AGE_BRACKET_ID, AGE_BRACKET_NAME, AGE_BRACKET_DESC, 
       AGE_START, AGE_END, ADD_TIME, 
       UPD_TIME)
     values (#{ageBracketId,jdbcType=BIGINT}, #{ageBracketName,jdbcType=VARCHAR}, #{ageBracketDesc,jdbcType=VARCHAR}, 
@@ -112,7 +112,7 @@
       #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.AgeBracketModel" >
-    insert into t_age_bracket
+    insert into T_AGE_BRACKET
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ageBracketId != null" >
         AGE_BRACKET_ID,
@@ -161,13 +161,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.AgeBracketModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_age_bracket
+    select count(*) from T_AGE_BRACKET
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_age_bracket
+    update T_AGE_BRACKET
     <set >
       <if test="record.ageBracketId != null" >
         AGE_BRACKET_ID = #{record.ageBracketId,jdbcType=BIGINT},
@@ -196,7 +196,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_age_bracket
+    update T_AGE_BRACKET
     set AGE_BRACKET_ID = #{record.ageBracketId,jdbcType=BIGINT},
       AGE_BRACKET_NAME = #{record.ageBracketName,jdbcType=VARCHAR},
       AGE_BRACKET_DESC = #{record.ageBracketDesc,jdbcType=VARCHAR},
@@ -209,7 +209,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.AgeBracketModel" >
-    update t_age_bracket
+    update T_AGE_BRACKET
     <set >
       <if test="ageBracketName != null" >
         AGE_BRACKET_NAME = #{ageBracketName,jdbcType=VARCHAR},
@@ -233,7 +233,7 @@
     where AGE_BRACKET_ID = #{ageBracketId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.AgeBracketModel" >
-    update t_age_bracket
+    update T_AGE_BRACKET
     set AGE_BRACKET_NAME = #{ageBracketName,jdbcType=VARCHAR},
       AGE_BRACKET_DESC = #{ageBracketDesc,jdbcType=VARCHAR},
       AGE_START = #{ageStart,jdbcType=TINYINT},

@@ -73,7 +73,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user_subscribe
+    from T_USER_SUBSCRIBE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,29 +85,29 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.UserSubscribeModelKey" >
     select 
     <include refid="Base_Column_List" />
-    from t_user_subscribe
+    from T_USER_SUBSCRIBE
     where USER_ID = #{userId,jdbcType=BIGINT}
       and SUBSCRIBE_ID = #{subscribeId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserSubscribeModelKey" >
-    delete from t_user_subscribe
+    delete from T_USER_SUBSCRIBE
     where USER_ID = #{userId,jdbcType=BIGINT}
       and SUBSCRIBE_ID = #{subscribeId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserSubscribeModelExample" >
-    delete from t_user_subscribe
+    delete from T_USER_SUBSCRIBE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserSubscribeModel" >
-    insert into t_user_subscribe (USER_ID, SUBSCRIBE_ID, ADD_TIME
+    insert into T_USER_SUBSCRIBE (USER_ID, SUBSCRIBE_ID, ADD_TIME
       )
     values (#{userId,jdbcType=BIGINT}, #{subscribeId,jdbcType=BIGINT}, #{addTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserSubscribeModel" >
-    insert into t_user_subscribe
+    insert into T_USER_SUBSCRIBE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         USER_ID,
@@ -132,13 +132,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserSubscribeModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_user_subscribe
+    select count(*) from T_USER_SUBSCRIBE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_user_subscribe
+    update T_USER_SUBSCRIBE
     <set >
       <if test="record.userId != null" >
         USER_ID = #{record.userId,jdbcType=BIGINT},
@@ -155,7 +155,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_user_subscribe
+    update T_USER_SUBSCRIBE
     set USER_ID = #{record.userId,jdbcType=BIGINT},
       SUBSCRIBE_ID = #{record.subscribeId,jdbcType=BIGINT},
       ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
@@ -164,7 +164,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserSubscribeModel" >
-    update t_user_subscribe
+    update T_USER_SUBSCRIBE
     <set >
       <if test="addTime != null" >
         ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
@@ -174,7 +174,7 @@
       and SUBSCRIBE_ID = #{subscribeId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserSubscribeModel" >
-    update t_user_subscribe
+    update T_USER_SUBSCRIBE
     set ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
     where USER_ID = #{userId,jdbcType=BIGINT}
       and SUBSCRIBE_ID = #{subscribeId,jdbcType=BIGINT}

@@ -22,7 +22,7 @@ public class IdolBizDao {
 	@Autowired
 	UserIdolModelMapper userIdolModelMapper;
 
-	public List<UserIdolModel> selectUserIdolByUserIdAndPage(Long userId, int offset, int limit) {
+	public List<UserIdolModel> selectUserIdolByUserIdAndPage(Long userId, long offset, int limit) {
 		UserIdolModelExample example = new UserIdolModelExample();
 		example.or().andUserIdEqualTo(userId);
 		example.setOrderByClause("add_time desc");

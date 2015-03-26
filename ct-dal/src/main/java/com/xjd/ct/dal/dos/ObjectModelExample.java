@@ -489,6 +489,66 @@ public class ObjectModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andLikeYesCountIsNull() {
+            addCriterion("LIKE_YES_COUNT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeYesCountIsNotNull() {
+            addCriterion("LIKE_YES_COUNT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeYesCountEqualTo(Integer value) {
+            addCriterion("LIKE_YES_COUNT =", value, "likeYesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeYesCountNotEqualTo(Integer value) {
+            addCriterion("LIKE_YES_COUNT <>", value, "likeYesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeYesCountGreaterThan(Integer value) {
+            addCriterion("LIKE_YES_COUNT >", value, "likeYesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeYesCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("LIKE_YES_COUNT >=", value, "likeYesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeYesCountLessThan(Integer value) {
+            addCriterion("LIKE_YES_COUNT <", value, "likeYesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeYesCountLessThanOrEqualTo(Integer value) {
+            addCriterion("LIKE_YES_COUNT <=", value, "likeYesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeYesCountIn(List<Integer> values) {
+            addCriterion("LIKE_YES_COUNT in", values, "likeYesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeYesCountNotIn(List<Integer> values) {
+            addCriterion("LIKE_YES_COUNT not in", values, "likeYesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeYesCountBetween(Integer value1, Integer value2) {
+            addCriterion("LIKE_YES_COUNT between", value1, value2, "likeYesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeYesCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("LIKE_YES_COUNT not between", value1, value2, "likeYesCount");
+            return (Criteria) this;
+        }
+
         public Criteria andLikeNoFlagIsNull() {
             addCriterion("LIKE_NO_FLAG is null");
             return (Criteria) this;
@@ -546,6 +606,66 @@ public class ObjectModelExample {
 
         public Criteria andLikeNoFlagNotBetween(Byte value1, Byte value2) {
             addCriterion("LIKE_NO_FLAG not between", value1, value2, "likeNoFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountIsNull() {
+            addCriterion("LIKE_NO_COUNT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountIsNotNull() {
+            addCriterion("LIKE_NO_COUNT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountEqualTo(Integer value) {
+            addCriterion("LIKE_NO_COUNT =", value, "likeNoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountNotEqualTo(Integer value) {
+            addCriterion("LIKE_NO_COUNT <>", value, "likeNoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountGreaterThan(Integer value) {
+            addCriterion("LIKE_NO_COUNT >", value, "likeNoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("LIKE_NO_COUNT >=", value, "likeNoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountLessThan(Integer value) {
+            addCriterion("LIKE_NO_COUNT <", value, "likeNoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountLessThanOrEqualTo(Integer value) {
+            addCriterion("LIKE_NO_COUNT <=", value, "likeNoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountIn(List<Integer> values) {
+            addCriterion("LIKE_NO_COUNT in", values, "likeNoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountNotIn(List<Integer> values) {
+            addCriterion("LIKE_NO_COUNT not in", values, "likeNoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountBetween(Integer value1, Integer value2) {
+            addCriterion("LIKE_NO_COUNT between", value1, value2, "likeNoCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNoCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("LIKE_NO_COUNT not between", value1, value2, "likeNoCount");
             return (Criteria) this;
         }
 
@@ -609,6 +729,66 @@ public class ObjectModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andCommentCountIsNull() {
+            addCriterion("COMMENT_COUNT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentCountIsNotNull() {
+            addCriterion("COMMENT_COUNT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentCountEqualTo(Integer value) {
+            addCriterion("COMMENT_COUNT =", value, "commentCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentCountNotEqualTo(Integer value) {
+            addCriterion("COMMENT_COUNT <>", value, "commentCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentCountGreaterThan(Integer value) {
+            addCriterion("COMMENT_COUNT >", value, "commentCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("COMMENT_COUNT >=", value, "commentCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentCountLessThan(Integer value) {
+            addCriterion("COMMENT_COUNT <", value, "commentCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentCountLessThanOrEqualTo(Integer value) {
+            addCriterion("COMMENT_COUNT <=", value, "commentCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentCountIn(List<Integer> values) {
+            addCriterion("COMMENT_COUNT in", values, "commentCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentCountNotIn(List<Integer> values) {
+            addCriterion("COMMENT_COUNT not in", values, "commentCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentCountBetween(Integer value1, Integer value2) {
+            addCriterion("COMMENT_COUNT between", value1, value2, "commentCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("COMMENT_COUNT not between", value1, value2, "commentCount");
+            return (Criteria) this;
+        }
+
         public Criteria andFavorFlagIsNull() {
             addCriterion("FAVOR_FLAG is null");
             return (Criteria) this;
@@ -666,6 +846,66 @@ public class ObjectModelExample {
 
         public Criteria andFavorFlagNotBetween(Byte value1, Byte value2) {
             addCriterion("FAVOR_FLAG not between", value1, value2, "favorFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountIsNull() {
+            addCriterion("FAVOR_COUNT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountIsNotNull() {
+            addCriterion("FAVOR_COUNT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountEqualTo(Integer value) {
+            addCriterion("FAVOR_COUNT =", value, "favorCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountNotEqualTo(Integer value) {
+            addCriterion("FAVOR_COUNT <>", value, "favorCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountGreaterThan(Integer value) {
+            addCriterion("FAVOR_COUNT >", value, "favorCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("FAVOR_COUNT >=", value, "favorCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountLessThan(Integer value) {
+            addCriterion("FAVOR_COUNT <", value, "favorCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountLessThanOrEqualTo(Integer value) {
+            addCriterion("FAVOR_COUNT <=", value, "favorCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountIn(List<Integer> values) {
+            addCriterion("FAVOR_COUNT in", values, "favorCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountNotIn(List<Integer> values) {
+            addCriterion("FAVOR_COUNT not in", values, "favorCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountBetween(Integer value1, Integer value2) {
+            addCriterion("FAVOR_COUNT between", value1, value2, "favorCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavorCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("FAVOR_COUNT not between", value1, value2, "favorCount");
             return (Criteria) this;
         }
 

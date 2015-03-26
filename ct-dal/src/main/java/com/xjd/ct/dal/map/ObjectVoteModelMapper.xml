@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_object_vote
+    from T_OBJECT_VOTE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,25 +88,25 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ObjectVoteModelKey" >
     select 
     <include refid="Base_Column_List" />
-    from t_object_vote
+    from T_OBJECT_VOTE
     where OBJECT_ID = #{objectId,jdbcType=BIGINT}
       and OPT_CODE = #{optCode,jdbcType=TINYINT}
       and USER_ID = #{userId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ObjectVoteModelKey" >
-    delete from t_object_vote
+    delete from T_OBJECT_VOTE
     where OBJECT_ID = #{objectId,jdbcType=BIGINT}
       and OPT_CODE = #{optCode,jdbcType=TINYINT}
       and USER_ID = #{userId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ObjectVoteModelExample" >
-    delete from t_object_vote
+    delete from T_OBJECT_VOTE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ObjectVoteModel" >
-    insert into t_object_vote (OBJECT_ID, OPT_CODE, USER_ID, 
+    insert into T_OBJECT_VOTE (OBJECT_ID, OPT_CODE, USER_ID, 
       YES_NO, ADD_TIME, UPD_TIME
       )
     values (#{objectId,jdbcType=BIGINT}, #{optCode,jdbcType=TINYINT}, #{userId,jdbcType=BIGINT}, 
@@ -114,7 +114,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ObjectVoteModel" >
-    insert into t_object_vote
+    insert into T_OBJECT_VOTE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="objectId != null" >
         OBJECT_ID,
@@ -157,13 +157,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ObjectVoteModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_object_vote
+    select count(*) from T_OBJECT_VOTE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_object_vote
+    update T_OBJECT_VOTE
     <set >
       <if test="record.objectId != null" >
         OBJECT_ID = #{record.objectId,jdbcType=BIGINT},
@@ -189,7 +189,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_object_vote
+    update T_OBJECT_VOTE
     set OBJECT_ID = #{record.objectId,jdbcType=BIGINT},
       OPT_CODE = #{record.optCode,jdbcType=TINYINT},
       USER_ID = #{record.userId,jdbcType=BIGINT},
@@ -201,7 +201,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ObjectVoteModel" >
-    update t_object_vote
+    update T_OBJECT_VOTE
     <set >
       <if test="yesNo != null" >
         YES_NO = #{yesNo,jdbcType=TINYINT},
@@ -218,7 +218,7 @@
       and USER_ID = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ObjectVoteModel" >
-    update t_object_vote
+    update T_OBJECT_VOTE
     set YES_NO = #{yesNo,jdbcType=TINYINT},
       ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
       UPD_TIME = #{updTime,jdbcType=TIMESTAMP}

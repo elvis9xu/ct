@@ -79,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user_summary
+    from T_USER_SUMMARY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,21 +91,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_user_summary
+    from T_USER_SUMMARY
     where USER_ID = #{userId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_user_summary
+    delete from T_USER_SUMMARY
     where USER_ID = #{userId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserSummaryModelExample" >
-    delete from t_user_summary
+    delete from T_USER_SUMMARY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserSummaryModel" >
-    insert into t_user_summary (USER_ID, INFORM_COUNT, FAVOR_COUNT, 
+    insert into T_USER_SUMMARY (USER_ID, INFORM_COUNT, FAVOR_COUNT, 
       PUBLISH_COUNT, IDOL_COUNT, FANS_COUNT, 
       ADD_TIME, UPD_TIME)
     values (#{userId,jdbcType=BIGINT}, #{informCount,jdbcType=INTEGER}, #{favorCount,jdbcType=INTEGER}, 
@@ -113,7 +113,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserSummaryModel" >
-    insert into t_user_summary
+    insert into T_USER_SUMMARY
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         USER_ID,
@@ -168,13 +168,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserSummaryModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_user_summary
+    select count(*) from T_USER_SUMMARY
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_user_summary
+    update T_USER_SUMMARY
     <set >
       <if test="record.userId != null" >
         USER_ID = #{record.userId,jdbcType=BIGINT},
@@ -206,7 +206,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_user_summary
+    update T_USER_SUMMARY
     set USER_ID = #{record.userId,jdbcType=BIGINT},
       INFORM_COUNT = #{record.informCount,jdbcType=INTEGER},
       FAVOR_COUNT = #{record.favorCount,jdbcType=INTEGER},
@@ -220,7 +220,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserSummaryModel" >
-    update t_user_summary
+    update T_USER_SUMMARY
     <set >
       <if test="informCount != null" >
         INFORM_COUNT = #{informCount,jdbcType=INTEGER},
@@ -247,7 +247,7 @@
     where USER_ID = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserSummaryModel" >
-    update t_user_summary
+    update T_USER_SUMMARY
     set INFORM_COUNT = #{informCount,jdbcType=INTEGER},
       FAVOR_COUNT = #{favorCount,jdbcType=INTEGER},
       PUBLISH_COUNT = #{publishCount,jdbcType=INTEGER},

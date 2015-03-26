@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_report
+    from T_REPORT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,21 +90,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_report
+    from T_REPORT
     where REPORT_ID = #{reportId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_report
+    delete from T_REPORT
     where REPORT_ID = #{reportId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ReportModelExample" >
-    delete from t_report
+    delete from T_REPORT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ReportModel" >
-    insert into t_report (REPORT_ID, OBJECT_TYPE, REPORT_REF_ID, 
+    insert into T_REPORT (REPORT_ID, OBJECT_TYPE, REPORT_REF_ID, 
       REPORT_REASON_TYPE, REPORT_REASON_DETAIL, ADD_TIME, 
       UPD_TIME)
     values (#{reportId,jdbcType=BIGINT}, #{objectType,jdbcType=TINYINT}, #{reportRefId,jdbcType=BIGINT}, 
@@ -112,7 +112,7 @@
       #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ReportModel" >
-    insert into t_report
+    insert into T_REPORT
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="reportId != null" >
         REPORT_ID,
@@ -161,13 +161,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ReportModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_report
+    select count(*) from T_REPORT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_report
+    update T_REPORT
     <set >
       <if test="record.reportId != null" >
         REPORT_ID = #{record.reportId,jdbcType=BIGINT},
@@ -196,7 +196,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_report
+    update T_REPORT
     set REPORT_ID = #{record.reportId,jdbcType=BIGINT},
       OBJECT_TYPE = #{record.objectType,jdbcType=TINYINT},
       REPORT_REF_ID = #{record.reportRefId,jdbcType=BIGINT},
@@ -209,7 +209,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ReportModel" >
-    update t_report
+    update T_REPORT
     <set >
       <if test="objectType != null" >
         OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
@@ -233,7 +233,7 @@
     where REPORT_ID = #{reportId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ReportModel" >
-    update t_report
+    update T_REPORT
     set OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
       REPORT_REF_ID = #{reportRefId,jdbcType=BIGINT},
       REPORT_REASON_TYPE = #{reportReasonType,jdbcType=TINYINT},

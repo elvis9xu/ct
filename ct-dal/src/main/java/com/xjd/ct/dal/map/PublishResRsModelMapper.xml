@@ -73,7 +73,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_biz_publish_res_rs
+    from T_BIZ_PUBLISH_RES_RS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,29 +85,29 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.PublishResRsModelKey" >
     select 
     <include refid="Base_Column_List" />
-    from t_biz_publish_res_rs
+    from T_BIZ_PUBLISH_RES_RS
     where PUBLISH_ID = #{publishId,jdbcType=BIGINT}
       and RES_ID = #{resId,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.xjd.ct.dal.dos.PublishResRsModelKey" >
-    delete from t_biz_publish_res_rs
+    delete from T_BIZ_PUBLISH_RES_RS
     where PUBLISH_ID = #{publishId,jdbcType=BIGINT}
       and RES_ID = #{resId,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.PublishResRsModelExample" >
-    delete from t_biz_publish_res_rs
+    delete from T_BIZ_PUBLISH_RES_RS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.PublishResRsModel" >
-    insert into t_biz_publish_res_rs (PUBLISH_ID, RES_ID, ADD_TIME
+    insert into T_BIZ_PUBLISH_RES_RS (PUBLISH_ID, RES_ID, ADD_TIME
       )
     values (#{publishId,jdbcType=BIGINT}, #{resId,jdbcType=CHAR}, #{addTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.PublishResRsModel" >
-    insert into t_biz_publish_res_rs
+    insert into T_BIZ_PUBLISH_RES_RS
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="publishId != null" >
         PUBLISH_ID,
@@ -132,13 +132,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.PublishResRsModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_biz_publish_res_rs
+    select count(*) from T_BIZ_PUBLISH_RES_RS
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_biz_publish_res_rs
+    update T_BIZ_PUBLISH_RES_RS
     <set >
       <if test="record.publishId != null" >
         PUBLISH_ID = #{record.publishId,jdbcType=BIGINT},
@@ -155,7 +155,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_biz_publish_res_rs
+    update T_BIZ_PUBLISH_RES_RS
     set PUBLISH_ID = #{record.publishId,jdbcType=BIGINT},
       RES_ID = #{record.resId,jdbcType=CHAR},
       ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
@@ -164,7 +164,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.PublishResRsModel" >
-    update t_biz_publish_res_rs
+    update T_BIZ_PUBLISH_RES_RS
     <set >
       <if test="addTime != null" >
         ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
@@ -174,7 +174,7 @@
       and RES_ID = #{resId,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.PublishResRsModel" >
-    update t_biz_publish_res_rs
+    update T_BIZ_PUBLISH_RES_RS
     set ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
     where PUBLISH_ID = #{publishId,jdbcType=BIGINT}
       and RES_ID = #{resId,jdbcType=CHAR}

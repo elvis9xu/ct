@@ -73,7 +73,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user_idol
+    from T_USER_IDOL
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,29 +85,29 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.UserIdolModelKey" >
     select 
     <include refid="Base_Column_List" />
-    from t_user_idol
+    from T_USER_IDOL
     where USER_ID = #{userId,jdbcType=BIGINT}
       and IDOL_USER_ID = #{idolUserId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserIdolModelKey" >
-    delete from t_user_idol
+    delete from T_USER_IDOL
     where USER_ID = #{userId,jdbcType=BIGINT}
       and IDOL_USER_ID = #{idolUserId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserIdolModelExample" >
-    delete from t_user_idol
+    delete from T_USER_IDOL
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserIdolModel" >
-    insert into t_user_idol (USER_ID, IDOL_USER_ID, ADD_TIME
+    insert into T_USER_IDOL (USER_ID, IDOL_USER_ID, ADD_TIME
       )
     values (#{userId,jdbcType=BIGINT}, #{idolUserId,jdbcType=BIGINT}, #{addTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserIdolModel" >
-    insert into t_user_idol
+    insert into T_USER_IDOL
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         USER_ID,
@@ -132,13 +132,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserIdolModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_user_idol
+    select count(*) from T_USER_IDOL
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_user_idol
+    update T_USER_IDOL
     <set >
       <if test="record.userId != null" >
         USER_ID = #{record.userId,jdbcType=BIGINT},
@@ -155,7 +155,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_user_idol
+    update T_USER_IDOL
     set USER_ID = #{record.userId,jdbcType=BIGINT},
       IDOL_USER_ID = #{record.idolUserId,jdbcType=BIGINT},
       ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
@@ -164,7 +164,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserIdolModel" >
-    update t_user_idol
+    update T_USER_IDOL
     <set >
       <if test="addTime != null" >
         ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
@@ -174,7 +174,7 @@
       and IDOL_USER_ID = #{idolUserId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserIdolModel" >
-    update t_user_idol
+    update T_USER_IDOL
     set ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
     where USER_ID = #{userId,jdbcType=BIGINT}
       and IDOL_USER_ID = #{idolUserId,jdbcType=BIGINT}

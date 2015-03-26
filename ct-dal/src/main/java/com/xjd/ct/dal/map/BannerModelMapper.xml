@@ -79,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_biz_banner
+    from T_BIZ_BANNER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,21 +91,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_biz_banner
+    from T_BIZ_BANNER
     where BANNER_ID = #{bannerId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_biz_banner
+    delete from T_BIZ_BANNER
     where BANNER_ID = #{bannerId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.BannerModelExample" >
-    delete from t_biz_banner
+    delete from T_BIZ_BANNER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.BannerModel" >
-    insert into t_biz_banner (BANNER_ID, BANNER_RES, BANNER_TYPE, 
+    insert into T_BIZ_BANNER (BANNER_ID, BANNER_RES, BANNER_TYPE, 
       OBJECT_TYPE, REF_ID, BANNER_CONTENT, 
       ADD_TIME, UPD_TIME)
     values (#{bannerId,jdbcType=BIGINT}, #{bannerRes,jdbcType=CHAR}, #{bannerType,jdbcType=TINYINT}, 
@@ -113,7 +113,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.BannerModel" >
-    insert into t_biz_banner
+    insert into T_BIZ_BANNER
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="bannerId != null" >
         BANNER_ID,
@@ -168,13 +168,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.BannerModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_biz_banner
+    select count(*) from T_BIZ_BANNER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_biz_banner
+    update T_BIZ_BANNER
     <set >
       <if test="record.bannerId != null" >
         BANNER_ID = #{record.bannerId,jdbcType=BIGINT},
@@ -206,7 +206,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_biz_banner
+    update T_BIZ_BANNER
     set BANNER_ID = #{record.bannerId,jdbcType=BIGINT},
       BANNER_RES = #{record.bannerRes,jdbcType=CHAR},
       BANNER_TYPE = #{record.bannerType,jdbcType=TINYINT},
@@ -220,7 +220,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.BannerModel" >
-    update t_biz_banner
+    update T_BIZ_BANNER
     <set >
       <if test="bannerRes != null" >
         BANNER_RES = #{bannerRes,jdbcType=CHAR},
@@ -247,7 +247,7 @@
     where BANNER_ID = #{bannerId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.BannerModel" >
-    update t_biz_banner
+    update T_BIZ_BANNER
     set BANNER_RES = #{bannerRes,jdbcType=CHAR},
       BANNER_TYPE = #{bannerType,jdbcType=TINYINT},
       OBJECT_TYPE = #{objectType,jdbcType=TINYINT},

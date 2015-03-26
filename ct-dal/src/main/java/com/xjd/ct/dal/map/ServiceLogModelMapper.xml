@@ -77,7 +77,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_gw_service_log
+    from T_GW_SERVICE_LOG
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,21 +89,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_gw_service_log
+    from T_GW_SERVICE_LOG
     where LOG_ID = #{logId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_gw_service_log
+    delete from T_GW_SERVICE_LOG
     where LOG_ID = #{logId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ServiceLogModelExample" >
-    delete from t_gw_service_log
+    delete from T_GW_SERVICE_LOG
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ServiceLogModel" >
-    insert into t_gw_service_log (LOG_ID, USER_IP, USER_ID, 
+    insert into T_GW_SERVICE_LOG (LOG_ID, USER_IP, USER_ID, 
       TOKEN, SERVICE_NAME, SERVICE_VERSION, 
       REQUEST_TIME)
     values (#{logId,jdbcType=BIGINT}, #{userIp,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
@@ -111,7 +111,7 @@
       #{requestTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ServiceLogModel" >
-    insert into t_gw_service_log
+    insert into T_GW_SERVICE_LOG
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="logId != null" >
         LOG_ID,
@@ -160,13 +160,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ServiceLogModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_gw_service_log
+    select count(*) from T_GW_SERVICE_LOG
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_gw_service_log
+    update T_GW_SERVICE_LOG
     <set >
       <if test="record.logId != null" >
         LOG_ID = #{record.logId,jdbcType=BIGINT},
@@ -195,7 +195,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_gw_service_log
+    update T_GW_SERVICE_LOG
     set LOG_ID = #{record.logId,jdbcType=BIGINT},
       USER_IP = #{record.userIp,jdbcType=VARCHAR},
       USER_ID = #{record.userId,jdbcType=BIGINT},
@@ -208,7 +208,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ServiceLogModel" >
-    update t_gw_service_log
+    update T_GW_SERVICE_LOG
     <set >
       <if test="userIp != null" >
         USER_IP = #{userIp,jdbcType=VARCHAR},
@@ -232,7 +232,7 @@
     where LOG_ID = #{logId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ServiceLogModel" >
-    update t_gw_service_log
+    update T_GW_SERVICE_LOG
     set USER_IP = #{userIp,jdbcType=VARCHAR},
       USER_ID = #{userId,jdbcType=BIGINT},
       TOKEN = #{token,jdbcType=CHAR},

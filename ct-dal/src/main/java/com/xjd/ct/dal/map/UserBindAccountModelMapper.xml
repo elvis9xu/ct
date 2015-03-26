@@ -79,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user_bind_account
+    from T_USER_BIND_ACCOUNT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,21 +91,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_user_bind_account
+    from T_USER_BIND_ACCOUNT
     where ACCOUNT_ID = #{accountId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_user_bind_account
+    delete from T_USER_BIND_ACCOUNT
     where ACCOUNT_ID = #{accountId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserBindAccountModelExample" >
-    delete from t_user_bind_account
+    delete from T_USER_BIND_ACCOUNT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserBindAccountModel" >
-    insert into t_user_bind_account (ACCOUNT_ID, USER_ID, ACCOUNT_TYPE, 
+    insert into T_USER_BIND_ACCOUNT (ACCOUNT_ID, USER_ID, ACCOUNT_TYPE, 
       OPEN_ID, ACCESS_TOKEN, ACCESS_TOKEN_EXPIRE_TIME, 
       ADD_TIME, UPD_TIME)
     values (#{accountId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{accountType,jdbcType=TINYINT}, 
@@ -113,7 +113,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserBindAccountModel" >
-    insert into t_user_bind_account
+    insert into T_USER_BIND_ACCOUNT
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="accountId != null" >
         ACCOUNT_ID,
@@ -168,13 +168,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserBindAccountModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_user_bind_account
+    select count(*) from T_USER_BIND_ACCOUNT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_user_bind_account
+    update T_USER_BIND_ACCOUNT
     <set >
       <if test="record.accountId != null" >
         ACCOUNT_ID = #{record.accountId,jdbcType=BIGINT},
@@ -206,7 +206,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_user_bind_account
+    update T_USER_BIND_ACCOUNT
     set ACCOUNT_ID = #{record.accountId,jdbcType=BIGINT},
       USER_ID = #{record.userId,jdbcType=BIGINT},
       ACCOUNT_TYPE = #{record.accountType,jdbcType=TINYINT},
@@ -220,7 +220,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserBindAccountModel" >
-    update t_user_bind_account
+    update T_USER_BIND_ACCOUNT
     <set >
       <if test="userId != null" >
         USER_ID = #{userId,jdbcType=BIGINT},
@@ -247,7 +247,7 @@
     where ACCOUNT_ID = #{accountId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserBindAccountModel" >
-    update t_user_bind_account
+    update T_USER_BIND_ACCOUNT
     set USER_ID = #{userId,jdbcType=BIGINT},
       ACCOUNT_TYPE = #{accountType,jdbcType=TINYINT},
       OPEN_ID = #{openId,jdbcType=VARCHAR},

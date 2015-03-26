@@ -9,7 +9,11 @@ public class ObjectVoteOptModel extends ObjectVoteOptModelKey {
 
     private Byte yesFlag;
 
+    private Integer yesCount;
+
     private Byte noFlag;
+
+    private Integer noCount;
 
     private Date addTime;
 
@@ -39,12 +43,28 @@ public class ObjectVoteOptModel extends ObjectVoteOptModelKey {
         this.yesFlag = yesFlag;
     }
 
+    public Integer getYesCount() {
+        return yesCount;
+    }
+
+    public void setYesCount(Integer yesCount) {
+        this.yesCount = yesCount;
+    }
+
     public Byte getNoFlag() {
         return noFlag;
     }
 
     public void setNoFlag(Byte noFlag) {
         this.noFlag = noFlag;
+    }
+
+    public Integer getNoCount() {
+        return noCount;
+    }
+
+    public void setNoCount(Integer noCount) {
+        this.noCount = noCount;
     }
 
     public Date getAddTime() {

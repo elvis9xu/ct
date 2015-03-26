@@ -8,9 +8,13 @@
     <result column="VOTE_FLAG" property="voteFlag" jdbcType="TINYINT" />
     <result column="VOTE_MULTI_FLAG" property="voteMultiFlag" jdbcType="TINYINT" />
     <result column="LIKE_YES_FLAG" property="likeYesFlag" jdbcType="TINYINT" />
+    <result column="LIKE_YES_COUNT" property="likeYesCount" jdbcType="INTEGER" />
     <result column="LIKE_NO_FLAG" property="likeNoFlag" jdbcType="TINYINT" />
+    <result column="LIKE_NO_COUNT" property="likeNoCount" jdbcType="INTEGER" />
     <result column="COMMENT_FLAG" property="commentFlag" jdbcType="TINYINT" />
+    <result column="COMMENT_COUNT" property="commentCount" jdbcType="INTEGER" />
     <result column="FAVOR_FLAG" property="favorFlag" jdbcType="TINYINT" />
+    <result column="FAVOR_COUNT" property="favorCount" jdbcType="INTEGER" />
     <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
     <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -74,7 +78,8 @@
   </sql>
   <sql id="Base_Column_List" >
     OBJECT_ID, OBJECT_TYPE, OBJECT_REF_ID, VOTE_FLAG, VOTE_MULTI_FLAG, LIKE_YES_FLAG, 
-    LIKE_NO_FLAG, COMMENT_FLAG, FAVOR_FLAG, ADD_TIME, UPD_TIME
+    LIKE_YES_COUNT, LIKE_NO_FLAG, LIKE_NO_COUNT, COMMENT_FLAG, COMMENT_COUNT, FAVOR_FLAG, 
+    FAVOR_COUNT, ADD_TIME, UPD_TIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ObjectModelExample" >
     select
@@ -82,7 +87,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_object
+    from T_OBJECT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,31 +99,35 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_object
+    from T_OBJECT
     where OBJECT_ID = #{objectId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_object
+    delete from T_OBJECT
     where OBJECT_ID = #{objectId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ObjectModelExample" >
-    delete from t_object
+    delete from T_OBJECT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ObjectModel" >
-    insert into t_object (OBJECT_ID, OBJECT_TYPE, OBJECT_REF_ID, 
+    insert into T_OBJECT (OBJECT_ID, OBJECT_TYPE, OBJECT_REF_ID, 
       VOTE_FLAG, VOTE_MULTI_FLAG, LIKE_YES_FLAG, 
-      LIKE_NO_FLAG, COMMENT_FLAG, FAVOR_FLAG, 
-      ADD_TIME, UPD_TIME)
+      LIKE_YES_COUNT, LIKE_NO_FLAG, LIKE_NO_COUNT, 
+      COMMENT_FLAG, COMMENT_COUNT, FAVOR_FLAG, 
+      FAVOR_COUNT, ADD_TIME, UPD_TIME
+      )
     values (#{objectId,jdbcType=BIGINT}, #{objectType,jdbcType=TINYINT}, #{objectRefId,jdbcType=BIGINT}, 
       #{voteFlag,jdbcType=TINYINT}, #{voteMultiFlag,jdbcType=TINYINT}, #{likeYesFlag,jdbcType=TINYINT}, 
-      #{likeNoFlag,jdbcType=TINYINT}, #{commentFlag,jdbcType=TINYINT}, #{favorFlag,jdbcType=TINYINT}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
+      #{likeYesCount,jdbcType=INTEGER}, #{likeNoFlag,jdbcType=TINYINT}, #{likeNoCount,jdbcType=INTEGER}, 
+      #{commentFlag,jdbcType=TINYINT}, #{commentCount,jdbcType=INTEGER}, #{favorFlag,jdbcType=TINYINT}, 
+      #{favorCount,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ObjectModel" >
-    insert into t_object
+    insert into T_OBJECT
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="objectId != null" >
         OBJECT_ID,
@@ -138,14 +147,26 @@
       <if test="likeYesFlag != null" >
         LIKE_YES_FLAG,
       </if>
+      <if test="likeYesCount != null" >
+        LIKE_YES_COUNT,
+      </if>
       <if test="likeNoFlag != null" >
         LIKE_NO_FLAG,
+      </if>
+      <if test="likeNoCount != null" >
+        LIKE_NO_COUNT,
       </if>
       <if test="commentFlag != null" >
         COMMENT_FLAG,
       </if>
+      <if test="commentCount != null" >
+        COMMENT_COUNT,
+      </if>
       <if test="favorFlag != null" >
         FAVOR_FLAG,
+      </if>
+      <if test="favorCount != null" >
+        FAVOR_COUNT,
       </if>
       <if test="addTime != null" >
         ADD_TIME,
@@ -173,14 +194,26 @@
       <if test="likeYesFlag != null" >
         #{likeYesFlag,jdbcType=TINYINT},
       </if>
+      <if test="likeYesCount != null" >
+        #{likeYesCount,jdbcType=INTEGER},
+      </if>
       <if test="likeNoFlag != null" >
         #{likeNoFlag,jdbcType=TINYINT},
+      </if>
+      <if test="likeNoCount != null" >
+        #{likeNoCount,jdbcType=INTEGER},
       </if>
       <if test="commentFlag != null" >
         #{commentFlag,jdbcType=TINYINT},
       </if>
+      <if test="commentCount != null" >
+        #{commentCount,jdbcType=INTEGER},
+      </if>
       <if test="favorFlag != null" >
         #{favorFlag,jdbcType=TINYINT},
+      </if>
+      <if test="favorCount != null" >
+        #{favorCount,jdbcType=INTEGER},
       </if>
       <if test="addTime != null" >
         #{addTime,jdbcType=TIMESTAMP},
@@ -191,13 +224,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ObjectModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_object
+    select count(*) from T_OBJECT
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_object
+    update T_OBJECT
     <set >
       <if test="record.objectId != null" >
         OBJECT_ID = #{record.objectId,jdbcType=BIGINT},
@@ -217,14 +250,26 @@
       <if test="record.likeYesFlag != null" >
         LIKE_YES_FLAG = #{record.likeYesFlag,jdbcType=TINYINT},
       </if>
+      <if test="record.likeYesCount != null" >
+        LIKE_YES_COUNT = #{record.likeYesCount,jdbcType=INTEGER},
+      </if>
       <if test="record.likeNoFlag != null" >
         LIKE_NO_FLAG = #{record.likeNoFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.likeNoCount != null" >
+        LIKE_NO_COUNT = #{record.likeNoCount,jdbcType=INTEGER},
       </if>
       <if test="record.commentFlag != null" >
         COMMENT_FLAG = #{record.commentFlag,jdbcType=TINYINT},
       </if>
+      <if test="record.commentCount != null" >
+        COMMENT_COUNT = #{record.commentCount,jdbcType=INTEGER},
+      </if>
       <if test="record.favorFlag != null" >
         FAVOR_FLAG = #{record.favorFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.favorCount != null" >
+        FAVOR_COUNT = #{record.favorCount,jdbcType=INTEGER},
       </if>
       <if test="record.addTime != null" >
         ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
@@ -238,16 +283,20 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_object
+    update T_OBJECT
     set OBJECT_ID = #{record.objectId,jdbcType=BIGINT},
       OBJECT_TYPE = #{record.objectType,jdbcType=TINYINT},
       OBJECT_REF_ID = #{record.objectRefId,jdbcType=BIGINT},
       VOTE_FLAG = #{record.voteFlag,jdbcType=TINYINT},
       VOTE_MULTI_FLAG = #{record.voteMultiFlag,jdbcType=TINYINT},
       LIKE_YES_FLAG = #{record.likeYesFlag,jdbcType=TINYINT},
+      LIKE_YES_COUNT = #{record.likeYesCount,jdbcType=INTEGER},
       LIKE_NO_FLAG = #{record.likeNoFlag,jdbcType=TINYINT},
+      LIKE_NO_COUNT = #{record.likeNoCount,jdbcType=INTEGER},
       COMMENT_FLAG = #{record.commentFlag,jdbcType=TINYINT},
+      COMMENT_COUNT = #{record.commentCount,jdbcType=INTEGER},
       FAVOR_FLAG = #{record.favorFlag,jdbcType=TINYINT},
+      FAVOR_COUNT = #{record.favorCount,jdbcType=INTEGER},
       ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
       UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -255,7 +304,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ObjectModel" >
-    update t_object
+    update T_OBJECT
     <set >
       <if test="objectType != null" >
         OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
@@ -272,14 +321,26 @@
       <if test="likeYesFlag != null" >
         LIKE_YES_FLAG = #{likeYesFlag,jdbcType=TINYINT},
       </if>
+      <if test="likeYesCount != null" >
+        LIKE_YES_COUNT = #{likeYesCount,jdbcType=INTEGER},
+      </if>
       <if test="likeNoFlag != null" >
         LIKE_NO_FLAG = #{likeNoFlag,jdbcType=TINYINT},
+      </if>
+      <if test="likeNoCount != null" >
+        LIKE_NO_COUNT = #{likeNoCount,jdbcType=INTEGER},
       </if>
       <if test="commentFlag != null" >
         COMMENT_FLAG = #{commentFlag,jdbcType=TINYINT},
       </if>
+      <if test="commentCount != null" >
+        COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
+      </if>
       <if test="favorFlag != null" >
         FAVOR_FLAG = #{favorFlag,jdbcType=TINYINT},
+      </if>
+      <if test="favorCount != null" >
+        FAVOR_COUNT = #{favorCount,jdbcType=INTEGER},
       </if>
       <if test="addTime != null" >
         ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
@@ -291,15 +352,19 @@
     where OBJECT_ID = #{objectId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ObjectModel" >
-    update t_object
+    update T_OBJECT
     set OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
       OBJECT_REF_ID = #{objectRefId,jdbcType=BIGINT},
       VOTE_FLAG = #{voteFlag,jdbcType=TINYINT},
       VOTE_MULTI_FLAG = #{voteMultiFlag,jdbcType=TINYINT},
       LIKE_YES_FLAG = #{likeYesFlag,jdbcType=TINYINT},
+      LIKE_YES_COUNT = #{likeYesCount,jdbcType=INTEGER},
       LIKE_NO_FLAG = #{likeNoFlag,jdbcType=TINYINT},
+      LIKE_NO_COUNT = #{likeNoCount,jdbcType=INTEGER},
       COMMENT_FLAG = #{commentFlag,jdbcType=TINYINT},
+      COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
       FAVOR_FLAG = #{favorFlag,jdbcType=TINYINT},
+      FAVOR_COUNT = #{favorCount,jdbcType=INTEGER},
       ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
       UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
     where OBJECT_ID = #{objectId,jdbcType=BIGINT}

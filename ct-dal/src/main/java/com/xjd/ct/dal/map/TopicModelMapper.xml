@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_biz_topic
+    from T_BIZ_TOPIC
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,21 +88,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_biz_topic
+    from T_BIZ_TOPIC
     where TOPIC_ID = #{topicId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_biz_topic
+    delete from T_BIZ_TOPIC
     where TOPIC_ID = #{topicId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.TopicModelExample" >
-    delete from t_biz_topic
+    delete from T_BIZ_TOPIC
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.TopicModel" >
-    insert into t_biz_topic (TOPIC_ID, TOPIC_TITLE, TOPIC_IMG_RES, 
+    insert into T_BIZ_TOPIC (TOPIC_ID, TOPIC_TITLE, TOPIC_IMG_RES, 
       TOPIC_DESC, ADD_TIME, UPD_TIME
       )
     values (#{topicId,jdbcType=BIGINT}, #{topicTitle,jdbcType=VARCHAR}, #{topicImgRes,jdbcType=CHAR}, 
@@ -110,7 +110,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.TopicModel" >
-    insert into t_biz_topic
+    insert into T_BIZ_TOPIC
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="topicId != null" >
         TOPIC_ID,
@@ -153,13 +153,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.TopicModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_biz_topic
+    select count(*) from T_BIZ_TOPIC
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_biz_topic
+    update T_BIZ_TOPIC
     <set >
       <if test="record.topicId != null" >
         TOPIC_ID = #{record.topicId,jdbcType=BIGINT},
@@ -185,7 +185,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_biz_topic
+    update T_BIZ_TOPIC
     set TOPIC_ID = #{record.topicId,jdbcType=BIGINT},
       TOPIC_TITLE = #{record.topicTitle,jdbcType=VARCHAR},
       TOPIC_IMG_RES = #{record.topicImgRes,jdbcType=CHAR},
@@ -197,7 +197,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.TopicModel" >
-    update t_biz_topic
+    update T_BIZ_TOPIC
     <set >
       <if test="topicTitle != null" >
         TOPIC_TITLE = #{topicTitle,jdbcType=VARCHAR},
@@ -218,7 +218,7 @@
     where TOPIC_ID = #{topicId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.TopicModel" >
-    update t_biz_topic
+    update T_BIZ_TOPIC
     set TOPIC_TITLE = #{topicTitle,jdbcType=VARCHAR},
       TOPIC_IMG_RES = #{topicImgRes,jdbcType=CHAR},
       TOPIC_DESC = #{topicDesc,jdbcType=VARCHAR},

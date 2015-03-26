@@ -31,7 +31,7 @@ public class IdolBiz {
 	 * @param limit
 	 * @return
 	 */
-	public List<UserForOtherVo> listIdols(Long userId, int offset, int limit) {
+	public List<UserForOtherVo> listIdols(Long userId, long offset, int limit) {
 		List<UserIdolModel> userIdolModelList = idolBizDao.selectUserIdolByUserIdAndPage(userId, offset, limit);
 
 		List<UserForOtherVo> userForOtherVoList = new ArrayList<UserForOtherVo>(userIdolModelList.size());

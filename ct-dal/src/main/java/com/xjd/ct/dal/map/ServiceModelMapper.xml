@@ -79,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_gw_service
+    from T_GW_SERVICE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,23 +91,23 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ServiceModelKey" >
     select 
     <include refid="Base_Column_List" />
-    from t_gw_service
+    from T_GW_SERVICE
     where NAME = #{name,jdbcType=VARCHAR}
       and VERSION = #{version,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ServiceModelKey" >
-    delete from t_gw_service
+    delete from T_GW_SERVICE
     where NAME = #{name,jdbcType=VARCHAR}
       and VERSION = #{version,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ServiceModelExample" >
-    delete from t_gw_service
+    delete from T_GW_SERVICE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ServiceModel" >
-    insert into t_gw_service (NAME, VERSION, NEED_LOGIN_FLAG, 
+    insert into T_GW_SERVICE (NAME, VERSION, NEED_LOGIN_FLAG, 
       IN_MAINTAIN_FLAG, MAINTAIN_MSG, VALID_FLAG, 
       ADD_TIME, UPD_TIME)
     values (#{name,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{needLoginFlag,jdbcType=TINYINT}, 
@@ -115,7 +115,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ServiceModel" >
-    insert into t_gw_service
+    insert into T_GW_SERVICE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="name != null" >
         NAME,
@@ -170,13 +170,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ServiceModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_gw_service
+    select count(*) from T_GW_SERVICE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_gw_service
+    update T_GW_SERVICE
     <set >
       <if test="record.name != null" >
         NAME = #{record.name,jdbcType=VARCHAR},
@@ -208,7 +208,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_gw_service
+    update T_GW_SERVICE
     set NAME = #{record.name,jdbcType=VARCHAR},
       VERSION = #{record.version,jdbcType=VARCHAR},
       NEED_LOGIN_FLAG = #{record.needLoginFlag,jdbcType=TINYINT},
@@ -222,7 +222,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ServiceModel" >
-    update t_gw_service
+    update T_GW_SERVICE
     <set >
       <if test="needLoginFlag != null" >
         NEED_LOGIN_FLAG = #{needLoginFlag,jdbcType=TINYINT},
@@ -247,7 +247,7 @@
       and VERSION = #{version,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ServiceModel" >
-    update t_gw_service
+    update T_GW_SERVICE
     set NEED_LOGIN_FLAG = #{needLoginFlag,jdbcType=TINYINT},
       IN_MAINTAIN_FLAG = #{inMaintainFlag,jdbcType=TINYINT},
       MAINTAIN_MSG = #{maintainMsg,jdbcType=VARCHAR},

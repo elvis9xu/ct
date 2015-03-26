@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_biz_recommend
+    from T_BIZ_RECOMMEND
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,21 +90,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_biz_recommend
+    from T_BIZ_RECOMMEND
     where RECOMMEND_ID = #{recommendId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_biz_recommend
+    delete from T_BIZ_RECOMMEND
     where RECOMMEND_ID = #{recommendId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.RecommendModelExample" >
-    delete from t_biz_recommend
+    delete from T_BIZ_RECOMMEND
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.RecommendModel" >
-    insert into t_biz_recommend (RECOMMEND_ID, OBJECT_TYPE, RECOMMEND_REF_ID, 
+    insert into T_BIZ_RECOMMEND (RECOMMEND_ID, OBJECT_TYPE, RECOMMEND_REF_ID, 
       RECOMMEND_TIME, RECOMMEND_ORDER, ADD_TIME, 
       UPD_TIME)
     values (#{recommendId,jdbcType=BIGINT}, #{objectType,jdbcType=TINYINT}, #{recommendRefId,jdbcType=BIGINT}, 
@@ -112,7 +112,7 @@
       #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.RecommendModel" >
-    insert into t_biz_recommend
+    insert into T_BIZ_RECOMMEND
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="recommendId != null" >
         RECOMMEND_ID,
@@ -161,13 +161,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.RecommendModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_biz_recommend
+    select count(*) from T_BIZ_RECOMMEND
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_biz_recommend
+    update T_BIZ_RECOMMEND
     <set >
       <if test="record.recommendId != null" >
         RECOMMEND_ID = #{record.recommendId,jdbcType=BIGINT},
@@ -196,7 +196,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_biz_recommend
+    update T_BIZ_RECOMMEND
     set RECOMMEND_ID = #{record.recommendId,jdbcType=BIGINT},
       OBJECT_TYPE = #{record.objectType,jdbcType=TINYINT},
       RECOMMEND_REF_ID = #{record.recommendRefId,jdbcType=BIGINT},
@@ -209,7 +209,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.RecommendModel" >
-    update t_biz_recommend
+    update T_BIZ_RECOMMEND
     <set >
       <if test="objectType != null" >
         OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
@@ -233,7 +233,7 @@
     where RECOMMEND_ID = #{recommendId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.RecommendModel" >
-    update t_biz_recommend
+    update T_BIZ_RECOMMEND
     set OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
       RECOMMEND_REF_ID = #{recommendRefId,jdbcType=BIGINT},
       RECOMMEND_TIME = #{recommendTime,jdbcType=TIMESTAMP},

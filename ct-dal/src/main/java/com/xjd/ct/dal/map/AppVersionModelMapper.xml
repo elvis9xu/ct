@@ -81,7 +81,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_gw_app_version
+    from T_GW_APP_VERSION
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,23 +93,23 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.AppVersionModelKey" >
     select 
     <include refid="Base_Column_List" />
-    from t_gw_app_version
+    from T_GW_APP_VERSION
     where APP_TYPE = #{appType,jdbcType=TINYINT}
       and VER_CODE = #{verCode,jdbcType=SMALLINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.xjd.ct.dal.dos.AppVersionModelKey" >
-    delete from t_gw_app_version
+    delete from T_GW_APP_VERSION
     where APP_TYPE = #{appType,jdbcType=TINYINT}
       and VER_CODE = #{verCode,jdbcType=SMALLINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.AppVersionModelExample" >
-    delete from t_gw_app_version
+    delete from T_GW_APP_VERSION
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.AppVersionModel" >
-    insert into t_gw_app_version (APP_TYPE, VER_CODE, VER_NAME, 
+    insert into T_GW_APP_VERSION (APP_TYPE, VER_CODE, VER_NAME, 
       VER_DESC, VER_RES, DOWN_LINK, 
       STATUS, SUPPORT_FLAG, ADD_TIME, 
       UPD_TIME)
@@ -119,7 +119,7 @@
       #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.AppVersionModel" >
-    insert into t_gw_app_version
+    insert into T_GW_APP_VERSION
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="appType != null" >
         APP_TYPE,
@@ -186,13 +186,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.AppVersionModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_gw_app_version
+    select count(*) from T_GW_APP_VERSION
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_gw_app_version
+    update T_GW_APP_VERSION
     <set >
       <if test="record.appType != null" >
         APP_TYPE = #{record.appType,jdbcType=TINYINT},
@@ -230,7 +230,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_gw_app_version
+    update T_GW_APP_VERSION
     set APP_TYPE = #{record.appType,jdbcType=TINYINT},
       VER_CODE = #{record.verCode,jdbcType=SMALLINT},
       VER_NAME = #{record.verName,jdbcType=VARCHAR},
@@ -246,7 +246,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.AppVersionModel" >
-    update t_gw_app_version
+    update T_GW_APP_VERSION
     <set >
       <if test="verName != null" >
         VER_NAME = #{verName,jdbcType=VARCHAR},
@@ -277,7 +277,7 @@
       and VER_CODE = #{verCode,jdbcType=SMALLINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.AppVersionModel" >
-    update t_gw_app_version
+    update T_GW_APP_VERSION
     set VER_NAME = #{verName,jdbcType=VARCHAR},
       VER_DESC = #{verDesc,jdbcType=VARCHAR},
       VER_RES = #{verRes,jdbcType=CHAR},

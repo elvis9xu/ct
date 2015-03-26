@@ -95,7 +95,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user
+    from T_USER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -107,21 +107,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from t_user
+    from T_USER
     where USER_ID = #{userId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_user
+    delete from T_USER
     where USER_ID = #{userId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserModelExample" >
-    delete from t_user
+    delete from T_USER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserModel" >
-    insert into t_user (USER_ID, PASSWORD, MOBILE, 
+    insert into T_USER (USER_ID, PASSWORD, MOBILE, 
       MOBILE_VERIFY_FLAG, EMAIL, EMAIL_VERIFY_FLAG, 
       QQ_BIND_FLAG, WEIXIN_BIND_FLAG, SINA_WEIBO_BIND_FLAG, 
       TECENT_WEIBO_FLAG, REAL_NAME, CERT_TYPE, 
@@ -139,7 +139,7 @@
       #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserModel" >
-    insert into t_user
+    insert into T_USER
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         USER_ID,
@@ -278,13 +278,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserModelExample" resultType="java.lang.Integer" >
-    select count(*) from t_user
+    select count(*) from T_USER
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update t_user
+    update T_USER
     <set >
       <if test="record.userId != null" >
         USER_ID = #{record.userId,jdbcType=BIGINT},
@@ -358,7 +358,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_user
+    update T_USER
     set USER_ID = #{record.userId,jdbcType=BIGINT},
       PASSWORD = #{record.password,jdbcType=VARCHAR},
       MOBILE = #{record.mobile,jdbcType=VARCHAR},
@@ -386,7 +386,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserModel" >
-    update t_user
+    update T_USER
     <set >
       <if test="password != null" >
         PASSWORD = #{password,jdbcType=VARCHAR},
@@ -455,7 +455,7 @@
     where USER_ID = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserModel" >
-    update t_user
+    update T_USER
     set PASSWORD = #{password,jdbcType=VARCHAR},
       MOBILE = #{mobile,jdbcType=VARCHAR},
       MOBILE_VERIFY_FLAG = #{mobileVerifyFlag,jdbcType=TINYINT},
