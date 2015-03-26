@@ -1,6 +1,10 @@
 package com.xjd.ct.app.cmpnt;
 
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,9 +27,7 @@ import com.xjd.ct.app.view.ViewUtil;
 import com.xjd.ct.biz.bo.ServiceBo;
 import com.xjd.ct.biz.bo.TokenBo;
 import com.xjd.ct.biz.bo.UserBo;
-import com.xjd.ct.biz.service.AuthService;
-import com.xjd.ct.biz.service.LogService;
-import com.xjd.ct.biz.service.ServiceService;
+import com.xjd.ct.biz.service.GwService;
 import com.xjd.ct.biz.service.UserService;
 import com.xjd.ct.utl.DateUtil;
 import com.xjd.ct.utl.DigestUtil;
@@ -44,15 +46,11 @@ public class ControllerAspect {
 	private static final Logger log = LoggerFactory.getLogger(ControllerAspect.class);
 
 	@Autowired
-	LogService logService;
-	@Autowired
-	AuthService authService;
+	GwService gwService;
 	@Autowired
 	UserService userService;
-	@Autowired
-	ServiceService serviceService;
 
-	@Around("within(com.xjd.ct.app.ctrlr.*) && @annotation(org.springframework.web.bind.annotation.RequestMapping)")
+	@Around("within(com.xjd.ct.app.ctrlr.*.*) && @annotation(org.springframework.web.bind.annotation.RequestMapping)")
 	protected Object aroudAdivce(ProceedingJoinPoint jp) throws Throwable {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getRequest();
@@ -68,7 +66,7 @@ public class ControllerAspect {
 		String paramString = paramString(request);
 		String fixLogString = "version=" + version + ", service=" + service + ", userIp=" + userIp + ", param="
 				+ paramString;
-//		long start = System.currentTimeMillis();
+		// long start = System.currentTimeMillis();
 		log.info("请求开始...: {}", fixLogString);
 		logHeaders(request);
 
@@ -79,19 +77,19 @@ public class ControllerAspect {
 			boolean offerTokenFlag = StringUtils.isNotEmpty(token);
 			TokenBo tokenBo = null;
 			if (offerTokenFlag) {
-				tokenBo = authService.queryTokenByToken(token);
+				tokenBo = userService.queryTokenByToken(token);
 			}
 
 			// 先log
-			logService.serviceLog(userIp, tokenBo == null ? AppConstant.ANONYMOUS_USERID : tokenBo.getUserId(), token, service,
-					version, DateUtil.now());
+			gwService.serviceLog(userIp, tokenBo == null ? AppConstant.ANONYMOUS_USERID : tokenBo.getUserId(), token,
+					service, version, DateUtil.now());
 
 			if (!"getToken".equals(service)) {
 				if (!offerTokenFlag) {
 					throw new BusinessException(RespCode.RESP_0001, new Object[] { "token" });
 				}
-				authService.checkToken(tokenBo);
-				authService.updateToken(token);
+				userService.checkToken(tokenBo);
+				userService.updateToken(token);
 			}
 
 			// 查询用户
@@ -100,7 +98,7 @@ public class ControllerAspect {
 				if (userBo == null) {
 					throw new BusinessException(RespCode.RESP_0110);
 				}
-				RequestContext.putUser(userBo);
+				RequestContext.putUserId(userBo.getUserId());
 			}
 
 			// == sign == //
@@ -127,7 +125,7 @@ public class ControllerAspect {
 			ValidationUtil.check(ValidationUtil.TIMESTAMP, timestamp);
 
 			// == service == //
-			ServiceBo serviceBo = serviceService.queryServiceByNameAndVersion(service, version);
+			ServiceBo serviceBo = gwService.queryServiceByNameAndVersion(service, version);
 			if (serviceBo == null) {
 				throw new BusinessException(RespCode.RESP_9980);
 			}
@@ -139,7 +137,7 @@ public class ControllerAspect {
 						: serviceBo.getMaintainMsg());
 			}
 			if (BoolEnum.parseCode(serviceBo.getNeedLoginFlag())) {
-				RequestContext.checkAndGetUser();
+				RequestContext.checkAndGetUserId();
 			}
 
 			rt = (View) jp.proceed();

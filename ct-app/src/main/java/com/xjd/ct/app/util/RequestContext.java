@@ -16,7 +16,7 @@ import com.xjd.ct.utl.respcode.RespCode;
 public class RequestContext {
 
 	private static final String KEY_USER_IP = RequestContext.class.getName() + ".user.ip";
-	private static final String KEY_USER = RequestContext.class.getName() + ".user";
+	private static final String KEY_USER_ID = RequestContext.class.getName() + ".user.id";
 	private static final String KEY_SERVICE_NAME = RequestContext.class.getName() + ".service.name";
 	private static final String KEY_SERVICE_VERSION = RequestContext.class.getName() + ".service.version";
 
@@ -46,20 +46,20 @@ public class RequestContext {
 		return (String) get().get(key);
 	}
 
-	public static void putUser(UserBo userObj) {
-		put(KEY_USER, userObj);
+	public static void putUserId(Long userId) {
+		put(KEY_USER_ID, userId);
 	}
 
-	public static UserBo getUser() {
-		return (UserBo) get(KEY_USER);
+	public static Long getUserId() {
+		return (Long) get(KEY_USER_ID);
 	}
 
-	public static UserBo checkAndGetUser() {
-		UserBo userBo = getUser();
-		if (userBo == null) {
+	public static Long checkAndGetUserId() {
+		Long userId = getUserId();
+		if (userId == null) {
 			throw new BusinessException(RespCode.RESP_0111);
 		}
-		return userBo;
+		return userId;
 	}
 
 	public static void putUserIp(String userIp) {

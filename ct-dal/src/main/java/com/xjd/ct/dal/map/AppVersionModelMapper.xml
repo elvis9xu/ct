@@ -88,6 +88,7 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <include refid="MysqlPageSuffix" />
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.AppVersionModelKey" >
     select 
@@ -288,4 +289,9 @@
     where APP_TYPE = #{appType,jdbcType=TINYINT}
       and VER_CODE = #{verCode,jdbcType=SMALLINT}
   </update>
+  <sql id="MysqlPageSuffix" >
+    <if test="page != null" >
+      <![CDATA[ limit #{page.offset}, #{page.limit} ]]>
+    </if>
+  </sql>
 </mapper>

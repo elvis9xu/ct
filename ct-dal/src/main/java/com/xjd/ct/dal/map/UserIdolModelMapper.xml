@@ -80,6 +80,7 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <include refid="MysqlPageSuffix" />
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.UserIdolModelKey" >
     select 
@@ -178,4 +179,9 @@
     where USER_ID = #{userId,jdbcType=BIGINT}
       and IDOL_USER_ID = #{idolUserId,jdbcType=BIGINT}
   </update>
+  <sql id="MysqlPageSuffix" >
+    <if test="page != null" >
+      <![CDATA[ limit #{page.offset}, #{page.limit} ]]>
+    </if>
+  </sql>
 </mapper>

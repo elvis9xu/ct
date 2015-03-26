@@ -80,6 +80,7 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <include refid="MysqlPageSuffix" />
   </select>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ObjectTagRsModelExample" >
     delete from t_object_tag_rs
@@ -150,4 +151,9 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  <sql id="MysqlPageSuffix" >
+    <if test="page != null" >
+      <![CDATA[ limit #{page.offset}, #{page.limit} ]]>
+    </if>
+  </sql>
 </mapper>

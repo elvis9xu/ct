@@ -2,16 +2,12 @@ package com.xjd.ct.biz.bo;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 /**
- * 用户全量信息
+ * 用户基本信息
  */
 public class UserBo extends BaseBo {
-	// User
 	private Long userId;
-
-	private String password;
 
 	private String mobile;
 
@@ -51,345 +47,216 @@ public class UserBo extends BaseBo {
 
 	private Date addTime;
 
-	// User Info
-	private Byte userType;
+	private Date updTime;
 
-	private Integer gradeExp;
-
-	private Byte gradeLevel;
-
-	private Integer point;
-
-	private String nickname;
-
-	private String headImgRes;
-
-	private Byte sex;
-
-	private Date birth;
-
-	private String moodWords;
-
-	private Date moodWordsTime;
-
-	// User Summary
-	private Integer informCount;
-
-	private Integer favorCount;
-
-	private Integer publishCount;
-
-	private Integer idolCount;
-
-	private Integer fansCount;
-
-	// Babys
-	private List<UserBabyBo> babyList;
-
-	// BindAccounts
-	private List<UserBindAccountBo> bindAccountList;
-
+	/** @return the userId */
 	public Long getUserId() {
 		return userId;
 	}
 
+	/** @param userId the userId to set */
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+	/** @return the mobile */
 	public String getMobile() {
 		return mobile;
 	}
 
+	/** @param mobile the mobile to set */
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
+	/** @return the mobileVerifyFlag */
 	public Byte getMobileVerifyFlag() {
 		return mobileVerifyFlag;
 	}
 
+	/** @param mobileVerifyFlag the mobileVerifyFlag to set */
 	public void setMobileVerifyFlag(Byte mobileVerifyFlag) {
 		this.mobileVerifyFlag = mobileVerifyFlag;
 	}
 
+	/** @return the email */
 	public String getEmail() {
 		return email;
 	}
 
+	/** @param email the email to set */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/** @return the emailVerifyFlag */
 	public Byte getEmailVerifyFlag() {
 		return emailVerifyFlag;
 	}
 
+	/** @param emailVerifyFlag the emailVerifyFlag to set */
 	public void setEmailVerifyFlag(Byte emailVerifyFlag) {
 		this.emailVerifyFlag = emailVerifyFlag;
 	}
 
+	/** @return the qqBindFlag */
 	public Byte getQqBindFlag() {
 		return qqBindFlag;
 	}
 
+	/** @param qqBindFlag the qqBindFlag to set */
 	public void setQqBindFlag(Byte qqBindFlag) {
 		this.qqBindFlag = qqBindFlag;
 	}
 
+	/** @return the weixinBindFlag */
 	public Byte getWeixinBindFlag() {
 		return weixinBindFlag;
 	}
 
+	/** @param weixinBindFlag the weixinBindFlag to set */
 	public void setWeixinBindFlag(Byte weixinBindFlag) {
 		this.weixinBindFlag = weixinBindFlag;
 	}
 
+	/** @return the sinaWeiboBindFlag */
 	public Byte getSinaWeiboBindFlag() {
 		return sinaWeiboBindFlag;
 	}
 
+	/** @param sinaWeiboBindFlag the sinaWeiboBindFlag to set */
 	public void setSinaWeiboBindFlag(Byte sinaWeiboBindFlag) {
 		this.sinaWeiboBindFlag = sinaWeiboBindFlag;
 	}
 
+	/** @return the tecentWeiboFlag */
 	public Byte getTecentWeiboFlag() {
 		return tecentWeiboFlag;
 	}
 
+	/** @param tecentWeiboFlag the tecentWeiboFlag to set */
 	public void setTecentWeiboFlag(Byte tecentWeiboFlag) {
 		this.tecentWeiboFlag = tecentWeiboFlag;
 	}
 
+	/** @return the realName */
 	public String getRealName() {
 		return realName;
 	}
 
+	/** @param realName the realName to set */
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
 
+	/** @return the certType */
 	public Byte getCertType() {
 		return certType;
 	}
 
+	/** @param certType the certType to set */
 	public void setCertType(Byte certType) {
 		this.certType = certType;
 	}
 
+	/** @return the certNo */
 	public String getCertNo() {
 		return certNo;
 	}
 
+	/** @param certNo the certNo to set */
 	public void setCertNo(String certNo) {
 		this.certNo = certNo;
 	}
 
+	/** @return the failTimes */
 	public Short getFailTimes() {
 		return failTimes;
 	}
 
+	/** @param failTimes the failTimes to set */
 	public void setFailTimes(Short failTimes) {
 		this.failTimes = failTimes;
 	}
 
+	/** @return the lastIp */
 	public String getLastIp() {
 		return lastIp;
 	}
 
+	/** @param lastIp the lastIp to set */
 	public void setLastIp(String lastIp) {
 		this.lastIp = lastIp;
 	}
 
+	/** @return the lastTime */
 	public Date getLastTime() {
 		return lastTime;
 	}
 
+	/** @param lastTime the lastTime to set */
 	public void setLastTime(Date lastTime) {
 		this.lastTime = lastTime;
 	}
 
+	/** @return the longitude */
 	public BigDecimal getLongitude() {
 		return longitude;
 	}
 
+	/** @param longitude the longitude to set */
 	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
 	}
 
+	/** @return the latitude */
 	public BigDecimal getLatitude() {
 		return latitude;
 	}
 
+	/** @param latitude the latitude to set */
 	public void setLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
 
+	/** @return the address */
 	public String getAddress() {
 		return address;
 	}
 
+	/** @param address the address to set */
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
-	public Date getAddTime() {
-		return addTime;
-	}
-
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
-
-	public Byte getUserType() {
-		return userType;
-	}
-
-	public void setUserType(Byte userType) {
-		this.userType = userType;
-	}
-
-	public Integer getGradeExp() {
-		return gradeExp;
-	}
-
-	public void setGradeExp(Integer gradeExp) {
-		this.gradeExp = gradeExp;
-	}
-
-	public Byte getGradeLevel() {
-		return gradeLevel;
-	}
-
-	public void setGradeLevel(Byte gradeLevel) {
-		this.gradeLevel = gradeLevel;
-	}
-
-	public Integer getPoint() {
-		return point;
-	}
-
-	public void setPoint(Integer point) {
-		this.point = point;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getHeadImgRes() {
-		return headImgRes;
-	}
-
-	public void setHeadImgRes(String headImgRes) {
-		this.headImgRes = headImgRes;
-	}
-
-	public Byte getSex() {
-		return sex;
-	}
-
-	public void setSex(Byte sex) {
-		this.sex = sex;
-	}
-
-	public Date getBirth() {
-		return birth;
-	}
-
-	public void setBirth(Date birth) {
-		this.birth = birth;
-	}
-
-	public String getMoodWords() {
-		return moodWords;
-	}
-
-	public void setMoodWords(String moodWords) {
-		this.moodWords = moodWords;
-	}
-
-	public Date getMoodWordsTime() {
-		return moodWordsTime;
-	}
-
-	public void setMoodWordsTime(Date moodWordsTime) {
-		this.moodWordsTime = moodWordsTime;
-	}
-
-	public Integer getInformCount() {
-		return informCount;
-	}
-
-	public void setInformCount(Integer informCount) {
-		this.informCount = informCount;
-	}
-
-	public Integer getFavorCount() {
-		return favorCount;
-	}
-
-	public void setFavorCount(Integer favorCount) {
-		this.favorCount = favorCount;
-	}
-
-	public Integer getPublishCount() {
-		return publishCount;
-	}
-
-	public void setPublishCount(Integer publishCount) {
-		this.publishCount = publishCount;
-	}
-
-	public Integer getIdolCount() {
-		return idolCount;
-	}
-
-	public void setIdolCount(Integer idolCount) {
-		this.idolCount = idolCount;
-	}
-
-	public Integer getFansCount() {
-		return fansCount;
-	}
-
-	public void setFansCount(Integer fansCount) {
-		this.fansCount = fansCount;
-	}
-
-	public List<UserBabyBo> getBabyList() {
-		return babyList;
-	}
-
-	public void setBabyList(List<UserBabyBo> babyList) {
-		this.babyList = babyList;
-	}
-
-	public List<UserBindAccountBo> getBindAccountList() {
-		return bindAccountList;
-	}
-
-	public void setBindAccountList(List<UserBindAccountBo> bindAccountList) {
-		this.bindAccountList = bindAccountList;
-	}
-
+	/** @return the userStatus */
 	public Byte getUserStatus() {
 		return userStatus;
 	}
 
+	/** @param userStatus the userStatus to set */
 	public void setUserStatus(Byte userStatus) {
 		this.userStatus = userStatus;
 	}
+
+	/** @return the addTime */
+	public Date getAddTime() {
+		return addTime;
+	}
+
+	/** @param addTime the addTime to set */
+	public void setAddTime(Date addTime) {
+		this.addTime = addTime;
+	}
+
+	/** @return the updTime */
+	public Date getUpdTime() {
+		return updTime;
+	}
+
+	/** @param updTime the updTime to set */
+	public void setUpdTime(Date updTime) {
+		this.updTime = updTime;
+	}
+
 }

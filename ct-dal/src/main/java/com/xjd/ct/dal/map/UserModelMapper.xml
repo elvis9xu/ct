@@ -21,9 +21,9 @@
     <result column="LONGITUDE" property="longitude" jdbcType="DECIMAL" />
     <result column="LATITUDE" property="latitude" jdbcType="DECIMAL" />
     <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="USER_STATUS" property="userStatus" jdbcType="TINYINT" />
     <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
     <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
-    <result column="USER_STATUS" property="userStatus" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -86,8 +86,8 @@
   <sql id="Base_Column_List" >
     USER_ID, PASSWORD, MOBILE, MOBILE_VERIFY_FLAG, EMAIL, EMAIL_VERIFY_FLAG, QQ_BIND_FLAG, 
     WEIXIN_BIND_FLAG, SINA_WEIBO_BIND_FLAG, TECENT_WEIBO_FLAG, REAL_NAME, CERT_TYPE, 
-    CERT_NO, FAIL_TIMES, LAST_IP, LAST_TIME, LONGITUDE, LATITUDE, ADDRESS, ADD_TIME, 
-    UPD_TIME, USER_STATUS
+    CERT_NO, FAIL_TIMES, LAST_IP, LAST_TIME, LONGITUDE, LATITUDE, ADDRESS, USER_STATUS, 
+    ADD_TIME, UPD_TIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.UserModelExample" >
     select
@@ -95,50 +95,51 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from T_USER
+    from t_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <include refid="MysqlPageSuffix" />
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from T_USER
+    from t_user
     where USER_ID = #{userId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from T_USER
+    delete from t_user
     where USER_ID = #{userId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserModelExample" >
-    delete from T_USER
+    delete from t_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserModel" >
-    insert into T_USER (USER_ID, PASSWORD, MOBILE, 
+    insert into t_user (USER_ID, PASSWORD, MOBILE, 
       MOBILE_VERIFY_FLAG, EMAIL, EMAIL_VERIFY_FLAG, 
       QQ_BIND_FLAG, WEIXIN_BIND_FLAG, SINA_WEIBO_BIND_FLAG, 
       TECENT_WEIBO_FLAG, REAL_NAME, CERT_TYPE, 
       CERT_NO, FAIL_TIMES, LAST_IP, 
       LAST_TIME, LONGITUDE, LATITUDE, 
-      ADDRESS, ADD_TIME, UPD_TIME, 
-      USER_STATUS)
+      ADDRESS, USER_STATUS, ADD_TIME, 
+      UPD_TIME)
     values (#{userId,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{mobileVerifyFlag,jdbcType=TINYINT}, #{email,jdbcType=VARCHAR}, #{emailVerifyFlag,jdbcType=TINYINT}, 
       #{qqBindFlag,jdbcType=TINYINT}, #{weixinBindFlag,jdbcType=TINYINT}, #{sinaWeiboBindFlag,jdbcType=TINYINT}, 
       #{tecentWeiboFlag,jdbcType=TINYINT}, #{realName,jdbcType=VARCHAR}, #{certType,jdbcType=TINYINT}, 
       #{certNo,jdbcType=VARCHAR}, #{failTimes,jdbcType=SMALLINT}, #{lastIp,jdbcType=VARCHAR}, 
       #{lastTime,jdbcType=TIMESTAMP}, #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, 
-      #{address,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP}, 
-      #{userStatus,jdbcType=TINYINT})
+      #{address,jdbcType=VARCHAR}, #{userStatus,jdbcType=TINYINT}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserModel" >
-    insert into T_USER
+    insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         USER_ID,
@@ -197,14 +198,14 @@
       <if test="address != null" >
         ADDRESS,
       </if>
+      <if test="userStatus != null" >
+        USER_STATUS,
+      </if>
       <if test="addTime != null" >
         ADD_TIME,
       </if>
       <if test="updTime != null" >
         UPD_TIME,
-      </if>
-      <if test="userStatus != null" >
-        USER_STATUS,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -265,25 +266,25 @@
       <if test="address != null" >
         #{address,jdbcType=VARCHAR},
       </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=TINYINT},
+      </if>
       <if test="addTime != null" >
         #{addTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updTime != null" >
         #{updTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userStatus != null" >
-        #{userStatus,jdbcType=TINYINT},
-      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserModelExample" resultType="java.lang.Integer" >
-    select count(*) from T_USER
+    select count(*) from t_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update T_USER
+    update t_user
     <set >
       <if test="record.userId != null" >
         USER_ID = #{record.userId,jdbcType=BIGINT},
@@ -342,14 +343,14 @@
       <if test="record.address != null" >
         ADDRESS = #{record.address,jdbcType=VARCHAR},
       </if>
+      <if test="record.userStatus != null" >
+        USER_STATUS = #{record.userStatus,jdbcType=TINYINT},
+      </if>
       <if test="record.addTime != null" >
         ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updTime != null" >
         UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.userStatus != null" >
-        USER_STATUS = #{record.userStatus,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -357,7 +358,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update T_USER
+    update t_user
     set USER_ID = #{record.userId,jdbcType=BIGINT},
       PASSWORD = #{record.password,jdbcType=VARCHAR},
       MOBILE = #{record.mobile,jdbcType=VARCHAR},
@@ -377,15 +378,15 @@
       LONGITUDE = #{record.longitude,jdbcType=DECIMAL},
       LATITUDE = #{record.latitude,jdbcType=DECIMAL},
       ADDRESS = #{record.address,jdbcType=VARCHAR},
+      USER_STATUS = #{record.userStatus,jdbcType=TINYINT},
       ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
-      UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP},
-      USER_STATUS = #{record.userStatus,jdbcType=TINYINT}
+      UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserModel" >
-    update T_USER
+    update t_user
     <set >
       <if test="password != null" >
         PASSWORD = #{password,jdbcType=VARCHAR},
@@ -441,20 +442,20 @@
       <if test="address != null" >
         ADDRESS = #{address,jdbcType=VARCHAR},
       </if>
+      <if test="userStatus != null" >
+        USER_STATUS = #{userStatus,jdbcType=TINYINT},
+      </if>
       <if test="addTime != null" >
         ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updTime != null" >
         UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userStatus != null" >
-        USER_STATUS = #{userStatus,jdbcType=TINYINT},
-      </if>
     </set>
     where USER_ID = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserModel" >
-    update T_USER
+    update t_user
     set PASSWORD = #{password,jdbcType=VARCHAR},
       MOBILE = #{mobile,jdbcType=VARCHAR},
       MOBILE_VERIFY_FLAG = #{mobileVerifyFlag,jdbcType=TINYINT},
@@ -473,9 +474,14 @@
       LONGITUDE = #{longitude,jdbcType=DECIMAL},
       LATITUDE = #{latitude,jdbcType=DECIMAL},
       ADDRESS = #{address,jdbcType=VARCHAR},
+      USER_STATUS = #{userStatus,jdbcType=TINYINT},
       ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
-      UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
-      USER_STATUS = #{userStatus,jdbcType=TINYINT}
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
     where USER_ID = #{userId,jdbcType=BIGINT}
   </update>
+  <sql id="MysqlPageSuffix" >
+    <if test="page != null" >
+      <![CDATA[ limit #{page.offset}, #{page.limit} ]]>
+    </if>
+  </sql>
 </mapper>

@@ -12,6 +12,8 @@ public class UserModelExample {
 
     protected List<Criteria> oredCriteria;
 
+    protected Page page;
+
     public UserModelExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
@@ -63,6 +65,28 @@ public class UserModelExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
+    }
+
+    public Page getPage() {
+        return page;
+    }
+
+    public void setPage(Page page) {
+        this.page = page;
+    }
+
+    public void setOffsetAndLimit(long offset, int limit) {
+        Page page = new Page();
+        page.setOffset(offset);
+        page.setLimit(limit);
+        this.setPage(page);
+    }
+
+    public void setBeginAndEnd(long begin, long end) {
+        Page page = new Page();
+        page.setOffset(begin);
+        page.setEnd(end);
+        this.setPage(page);
     }
 
     protected abstract static class GeneratedCriteria {
@@ -1316,6 +1340,66 @@ public class UserModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andUserStatusIsNull() {
+            addCriterion("USER_STATUS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusIsNotNull() {
+            addCriterion("USER_STATUS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusEqualTo(Byte value) {
+            addCriterion("USER_STATUS =", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusNotEqualTo(Byte value) {
+            addCriterion("USER_STATUS <>", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusGreaterThan(Byte value) {
+            addCriterion("USER_STATUS >", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("USER_STATUS >=", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusLessThan(Byte value) {
+            addCriterion("USER_STATUS <", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("USER_STATUS <=", value, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusIn(List<Byte> values) {
+            addCriterion("USER_STATUS in", values, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusNotIn(List<Byte> values) {
+            addCriterion("USER_STATUS not in", values, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusBetween(Byte value1, Byte value2) {
+            addCriterion("USER_STATUS between", value1, value2, "userStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("USER_STATUS not between", value1, value2, "userStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andAddTimeIsNull() {
             addCriterion("ADD_TIME is null");
             return (Criteria) this;
@@ -1435,66 +1519,6 @@ public class UserModelExample {
             addCriterion("UPD_TIME not between", value1, value2, "updTime");
             return (Criteria) this;
         }
-
-        public Criteria andUserStatusIsNull() {
-            addCriterion("USER_STATUS is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserStatusIsNotNull() {
-            addCriterion("USER_STATUS is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserStatusEqualTo(Byte value) {
-            addCriterion("USER_STATUS =", value, "userStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserStatusNotEqualTo(Byte value) {
-            addCriterion("USER_STATUS <>", value, "userStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserStatusGreaterThan(Byte value) {
-            addCriterion("USER_STATUS >", value, "userStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserStatusGreaterThanOrEqualTo(Byte value) {
-            addCriterion("USER_STATUS >=", value, "userStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserStatusLessThan(Byte value) {
-            addCriterion("USER_STATUS <", value, "userStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserStatusLessThanOrEqualTo(Byte value) {
-            addCriterion("USER_STATUS <=", value, "userStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserStatusIn(List<Byte> values) {
-            addCriterion("USER_STATUS in", values, "userStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserStatusNotIn(List<Byte> values) {
-            addCriterion("USER_STATUS not in", values, "userStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserStatusBetween(Byte value1, Byte value2) {
-            addCriterion("USER_STATUS between", value1, value2, "userStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserStatusNotBetween(Byte value1, Byte value2) {
-            addCriterion("USER_STATUS not between", value1, value2, "userStatus");
-            return (Criteria) this;
-        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -1587,6 +1611,41 @@ public class UserModelExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
+        }
+    }
+
+    public static class Page {
+        protected long offset;
+
+        protected int limit;
+
+        protected long end;
+
+        public long getOffset() {
+            return offset;
+        }
+
+        public int getLimit() {
+            return limit;
+        }
+
+        public long getEnd() {
+            return end;
+        }
+
+        public void setOffset(long offset) {
+            this.offset = offset;
+            end = (offset + limit - 1);
+        }
+
+        public void setLimit(int limit) {
+            this.limit = limit;
+            end = (offset + limit - 1);
+        }
+
+        public void setEnd(long end) {
+            this.end = end;
+            limit = (int) (end - offset + 1);
         }
     }
 }

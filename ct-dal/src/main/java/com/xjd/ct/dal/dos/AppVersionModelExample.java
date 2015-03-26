@@ -11,6 +11,8 @@ public class AppVersionModelExample {
 
     protected List<Criteria> oredCriteria;
 
+    protected Page page;
+
     public AppVersionModelExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
@@ -62,6 +64,28 @@ public class AppVersionModelExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
+    }
+
+    public Page getPage() {
+        return page;
+    }
+
+    public void setPage(Page page) {
+        this.page = page;
+    }
+
+    public void setOffsetAndLimit(long offset, int limit) {
+        Page page = new Page();
+        page.setOffset(offset);
+        page.setLimit(limit);
+        this.setPage(page);
+    }
+
+    public void setBeginAndEnd(long begin, long end) {
+        Page page = new Page();
+        page.setOffset(begin);
+        page.setEnd(end);
+        this.setPage(page);
     }
 
     protected abstract static class GeneratedCriteria {
@@ -836,6 +860,41 @@ public class AppVersionModelExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
+        }
+    }
+
+    public static class Page {
+        protected long offset;
+
+        protected int limit;
+
+        protected long end;
+
+        public long getOffset() {
+            return offset;
+        }
+
+        public int getLimit() {
+            return limit;
+        }
+
+        public long getEnd() {
+            return end;
+        }
+
+        public void setOffset(long offset) {
+            this.offset = offset;
+            end = (offset + limit - 1);
+        }
+
+        public void setLimit(int limit) {
+            this.limit = limit;
+            end = (offset + limit - 1);
+        }
+
+        public void setEnd(long end) {
+            this.end = end;
+            limit = (int) (end - offset + 1);
         }
     }
 }

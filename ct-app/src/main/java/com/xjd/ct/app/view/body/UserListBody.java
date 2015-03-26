@@ -3,22 +3,19 @@ package com.xjd.ct.app.view.body;
 import java.util.List;
 
 import com.xjd.ct.app.view.ViewBody;
-import com.xjd.ct.app.view.vo.UserVo;
+import com.xjd.ct.app.view.vo.UserForOtherVo;
 
-/**
- * 用户全量信息
- * 
- * @author elvis.xu
- * @since 2015-03-23 18:34
- */
 public class UserListBody extends ViewBody {
-	private List<UserVo> userInfoList;
+	private List<UserForOtherVo> userInfoList;
 
-	public List<UserVo> getUserInfoList() {
+	/** @return the userInfoList */
+	public List<UserForOtherVo> getUserInfoList() {
 		return userInfoList;
 	}
 
-	public void setUserInfoList(List<UserVo> userInfoList) {
+	/** @param userInfoList the userInfoList to set */
+	public void setUserInfoList(List<UserForOtherVo> userInfoList) {
 		this.userInfoList = userInfoList;
 	}
+
 }

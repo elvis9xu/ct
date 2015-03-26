@@ -85,6 +85,7 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <include refid="MysqlPageSuffix" />
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ObjectVoteOptModelKey" >
     select 
@@ -255,4 +256,9 @@
     where OBJECT_ID = #{objectId,jdbcType=BIGINT}
       and OPT_CODE = #{optCode,jdbcType=TINYINT}
   </update>
+  <sql id="MysqlPageSuffix" >
+    <if test="page != null" >
+      <![CDATA[ limit #{page.offset}, #{page.limit} ]]>
+    </if>
+  </sql>
 </mapper>

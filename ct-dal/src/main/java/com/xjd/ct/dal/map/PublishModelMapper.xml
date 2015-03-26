@@ -82,6 +82,7 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <include refid="MysqlPageSuffix" />
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -208,4 +209,9 @@
       UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
     where PUBLISH_ID = #{publishId,jdbcType=BIGINT}
   </update>
+  <sql id="MysqlPageSuffix" >
+    <if test="page != null" >
+      <![CDATA[ limit #{page.offset}, #{page.limit} ]]>
+    </if>
+  </sql>
 </mapper>
