@@ -22,6 +22,7 @@ public class SequenceDao {
 	public static final String SEQ_USER_BABY_ID = "SEQ_USER_BABY_ID";
 	public static final String SEQ_USER_BIND_ACCOUNT_ID = "SEQ_USER_BIND_ACCOUNT_ID";
 	public static final String SEQ_INFORM_ID = "SEQ_INFORM_ID";
+	public static final String SEQ_OBJECT_COMMENT_ID = "SEQ_OBJECT_COMMENT_ID";
 
 	@Autowired
 	SequenceMapper sequenceMapper;

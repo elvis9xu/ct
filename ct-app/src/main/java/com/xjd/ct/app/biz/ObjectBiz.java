@@ -12,6 +12,8 @@ import com.xjd.ct.dal.dao.ObjectBizDao;
 import com.xjd.ct.dal.dao.ResourceBizDao;
 import com.xjd.ct.dal.dos.*;
 import com.xjd.ct.utl.enums.ObjectTypeEnum;
+import com.xjd.ct.utl.exception.BusinessException;
+import com.xjd.ct.utl.respcode.RespCode;
 
 /**
  * 网关特有与发表相关的业务
@@ -152,5 +154,31 @@ public class ObjectBiz {
 			BeanUtils.copyProperties(objectModel, objectVo);
 		}
 		return objectVo;
+	}
+
+	public CommentVo queryComment(Long commentId) {
+		ObjectCommentModel commentModel = objectBizDao.selectObjectCommentModelByCommentId(commentId);
+		if (commentModel == null) {
+			return null;
+		}
+		CommentVo commentVo = new CommentVo();
+		BeanUtils.copyProperties(commentModel, commentVo);
+		return commentVo;
+	}
+
+	public List<CommentVo> listComments(Byte objectType, Long objectRefId) {
+		ObjectModel objectModel = objectBizDao.selectObjectModelByObjectTypeAndObjectRefId(objectType, objectRefId);
+		if (objectModel == null) {
+			throw new BusinessException(RespCode.RESP_0201);
+		}
+
+		List<ObjectCommentModel> commentModelList objectBizDao.selectObjectCommentModelByObjectId(objectModel.getObjectId());
+		List<CommentVo> list = new ArrayList<CommentVo>(commentModelList.size());
+		for (ObjectCommentModel commentModel : commentModelList) {
+			CommentVo commentVo = new CommentVo();
+			BeanUtils.copyProperties(commentModel, commentVo);
+			list.add(commentVo);
+		}
+		return  list;
 	}
 }

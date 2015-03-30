@@ -6,17 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xjd.ct.dal.dos.UserBabyModel;
-import com.xjd.ct.dal.dos.UserBabyModelExample;
-import com.xjd.ct.dal.dos.UserInfoModel;
-import com.xjd.ct.dal.dos.UserModel;
-import com.xjd.ct.dal.dos.UserModelExample;
-import com.xjd.ct.dal.dos.UserSummaryModel;
-import com.xjd.ct.dal.map.UserBabyModelMapper;
-import com.xjd.ct.dal.map.UserBindAccountModelMapper;
-import com.xjd.ct.dal.map.UserInfoModelMapper;
-import com.xjd.ct.dal.map.UserModelMapper;
-import com.xjd.ct.dal.map.UserSummaryModelMapper;
+import com.xjd.ct.dal.dos.*;
+import com.xjd.ct.dal.map.*;
 import com.xjd.ct.utl.DateUtil;
 import com.xjd.ct.utl.QueryResultUtil;
 
@@ -268,6 +259,30 @@ public class UserDao {
 		return userSummaryModelMapper.updateByPrimaryKeySelective(upd);
 	}
 
+	public int increaseFavorCount(Long userId) {
+		UserSummaryModel userSummaryModel = userSummaryModelMapper.selectByPrimaryKey(userId);
+
+		UserSummaryModel upd = new UserSummaryModel();
+		upd.setUserId(userId);
+		upd.setFavorCount(userSummaryModel.getFavorCount() + 1);
+		upd.setUpdTime(DateUtil.now());
+
+		return userSummaryModelMapper.updateByPrimaryKeySelective(upd);
+
+	}
+
+	public int decreaseFavorCount(Long userId) {
+		UserSummaryModel userSummaryModel = userSummaryModelMapper.selectByPrimaryKey(userId);
+
+		UserSummaryModel upd = new UserSummaryModel();
+		upd.setUserId(userId);
+		upd.setFavorCount(userSummaryModel.getFavorCount() - 1);
+		upd.setUpdTime(DateUtil.now());
+
+		return userSummaryModelMapper.updateByPrimaryKeySelective(upd);
+	}
+
+
 	// ==============用户宝宝=============== //
 	/**
 	 * 根据用户ID查询用户的Baby
@@ -301,6 +316,7 @@ public class UserDao {
 	public int insertUserBaby(UserBabyModel babyModel) {
 		return userBabyModelMapper.insert(babyModel);
 	}
+
 
 	// ==============用户绑定账号=============== //
 

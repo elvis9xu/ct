@@ -17,5 +17,8 @@ public interface ValidationProperties {
 	String OBJECT_REF_ID = "objectRefId";
 	String LIKE = "like";
 	String FAVOR = "favor";
+	String COMMENT = "comment";
+	String TO_COMMENT_ID = "toCommentId";
+	String COMMENT_ID = "commentId";
 
 }

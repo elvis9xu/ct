@@ -77,6 +77,17 @@ public class ValidationBean {
 	@Pattern(regexp = "0|1", message = RespCode.RESP_0003)
 	private String favor;
 
+	@NotBlank(message = RespCode.RESP_0001)
+	private String comment;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@Digits(integer = 18, fraction = 0, message = RespCode.RESP_0002)
+	private String toCommentId;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@Digits(integer = 18, fraction = 0, message = RespCode.RESP_0002)
+	private String commentId;
+
 	public String getTimestamp() {
 		return timestamp;
 	}
@@ -213,4 +224,27 @@ public class ValidationBean {
 		this.favor = favor;
 	}
 
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getToCommentId() {
+		return toCommentId;
+	}
+
+	public void setToCommentId(String toCommentId) {
+		this.toCommentId = toCommentId;
+	}
+
+	public String getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(String commentId) {
+		this.commentId = commentId;
+	}
 }

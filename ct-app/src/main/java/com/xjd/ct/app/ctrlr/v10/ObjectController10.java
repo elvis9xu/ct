@@ -13,7 +13,10 @@ import com.xjd.ct.app.biz.ObjectBiz;
 import com.xjd.ct.app.util.RequestContext;
 import com.xjd.ct.app.view.View;
 import com.xjd.ct.app.view.ViewUtil;
+import com.xjd.ct.app.view.body.CommentBody;
+import com.xjd.ct.app.view.body.CommentListBody;
 import com.xjd.ct.app.view.body.ObjectListBody;
+import com.xjd.ct.app.view.vo.CommentVo;
 import com.xjd.ct.app.view.vo.ObjectVo;
 import com.xjd.ct.app.view.vo.PublishVo;
 import com.xjd.ct.biz.service.BizObjectService;
@@ -205,6 +208,77 @@ public class ObjectController10 {
 			bizObjectService.removeFavor(RequestContext.checkAndGetUserId(), objectTypeB, objectRefIdL);
 		}
 		// 返回结果
+		View view = ViewUtil.defaultView();
+		return view;
+	}
+
+	@RequestMapping("/addComment")
+	@ResponseBody
+	public View addComment(@RequestParam(value = "objectType", required = false) String objectType,
+			@RequestParam(value = "objectRefId", required = false) String objectRefId,
+			@RequestParam(value = "comment", required = false) String comment,
+			@RequestParam(value = "toCommentId", required = false) String toCommentId) {
+		// 参数校验
+		ValidationUtil.check(ValidationUtil.OBJECT_TYPE, objectType, ValidationUtil.OBJECT_REF_ID, objectRefId,
+				ValidationUtil.COMMENT, comment);
+
+		if (StringUtils.isNotEmpty(toCommentId)) {
+			ValidationUtil.check(ValidationUtil.TO_COMMENT_ID, toCommentId);
+		}
+
+		Byte objectTypeB = Byte.valueOf(objectType);
+		Long objectRefIdL = Long.valueOf(objectRefId);
+		Long toCommentIdL = null;
+		if (StringUtils.isNotEmpty(toCommentId)) {
+			toCommentIdL = Long.valueOf(toCommentId);
+		}
+
+		// 业务调用
+		Long commentId = bizObjectService.addComment(RequestContext.checkAndGetUserId(), objectTypeB, objectRefIdL,
+				comment, toCommentIdL);
+		CommentVo vo = objectBiz.queryComment(commentId);
+
+		// 返回结果
+		CommentBody body = new CommentBody();
+		body.setComment(vo);
+
+		View view = ViewUtil.defaultView();
+		return view;
+	}
+
+	@RequestMapping("/removeComment")
+	@ResponseBody
+	public View removeComment(@RequestParam(value = "commentId", required = false) String commentId) {
+		// 参数校验
+		ValidationUtil.check(ValidationUtil.COMMENT_ID, commentId);
+
+		Long commentIdL = Long.valueOf(commentId);
+
+		// 业务调用
+		bizObjectService.removeComment(RequestContext.checkAndGetUserId(), commentIdL);
+
+		// 返回结果
+		View view = ViewUtil.defaultView();
+		return view;
+	}
+
+	@RequestMapping("/listComments")
+	@ResponseBody
+	public View listComments(@RequestParam(value = "objectType", required = false) String objectType,
+			@RequestParam(value = "objectRefId", required = false) String objectRefId) {
+		// 参数校验
+		ValidationUtil.check(ValidationUtil.OBJECT_TYPE, objectType, ValidationUtil.OBJECT_REF_ID, objectRefId);
+
+		Byte objectTypeB = Byte.valueOf(objectType);
+		Long objectRefIdL = Long.valueOf(objectRefId);
+
+		// 业务调用
+		List<CommentVo> commentVoList = objectBiz.listComments(objectTypeB, objectRefIdL);
+
+		// 返回结果
+		CommentListBody body = new CommentListBody();
+		body.setCommentList(commentVoList);
+
 		View view = ViewUtil.defaultView();
 		return view;
 	}

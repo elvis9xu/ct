@@ -107,4 +107,9 @@ public class ObjectBizDao {
 
 		return publishResRsModelMapper.selectByExample(example);
 	}
+
+	public ObjectCommentModel selectObjectCommentModelByCommentId(Long commentId) {
+		return objectCommentModelMapper.selectByPrimaryKey(commentId);
+	}
+
 }
