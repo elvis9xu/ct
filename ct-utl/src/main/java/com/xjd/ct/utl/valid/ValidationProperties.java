@@ -13,5 +13,9 @@ public interface ValidationProperties {
 	String IDOL_OPER = "idolOper";
 	String OFFSET = "offset";
 	String COUNT = "count";
+	String OBJECT_TYPE = "objectType";
+	String OBJECT_REF_ID = "objectRefId";
+	String LIKE = "like";
+	String FAVOR = "favor";
 
 }

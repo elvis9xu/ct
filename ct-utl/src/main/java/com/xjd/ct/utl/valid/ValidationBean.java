@@ -6,6 +6,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.xjd.ct.utl.enums.IdolOperEnum;
+import com.xjd.ct.utl.enums.ObjectTypeEnum;
 import com.xjd.ct.utl.enums.UserSexEnum;
 import com.xjd.ct.utl.respcode.RespCode;
 import com.xjd.ct.utl.valid.constraints.Date;
@@ -57,8 +58,24 @@ public class ValidationBean {
 	private String offset;
 
 	@NotBlank(message = RespCode.RESP_0001)
-	@Digits(integer = 3, fraction = 0, message = RespCode.RESP_0002)
+	@Digits(integer = 2, fraction = 0, message = RespCode.RESP_0002)
 	private String count;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@com.xjd.ct.utl.valid.constraints.Enum(enumClass = ObjectTypeEnum.class)
+	private String objectType;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@Digits(integer = 18, fraction = 0, message = RespCode.RESP_0002)
+	private String objectRefId;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@Pattern(regexp = "0|1", message = RespCode.RESP_0003)
+	private String like;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@Pattern(regexp = "0|1", message = RespCode.RESP_0003)
+	private String favor;
 
 	public String getTimestamp() {
 		return timestamp;
@@ -155,4 +172,45 @@ public class ValidationBean {
 	public void setCount(String count) {
 		this.count = count;
 	}
+
+	/** @return the objectType */
+	public String getObjectType() {
+		return objectType;
+	}
+
+	/** @param objectType the objectType to set */
+	public void setObjectType(String objectType) {
+		this.objectType = objectType;
+	}
+
+	/** @return the objectRefId */
+	public String getObjectRefId() {
+		return objectRefId;
+	}
+
+	/** @param objectRefId the objectRefId to set */
+	public void setObjectRefId(String objectRefId) {
+		this.objectRefId = objectRefId;
+	}
+
+	/** @return the like */
+	public String getLike() {
+		return like;
+	}
+
+	/** @param like the like to set */
+	public void setLike(String like) {
+		this.like = like;
+	}
+
+	/** @return the favor */
+	public String getFavor() {
+		return favor;
+	}
+
+	/** @param favor the favor to set */
+	public void setFavor(String favor) {
+		this.favor = favor;
+	}
+
 }

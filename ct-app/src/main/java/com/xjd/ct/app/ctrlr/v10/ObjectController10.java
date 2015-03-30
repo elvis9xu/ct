@@ -16,6 +16,8 @@ import com.xjd.ct.app.view.ViewUtil;
 import com.xjd.ct.app.view.body.ObjectListBody;
 import com.xjd.ct.app.view.vo.ObjectVo;
 import com.xjd.ct.app.view.vo.PublishVo;
+import com.xjd.ct.biz.service.BizObjectService;
+import com.xjd.ct.utl.enums.YesNoEnum;
 import com.xjd.ct.utl.valid.ValidationUtil;
 
 /**
@@ -29,6 +31,8 @@ import com.xjd.ct.utl.valid.ValidationUtil;
 public class ObjectController10 {
 	@Autowired
 	ObjectBiz objectBiz;
+	@Autowired
+	BizObjectService bizObjectService;
 
 	@RequestMapping("/listMyPublishs")
 	@ResponseBody
@@ -156,6 +160,52 @@ public class ObjectController10 {
 
 		View view = ViewUtil.defaultView();
 		view.setBody(body);
+		return view;
+	}
+
+	@RequestMapping("/like")
+	@ResponseBody
+	public View like(@RequestParam(value = "objectType", required = false) String objectType,
+			@RequestParam(value = "objectRefId", required = false) String objectRefId,
+			@RequestParam(value = "like", required = false) String like) {
+		// 参数校验
+		ValidationUtil.check(ValidationUtil.OBJECT_TYPE, objectType, ValidationUtil.OBJECT_REF_ID, objectRefId,
+				ValidationUtil.LIKE, like);
+
+		Byte objectTypeB = Byte.valueOf(objectType);
+		Long objectRefIdL = Long.valueOf(objectRefId);
+
+		// 业务调用
+		if ("1".equals(like)) {
+			bizObjectService.addLike(RequestContext.checkAndGetUserId(), objectTypeB, objectRefIdL, YesNoEnum.YES.getCode());
+		} else {
+			bizObjectService.removeLike(RequestContext.checkAndGetUserId(), objectTypeB, objectRefIdL, YesNoEnum.YES.getCode());
+		}
+		// 返回结果
+		View view = ViewUtil.defaultView();
+		return view;
+	}
+	
+	@RequestMapping("/favor")
+	@ResponseBody
+	public View favor(@RequestParam(value = "objectType", required = false) String objectType,
+			@RequestParam(value = "objectRefId", required = false) String objectRefId,
+			@RequestParam(value = "favor", required = false) String favor) {
+		// 参数校验
+		ValidationUtil.check(ValidationUtil.OBJECT_TYPE, objectType, ValidationUtil.OBJECT_REF_ID, objectRefId,
+				ValidationUtil.FAVOR, favor);
+		
+		Byte objectTypeB = Byte.valueOf(objectType);
+		Long objectRefIdL = Long.valueOf(objectRefId);
+		
+		// 业务调用
+		if ("1".equals(favor)) {
+			bizObjectService.addFavor(RequestContext.checkAndGetUserId(), objectTypeB, objectRefIdL);
+		} else {
+			bizObjectService.removeFavor(RequestContext.checkAndGetUserId(), objectTypeB, objectRefIdL);
+		}
+		// 返回结果
+		View view = ViewUtil.defaultView();
 		return view;
 	}
 }
