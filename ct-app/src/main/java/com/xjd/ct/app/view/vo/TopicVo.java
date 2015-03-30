@@ -11,8 +11,6 @@ public class TopicVo extends ObjectVo {
 
 	private String topicTitle;
 
-	private String topicImgRes;
-
 	private String topicDesc;
 
 	private ResourceVo topicImgResource;
@@ -31,14 +29,6 @@ public class TopicVo extends ObjectVo {
 
 	public void setTopicTitle(String topicTitle) {
 		this.topicTitle = topicTitle;
-	}
-
-	public String getTopicImgRes() {
-		return topicImgRes;
-	}
-
-	public void setTopicImgRes(String topicImgRes) {
-		this.topicImgRes = topicImgRes;
 	}
 
 	public String getTopicDesc() {

@@ -139,7 +139,7 @@ public class ObjectBiz {
 			BeanUtils.copyProperties(topicModel, topicVo);
 
 			// 查询资源
-			ResourceModel resourceModel = resourceBizDao.selectResourceModelByResId(topicVo.getTopicImgRes());
+			ResourceModel resourceModel = resourceBizDao.selectResourceModelByResId(topicModel.getTopicImgRes());
 			ResourceVo resourceVo = new ResourceVo();
 			BeanUtils.copyProperties(resourceModel, resourceVo);
 			topicVo.setTopicImgResource(resourceVo);
