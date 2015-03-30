@@ -172,7 +172,8 @@ public class ObjectBiz {
 			throw new BusinessException(RespCode.RESP_0201);
 		}
 
-		List<ObjectCommentModel> commentModelList objectBizDao.selectObjectCommentModelByObjectId(objectModel.getObjectId());
+		List<ObjectCommentModel> commentModelList = objectBizDao.selectObjectCommentModelByObjectId(objectModel
+				.getObjectId());
 		List<CommentVo> list = new ArrayList<CommentVo>(commentModelList.size());
 		for (ObjectCommentModel commentModel : commentModelList) {
 			CommentVo commentVo = new CommentVo();

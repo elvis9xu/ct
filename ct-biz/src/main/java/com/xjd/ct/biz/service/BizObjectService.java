@@ -245,6 +245,8 @@ public class BizObjectService {
 
 		// 记数
 		objectDao.increaseCommentCount(objectModel.getObjectId());
+
+		return objectCommentModel.getCommentId();
 	}
 
 	/**

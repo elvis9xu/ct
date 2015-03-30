@@ -20,5 +20,9 @@ public interface ValidationProperties {
 	String COMMENT = "comment";
 	String TO_COMMENT_ID = "toCommentId";
 	String COMMENT_ID = "commentId";
+	String SUBSCRIBE_ID = "subscribeId";
+	String SUBSCRIBE = "subscribe";
+	String AGE_BRACKET_ID = "ageBracketIdL";
+	String SET = "set";
 
 }

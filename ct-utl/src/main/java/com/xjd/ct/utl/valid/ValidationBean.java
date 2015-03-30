@@ -88,6 +88,22 @@ public class ValidationBean {
 	@Digits(integer = 18, fraction = 0, message = RespCode.RESP_0002)
 	private String commentId;
 
+	@NotBlank(message = RespCode.RESP_0001)
+	@Digits(integer = 18, fraction = 0, message = RespCode.RESP_0002)
+	private String subscribeId;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@Pattern(regexp = "0|1", message = RespCode.RESP_0003)
+	private String subscribe;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@Digits(integer = 18, fraction = 0, message = RespCode.RESP_0002)
+	private String ageBracketIdL;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@Pattern(regexp = "0|1", message = RespCode.RESP_0003)
+	private String set;
+
 	public String getTimestamp() {
 		return timestamp;
 	}
@@ -246,5 +262,37 @@ public class ValidationBean {
 
 	public void setCommentId(String commentId) {
 		this.commentId = commentId;
+	}
+
+	public String getSubscribeId() {
+		return subscribeId;
+	}
+
+	public void setSubscribeId(String subscribeId) {
+		this.subscribeId = subscribeId;
+	}
+
+	public String getSubscribe() {
+		return subscribe;
+	}
+
+	public void setSubscribe(String subscribe) {
+		this.subscribe = subscribe;
+	}
+
+	public String getAgeBracketIdL() {
+		return ageBracketIdL;
+	}
+
+	public void setAgeBracketIdL(String ageBracketIdL) {
+		this.ageBracketIdL = ageBracketIdL;
+	}
+
+	public String getSet() {
+		return set;
+	}
+
+	public void setSet(String set) {
+		this.set = set;
 	}
 }
