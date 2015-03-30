@@ -56,6 +56,7 @@ public class SubscribeService {
 		subscribeDao.insertUserSubscribeModel(userSubscribeModel);
 	}
 
+	@Transactional
 	public void unsubscribe(Long userId, Long subscribeId) {
 		// 判断
 		UserSubscribeModel userSubscribeModel = subscribeDao.selectUserSubscribeModelByUserIdAndSubscribeId(userId,
@@ -68,6 +69,7 @@ public class SubscribeService {
 		subscribeDao.deleteUserSubscribeModelByUserIdAndSubscribeId(userId, subscribeId);
 	}
 
+	@Transactional
 	public void setAgeBracket(Long userId, Long ageBracketId) {
 		// 判断
 		AgeBracketModel ageBracketModel = subscribeDao.selectAgeBracketModelByAgeBracketId(ageBracketId);
@@ -89,6 +91,7 @@ public class SubscribeService {
 		subscribeDao.insertUserAgeBracketResModel(userAgeBracketResModel);
 	}
 
+	@Transactional
 	public void unsetAgeBracket(Long userId, Long ageBracketId) {
 		// 判断
 		UserAgeBracketResModel userAgeBracketResModel = subscribeDao
