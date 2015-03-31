@@ -1,5 +1,7 @@
 package com.xjd.ct.dal.dao;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,8 @@ public class ObjectBizDao {
 	ArticleModelMapper articleModelMapper;
 	@Autowired
 	TopicModelMapper topicModelMapper;
+	@Autowired
+	UserIdolModelMapper userIdolModelMapper;
 
 	public ObjectModel selectObjectModelByObjectTypeAndObjectRefId(Byte objectType, Long objectRefId) {
 		ObjectModelExample example = new ObjectModelExample();
@@ -112,4 +116,51 @@ public class ObjectBizDao {
 		return objectCommentModelMapper.selectByPrimaryKey(commentId);
 	}
 
+	public List<ArticleModel> selectArticleByPageOrderByAddTimeDesc(Long offset, Integer count) {
+		ArticleModelExample example = new ArticleModelExample();
+		example.setOrderByClause("add_time desc");
+		example.setOffsetAndLimit(offset, count);
+
+		return articleModelMapper.selectByExample(example);
+	}
+
+	public List<PublishModel> selectPublishByPageOrderByAddTimeDesc(Long offset, Integer count) {
+		PublishModelExample example = new PublishModelExample();
+		example.setOrderByClause("add_time desc");
+		example.setOffsetAndLimit(offset, count);
+
+		return publishModelMapper.selectByExample(example);
+	}
+
+	// TODO 优化
+	public List<PublishModel> selectPublishByUserIdListAndPageOrderByAddTimeDesc(Long userId, Long offset, Integer count) {
+		// 我关注的用户
+		UserIdolModelExample idolModelExample = new UserIdolModelExample();
+		idolModelExample.or().andUserIdEqualTo(userId);
+		List<UserIdolModel> idolList = userIdolModelMapper.selectByExample(idolModelExample);
+
+		// 关注我的用户
+		idolModelExample = new UserIdolModelExample();
+		idolModelExample.or().andIdolUserIdEqualTo(userId);
+		List<UserIdolModel> fansList = userIdolModelMapper.selectByExample(idolModelExample);
+
+		List<Long> idList = new ArrayList<Long>(idolList.size() + fansList.size());
+		for (UserIdolModel userIdolModel : idolList) {
+			idList.add(userIdolModel.getIdolUserId());
+		}
+		for (UserIdolModel userIdolModel : fansList) {
+			idList.add(userIdolModel.getUserId());
+		}
+
+		if (idList.isEmpty()) {
+			return Collections.emptyList();
+		}
+
+		PublishModelExample example = new PublishModelExample();
+		example.or().andUserIdIn(idList);
+		example.setOrderByClause("add_time desc");
+		example.setOffsetAndLimit(offset, count);
+
+		return publishModelMapper.selectByExample(example);
+	}
 }

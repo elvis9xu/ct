@@ -182,4 +182,47 @@ public class ObjectBiz {
 		}
 		return  list;
 	}
+
+	public List<ObjectVo> listArticles(Byte orderBy, Long offset, Integer count) {
+		// 目前仅支持时间倒序
+		List<ArticleModel> articleModelList = objectBizDao.selectArticleByPageOrderByAddTimeDesc(offset, count);
+
+		List<ObjectVo> list = new ArrayList<ObjectVo>(articleModelList.size());
+		for (ArticleModel articleModel : articleModelList) {
+			ObjectVo vo = assemble(ObjectTypeEnum.ARTICLE.getCode(), articleModel.getArticleId());
+
+			list.add(vo);
+		}
+
+		return list;
+
+	}
+
+	public List<ObjectVo> listPublishs(Byte orderBy, Long offset, Integer count) {
+		List<PublishModel> publishModelList = objectBizDao.selectPublishByPageOrderByAddTimeDesc(offset, count);
+
+		List<ObjectVo> list = new ArrayList<ObjectVo>(publishModelList.size());
+		for (PublishModel publishModel : publishModelList) {
+			ObjectVo vo = assemble(ObjectTypeEnum.PUBLISH.getCode(), publishModel.getPublishId());
+
+			list.add(vo);
+		}
+
+		return list;
+	}
+
+	public List<ObjectVo> listPublishs(Long userId, Byte orderBy, Long offset, Integer count) {
+		List<PublishModel> publishModelList = objectBizDao.selectPublishByUserIdListAndPageOrderByAddTimeDesc(userId,
+				offset, count);
+
+		List<ObjectVo> list = new ArrayList<ObjectVo>(publishModelList.size());
+		for (PublishModel publishModel : publishModelList) {
+			ObjectVo vo = assemble(ObjectTypeEnum.PUBLISH.getCode(), publishModel.getPublishId());
+
+			list.add(vo);
+		}
+
+		return list;
+	}
+
 }

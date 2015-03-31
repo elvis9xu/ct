@@ -24,5 +24,7 @@ public interface ValidationProperties {
 	String SUBSCRIBE = "subscribe";
 	String AGE_BRACKET_ID = "ageBracketIdL";
 	String SET = "set";
+	String ORDER_BY = "orderBy";
+	String RANGE = "range";
 
 }

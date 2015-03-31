@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.xjd.ct.utl.enums.IdolOperEnum;
 import com.xjd.ct.utl.enums.ObjectTypeEnum;
+import com.xjd.ct.utl.enums.OrderByEnum;
 import com.xjd.ct.utl.enums.UserSexEnum;
 import com.xjd.ct.utl.respcode.RespCode;
 import com.xjd.ct.utl.valid.constraints.Date;
@@ -103,6 +104,14 @@ public class ValidationBean {
 	@NotBlank(message = RespCode.RESP_0001)
 	@Pattern(regexp = "0|1", message = RespCode.RESP_0003)
 	private String set;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@com.xjd.ct.utl.valid.constraints.Enum(enumClass = OrderByEnum.class)
+	private String orderBy;
+
+	@NotBlank(message = RespCode.RESP_0001)
+	@Pattern(regexp = "0|1", message = RespCode.RESP_0003)
+	private String range;
 
 	public String getTimestamp() {
 		return timestamp;
@@ -294,5 +303,21 @@ public class ValidationBean {
 
 	public void setSet(String set) {
 		this.set = set;
+	}
+
+	public String getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
+
+	public String getRange() {
+		return range;
+	}
+
+	public void setRange(String range) {
+		this.range = range;
 	}
 }

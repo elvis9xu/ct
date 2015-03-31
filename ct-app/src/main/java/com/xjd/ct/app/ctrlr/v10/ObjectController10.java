@@ -282,4 +282,61 @@ public class ObjectController10 {
 		View view = ViewUtil.defaultView();
 		return view;
 	}
+
+	@RequestMapping("/listArticles")
+	@ResponseBody
+	public View listArticles(@RequestParam(value = "orderBy", required = false) String orderBy,
+							 @RequestParam(value = "offset", required = false) String offset,
+							 @RequestParam(value = "count", required = false) String count) {
+		// 参数校验
+		ValidationUtil.check(ValidationUtil.ORDER_BY, orderBy, ValidationUtil.OFFSET, offset, ValidationUtil.COUNT,
+				count);
+
+		Byte orderByB = Byte.valueOf(orderBy);
+		Long offsetL = Long.valueOf(offset);
+		Integer countI = Integer.valueOf(count);
+
+		// 业务调用
+		List<ObjectVo> list = objectBiz.listArticles(orderByB, offsetL, countI);
+
+		// 返回结果
+		ObjectListBody body = new ObjectListBody();
+		body.setObjectList(list);
+
+		View view = ViewUtil.defaultView();
+		view.setBody(body);
+		return view;
+	}
+
+	@RequestMapping("/listPublishs")
+	@ResponseBody
+	public View listPublishs(@RequestParam(value = "range", required = false) String range,
+							 @RequestParam(value = "orderBy", required = false) String orderBy,
+							 @RequestParam(value = "offset", required = false) String offset,
+							 @RequestParam(value = "count", required = false) String count) {
+		// 参数校验
+		ValidationUtil.check(ValidationUtil.RANGE, range, ValidationUtil.ORDER_BY, orderBy, ValidationUtil.OFFSET,
+				offset, ValidationUtil.COUNT, count);
+
+		Byte orderByB = Byte.valueOf(orderBy);
+		Long offsetL = Long.valueOf(offset);
+		Integer countI = Integer.valueOf(count);
+
+		List<ObjectVo> list = null;
+		// 业务调用
+		if ("0".equals(range)) { // 所有
+			list = objectBiz.listPublishs(orderByB, offsetL, countI);
+
+		} else { // 仅关注用户
+			list = objectBiz.listPublishs(RequestContext.checkAndGetUserId(), orderByB, offsetL, countI);
+		}
+
+		// 返回结果
+		ObjectListBody body = new ObjectListBody();
+		body.setObjectList(list);
+
+		View view = ViewUtil.defaultView();
+		view.setBody(body);
+		return view;
+	}
 }
