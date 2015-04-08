@@ -72,72 +72,74 @@ public class ControllerAspect {
 
 		View rt = null;
 		try {
-			// == token == //
-			String token = request.getParameter("token");
-			boolean offerTokenFlag = StringUtils.isNotEmpty(token);
-			TokenBo tokenBo = null;
-			if (offerTokenFlag) {
-				tokenBo = userService.queryTokenByToken(token);
-			}
-
-			// 先log
-			gwService.serviceLog(userIp, tokenBo == null ? AppConstant.ANONYMOUS_USERID : tokenBo.getUserId(), token,
-					service, version, DateUtil.now());
-
-			if (!"getToken".equals(service)) {
-				if (!offerTokenFlag) {
-					throw new BusinessException(RespCode.RESP_0001, new Object[] { "token" });
+			if (!"upload".equals(service)) { // TODO 上传资源不要做参数校验, 以后移动其它工程中
+				// == token == //
+				String token = request.getParameter("token");
+				boolean offerTokenFlag = StringUtils.isNotEmpty(token);
+				TokenBo tokenBo = null;
+				if (offerTokenFlag) {
+					tokenBo = userService.queryTokenByToken(token);
 				}
-				userService.checkToken(tokenBo);
-				userService.updateToken(token);
-			}
 
-			// 查询用户
-			if (tokenBo != null && !AppConstant.ANONYMOUS_USERID.equals(tokenBo.getUserId())) {
-				UserBo userBo = userService.queryUserByUserId(tokenBo.getUserId());
-				if (userBo == null) {
-					throw new BusinessException(RespCode.RESP_0110);
-				}
-				RequestContext.putUserId(userBo.getUserId());
-			}
+				// 先log
+				gwService.serviceLog(userIp, tokenBo == null ? AppConstant.ANONYMOUS_USERID : tokenBo.getUserId(),
+						token, service, version, DateUtil.now());
 
-			// == sign == //
-			if (!AppContext.isSignDisabled()) {
-				String sign = request.getParameter("sign");
-				if (StringUtils.isEmpty(sign)) {
-					throw new BusinessException(RespCode.RESP_0010);
+				if (!"getToken".equals(service)) {
+					if (!offerTokenFlag) {
+						throw new BusinessException(RespCode.RESP_0001, new Object[] { "token" });
+					}
+					userService.checkToken(tokenBo);
+					userService.updateToken(token);
 				}
-				Map<String, String> map = new TreeMap<String, String>();
-				for (Enumeration<String> enu = request.getParameterNames(); enu.hasMoreElements();) {
-					String key = enu.nextElement();
-					map.put(key, request.getParameter(key));
-				}
-				map.remove("sign");
-				if (!checkSign(sign, map, tokenBo == null ? "" : tokenBo.getSalt())) {
-					throw new BusinessException(RespCode.RESP_0011);
-				}
-			} else {
-				log.debug("check sign disabled!");
-			}
 
-			// == timestamp == //
-			String timestamp = request.getParameter("timestamp");
-			ValidationUtil.check(ValidationUtil.TIMESTAMP, timestamp);
+				// 查询用户
+				if (tokenBo != null && !AppConstant.ANONYMOUS_USERID.equals(tokenBo.getUserId())) {
+					UserBo userBo = userService.queryUserByUserId(tokenBo.getUserId());
+					if (userBo == null) {
+						throw new BusinessException(RespCode.RESP_0110);
+					}
+					RequestContext.putUserId(userBo.getUserId());
+				}
 
-			// == service == //
-			ServiceBo serviceBo = gwService.queryServiceByNameAndVersion(service, version);
-			if (serviceBo == null) {
-				throw new BusinessException(RespCode.RESP_9980);
-			}
-			if (!BoolEnum.parseCode(serviceBo.getValidFlag())) {
-				throw new BusinessException(RespCode.RESP_9981);
-			}
-			if (BoolEnum.parseCode(serviceBo.getInMaintainFlag())) {
-				throw new BusinessException(RespCode.RESP_9982, StringUtils.isBlank(serviceBo.getMaintainMsg()) ? null
-						: serviceBo.getMaintainMsg());
-			}
-			if (BoolEnum.parseCode(serviceBo.getNeedLoginFlag())) {
-				RequestContext.checkAndGetUserId();
+				// == sign == //
+				if (!AppContext.isSignDisabled()) {
+					String sign = request.getParameter("sign");
+					if (StringUtils.isEmpty(sign)) {
+						throw new BusinessException(RespCode.RESP_0010);
+					}
+					Map<String, String> map = new TreeMap<String, String>();
+					for (Enumeration<String> enu = request.getParameterNames(); enu.hasMoreElements();) {
+						String key = enu.nextElement();
+						map.put(key, request.getParameter(key));
+					}
+					map.remove("sign");
+					if (!checkSign(sign, map, tokenBo == null ? "" : tokenBo.getSalt())) {
+						throw new BusinessException(RespCode.RESP_0011);
+					}
+				} else {
+					log.debug("check sign disabled!");
+				}
+
+				// == timestamp == //
+				String timestamp = request.getParameter("timestamp");
+				ValidationUtil.check(ValidationUtil.TIMESTAMP, timestamp);
+
+				// == service == //
+				ServiceBo serviceBo = gwService.queryServiceByNameAndVersion(service, version);
+				if (serviceBo == null) {
+					throw new BusinessException(RespCode.RESP_9980);
+				}
+				if (!BoolEnum.parseCode(serviceBo.getValidFlag())) {
+					throw new BusinessException(RespCode.RESP_9981);
+				}
+				if (BoolEnum.parseCode(serviceBo.getInMaintainFlag())) {
+					throw new BusinessException(RespCode.RESP_9982,
+							StringUtils.isBlank(serviceBo.getMaintainMsg()) ? null : serviceBo.getMaintainMsg());
+				}
+				if (BoolEnum.parseCode(serviceBo.getNeedLoginFlag())) {
+					RequestContext.checkAndGetUserId();
+				}
 			}
 
 			rt = (View) jp.proceed();
@@ -155,6 +157,11 @@ public class ControllerAspect {
 				rt = ViewUtil.defaultView(RespCode.RESP_9999);
 				log.error("请求异常: " + fixLogString, t);
 			}
+		}
+
+		if (rt == null) {
+			log.info("请求返回: {}, result={}", fixLogString, null);
+			return null;
 		}
 
 		rt = ViewUtil.builder(rt).service(service).version(version).timestamp(DateUtil.now()).build();

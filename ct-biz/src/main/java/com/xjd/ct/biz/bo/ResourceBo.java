@@ -1,14 +1,8 @@
-package com.xjd.ct.app.view.vo;
+package com.xjd.ct.biz.bo;
 
 import java.util.Date;
 
-/**
- * 资源对象
- * 
- * @author elvis.xu
- * @since 2015-03-26 22:54
- */
-public class ResourceVo {
+public class ResourceBo extends BaseBo {
 	private String resId;
 
 	private String resContentType;

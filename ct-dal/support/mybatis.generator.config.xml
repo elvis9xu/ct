@@ -5,8 +5,8 @@
 
 <generatorConfiguration>
   <!-- 修改：jdbc jar包 -->
-  <!--<classPathEntry location="C:/Program Files (x86)/MySQL/MySQL Tools for 5.0/java/lib/mysql-connector-java-5.0.4-bin.jar" />-->
-  <classPathEntry location="/Users/XJD/360yunpan/repo/maven_repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar"/>
+  <classPathEntry location="C:/Program Files (x86)/MySQL/MySQL Tools for 5.0/java/lib/mysql-connector-java-5.0.4-bin.jar" />
+  <!-- <classPathEntry location="/Users/XJD/360yunpan/repo/maven_repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar"/> -->
   <!-- 生成的class所在的根路径 -->
   <classPathEntry location="target/classes" />
 
@@ -42,7 +42,7 @@
     <!--<table tableName="t_age_bracket" domainObjectName="AgeBracketModel" />-->
     <!--<table tableName="t_biz_article" domainObjectName="ArticleModel" />-->
     <!--<table tableName="t_biz_banner" domainObjectName="BannerModel" />-->
-    <table tableName="t_biz_publish" domainObjectName="PublishModel" />
+    <!-- <table tableName="t_biz_publish" domainObjectName="PublishModel" /> -->
     <!--<table tableName="t_biz_publish_res_rs" domainObjectName="PublishResRsModel" />-->
     <!--<table tableName="t_biz_recommend" domainObjectName="RecommendModel" />-->
     <!--<table tableName="t_biz_topic" domainObjectName="TopicModel" />-->
@@ -61,7 +61,7 @@
     <!--<table tableName="t_object_vote" domainObjectName="ObjectVoteModel" />-->
     <!--<table tableName="t_object_vote_opt" domainObjectName="ObjectVoteOptModel" />-->
     <!--<table tableName="t_report" domainObjectName="ReportModel" />-->
-    <!--<table tableName="t_resource" domainObjectName="ResourceModel" />-->
+    <table tableName="t_resource" domainObjectName="ResourceModel" />
     <!--<table tableName="t_sequence" domainObjectName="SequenceModel" />-->
     <!--<table tableName="t_subscribe" domainObjectName="SubscribeModel" />-->
     <!--<table tableName="t_token" domainObjectName="TokenModel" />-->

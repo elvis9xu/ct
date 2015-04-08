@@ -5,6 +5,8 @@ import java.util.Date;
 public class ResourceModel extends BaseDo {
     private String resId;
 
+    private String resContentType;
+
     private String resFormat;
 
     private Byte resForm;
@@ -23,6 +25,14 @@ public class ResourceModel extends BaseDo {
 
     public void setResId(String resId) {
         this.resId = resId;
+    }
+
+    public String getResContentType() {
+        return resContentType;
+    }
+
+    public void setResContentType(String resContentType) {
+        this.resContentType = resContentType;
     }
 
     public String getResFormat() {

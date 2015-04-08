@@ -2,9 +2,11 @@ package com.xjd.ct.biz.util;
 
 import org.springframework.beans.BeanUtils;
 
+import com.xjd.ct.biz.bo.ResourceBo;
 import com.xjd.ct.biz.bo.ServiceBo;
 import com.xjd.ct.biz.bo.TokenBo;
 import com.xjd.ct.biz.bo.UserBo;
+import com.xjd.ct.dal.dos.ResourceModel;
 import com.xjd.ct.dal.dos.ServiceModel;
 import com.xjd.ct.dal.dos.TokenModel;
 import com.xjd.ct.dal.dos.UserModel;
@@ -43,4 +45,14 @@ public abstract class BeanTansferUtil {
 		BeanUtils.copyProperties(userDo, userBo);
 		return userBo;
 	}
+
+	public static ResourceBo transferResourceDoToResourceBo(ResourceModel resourceModel) {
+		if (resourceModel == null) {
+			return null;
+		}
+		ResourceBo resourceBo = new ResourceBo();
+		BeanUtils.copyProperties(resourceModel, resourceBo);
+		return resourceBo;
+	}
+
 }

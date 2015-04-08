@@ -199,6 +199,76 @@ public class ResourceModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andResContentTypeIsNull() {
+            addCriterion("RES_CONTENT_TYPE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeIsNotNull() {
+            addCriterion("RES_CONTENT_TYPE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeEqualTo(String value) {
+            addCriterion("RES_CONTENT_TYPE =", value, "resContentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeNotEqualTo(String value) {
+            addCriterion("RES_CONTENT_TYPE <>", value, "resContentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeGreaterThan(String value) {
+            addCriterion("RES_CONTENT_TYPE >", value, "resContentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("RES_CONTENT_TYPE >=", value, "resContentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeLessThan(String value) {
+            addCriterion("RES_CONTENT_TYPE <", value, "resContentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeLessThanOrEqualTo(String value) {
+            addCriterion("RES_CONTENT_TYPE <=", value, "resContentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeLike(String value) {
+            addCriterion("RES_CONTENT_TYPE like", value, "resContentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeNotLike(String value) {
+            addCriterion("RES_CONTENT_TYPE not like", value, "resContentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeIn(List<String> values) {
+            addCriterion("RES_CONTENT_TYPE in", values, "resContentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeNotIn(List<String> values) {
+            addCriterion("RES_CONTENT_TYPE not in", values, "resContentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeBetween(String value1, String value2) {
+            addCriterion("RES_CONTENT_TYPE between", value1, value2, "resContentType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResContentTypeNotBetween(String value1, String value2) {
+            addCriterion("RES_CONTENT_TYPE not between", value1, value2, "resContentType");
+            return (Criteria) this;
+        }
+
         public Criteria andResFormatIsNull() {
             addCriterion("RES_FORMAT is null");
             return (Criteria) this;
