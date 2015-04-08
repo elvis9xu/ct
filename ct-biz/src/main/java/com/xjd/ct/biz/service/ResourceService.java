@@ -55,6 +55,7 @@ public class ResourceService {
 			resourceModel.setResForm(ResFormEnum.FILE.getCode());
 			resourceModel.setResPath(generateResourcePath(resourceModel.getResId(), md5, format));
 			resourceModel.setResMd5(md5);
+			resourceModel.setResSize(file.length());
 			Date now = DateUtil.now();
 			resourceModel.setAddTime(now);
 			resourceModel.setUpdTime(now);

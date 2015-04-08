@@ -8,6 +8,9 @@
     <result column="RES_FORM" property="resForm" jdbcType="TINYINT" />
     <result column="RES_PATH" property="resPath" jdbcType="VARCHAR" />
     <result column="RES_MD5" property="resMd5" jdbcType="CHAR" />
+    <result column="RES_SIZE" property="resSize" jdbcType="BIGINT" />
+    <result column="RES_CUT_1" property="resCut1" jdbcType="VARCHAR" />
+    <result column="RES_CUT_2" property="resCut2" jdbcType="VARCHAR" />
     <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
     <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -70,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    RES_ID, RES_CONTENT_TYPE, RES_FORMAT, RES_FORM, RES_PATH, RES_MD5, ADD_TIME, UPD_TIME
+    RES_ID, RES_CONTENT_TYPE, RES_FORMAT, RES_FORM, RES_PATH, RES_MD5, RES_SIZE, RES_CUT_1, 
+    RES_CUT_2, ADD_TIME, UPD_TIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ResourceModelExample" >
     select
@@ -106,9 +110,11 @@
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ResourceModel" >
     insert into t_resource (RES_ID, RES_CONTENT_TYPE, RES_FORMAT, 
       RES_FORM, RES_PATH, RES_MD5, 
+      RES_SIZE, RES_CUT_1, RES_CUT_2, 
       ADD_TIME, UPD_TIME)
     values (#{resId,jdbcType=CHAR}, #{resContentType,jdbcType=VARCHAR}, #{resFormat,jdbcType=VARCHAR}, 
       #{resForm,jdbcType=TINYINT}, #{resPath,jdbcType=VARCHAR}, #{resMd5,jdbcType=CHAR}, 
+      #{resSize,jdbcType=BIGINT}, #{resCut1,jdbcType=VARCHAR}, #{resCut2,jdbcType=VARCHAR}, 
       #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ResourceModel" >
@@ -131,6 +137,15 @@
       </if>
       <if test="resMd5 != null" >
         RES_MD5,
+      </if>
+      <if test="resSize != null" >
+        RES_SIZE,
+      </if>
+      <if test="resCut1 != null" >
+        RES_CUT_1,
+      </if>
+      <if test="resCut2 != null" >
+        RES_CUT_2,
       </if>
       <if test="addTime != null" >
         ADD_TIME,
@@ -157,6 +172,15 @@
       </if>
       <if test="resMd5 != null" >
         #{resMd5,jdbcType=CHAR},
+      </if>
+      <if test="resSize != null" >
+        #{resSize,jdbcType=BIGINT},
+      </if>
+      <if test="resCut1 != null" >
+        #{resCut1,jdbcType=VARCHAR},
+      </if>
+      <if test="resCut2 != null" >
+        #{resCut2,jdbcType=VARCHAR},
       </if>
       <if test="addTime != null" >
         #{addTime,jdbcType=TIMESTAMP},
@@ -193,6 +217,15 @@
       <if test="record.resMd5 != null" >
         RES_MD5 = #{record.resMd5,jdbcType=CHAR},
       </if>
+      <if test="record.resSize != null" >
+        RES_SIZE = #{record.resSize,jdbcType=BIGINT},
+      </if>
+      <if test="record.resCut1 != null" >
+        RES_CUT_1 = #{record.resCut1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resCut2 != null" >
+        RES_CUT_2 = #{record.resCut2,jdbcType=VARCHAR},
+      </if>
       <if test="record.addTime != null" >
         ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
       </if>
@@ -212,6 +245,9 @@
       RES_FORM = #{record.resForm,jdbcType=TINYINT},
       RES_PATH = #{record.resPath,jdbcType=VARCHAR},
       RES_MD5 = #{record.resMd5,jdbcType=CHAR},
+      RES_SIZE = #{record.resSize,jdbcType=BIGINT},
+      RES_CUT_1 = #{record.resCut1,jdbcType=VARCHAR},
+      RES_CUT_2 = #{record.resCut2,jdbcType=VARCHAR},
       ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
       UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -236,6 +272,15 @@
       <if test="resMd5 != null" >
         RES_MD5 = #{resMd5,jdbcType=CHAR},
       </if>
+      <if test="resSize != null" >
+        RES_SIZE = #{resSize,jdbcType=BIGINT},
+      </if>
+      <if test="resCut1 != null" >
+        RES_CUT_1 = #{resCut1,jdbcType=VARCHAR},
+      </if>
+      <if test="resCut2 != null" >
+        RES_CUT_2 = #{resCut2,jdbcType=VARCHAR},
+      </if>
       <if test="addTime != null" >
         ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
       </if>
@@ -252,6 +297,9 @@
       RES_FORM = #{resForm,jdbcType=TINYINT},
       RES_PATH = #{resPath,jdbcType=VARCHAR},
       RES_MD5 = #{resMd5,jdbcType=CHAR},
+      RES_SIZE = #{resSize,jdbcType=BIGINT},
+      RES_CUT_1 = #{resCut1,jdbcType=VARCHAR},
+      RES_CUT_2 = #{resCut2,jdbcType=VARCHAR},
       ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
       UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
     where RES_ID = #{resId,jdbcType=CHAR}

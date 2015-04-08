@@ -65,4 +65,9 @@ public class IndexPageBiz {
 		// FIXME 根据专题进行查询
 		return Collections.emptyList();
 	}
+
+	public ResourceVo getLaunchPic() {
+		// FIXME
+		return null;
+	}
 }

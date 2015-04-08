@@ -15,6 +15,12 @@ public class ResourceModel extends BaseDo {
 
     private String resMd5;
 
+    private Long resSize;
+
+    private String resCut1;
+
+    private String resCut2;
+
     private Date addTime;
 
     private Date updTime;
@@ -65,6 +71,30 @@ public class ResourceModel extends BaseDo {
 
     public void setResMd5(String resMd5) {
         this.resMd5 = resMd5;
+    }
+
+    public Long getResSize() {
+        return resSize;
+    }
+
+    public void setResSize(Long resSize) {
+        this.resSize = resSize;
+    }
+
+    public String getResCut1() {
+        return resCut1;
+    }
+
+    public void setResCut1(String resCut1) {
+        this.resCut1 = resCut1;
+    }
+
+    public String getResCut2() {
+        return resCut2;
+    }
+
+    public void setResCut2(String resCut2) {
+        this.resCut2 = resCut2;
     }
 
     public Date getAddTime() {

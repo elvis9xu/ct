@@ -539,6 +539,206 @@ public class ResourceModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andResSizeIsNull() {
+            addCriterion("RES_SIZE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResSizeIsNotNull() {
+            addCriterion("RES_SIZE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResSizeEqualTo(Long value) {
+            addCriterion("RES_SIZE =", value, "resSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andResSizeNotEqualTo(Long value) {
+            addCriterion("RES_SIZE <>", value, "resSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andResSizeGreaterThan(Long value) {
+            addCriterion("RES_SIZE >", value, "resSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andResSizeGreaterThanOrEqualTo(Long value) {
+            addCriterion("RES_SIZE >=", value, "resSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andResSizeLessThan(Long value) {
+            addCriterion("RES_SIZE <", value, "resSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andResSizeLessThanOrEqualTo(Long value) {
+            addCriterion("RES_SIZE <=", value, "resSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andResSizeIn(List<Long> values) {
+            addCriterion("RES_SIZE in", values, "resSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andResSizeNotIn(List<Long> values) {
+            addCriterion("RES_SIZE not in", values, "resSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andResSizeBetween(Long value1, Long value2) {
+            addCriterion("RES_SIZE between", value1, value2, "resSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andResSizeNotBetween(Long value1, Long value2) {
+            addCriterion("RES_SIZE not between", value1, value2, "resSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1IsNull() {
+            addCriterion("RES_CUT_1 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1IsNotNull() {
+            addCriterion("RES_CUT_1 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1EqualTo(String value) {
+            addCriterion("RES_CUT_1 =", value, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1NotEqualTo(String value) {
+            addCriterion("RES_CUT_1 <>", value, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1GreaterThan(String value) {
+            addCriterion("RES_CUT_1 >", value, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1GreaterThanOrEqualTo(String value) {
+            addCriterion("RES_CUT_1 >=", value, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1LessThan(String value) {
+            addCriterion("RES_CUT_1 <", value, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1LessThanOrEqualTo(String value) {
+            addCriterion("RES_CUT_1 <=", value, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1Like(String value) {
+            addCriterion("RES_CUT_1 like", value, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1NotLike(String value) {
+            addCriterion("RES_CUT_1 not like", value, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1In(List<String> values) {
+            addCriterion("RES_CUT_1 in", values, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1NotIn(List<String> values) {
+            addCriterion("RES_CUT_1 not in", values, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1Between(String value1, String value2) {
+            addCriterion("RES_CUT_1 between", value1, value2, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut1NotBetween(String value1, String value2) {
+            addCriterion("RES_CUT_1 not between", value1, value2, "resCut1");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2IsNull() {
+            addCriterion("RES_CUT_2 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2IsNotNull() {
+            addCriterion("RES_CUT_2 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2EqualTo(String value) {
+            addCriterion("RES_CUT_2 =", value, "resCut2");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2NotEqualTo(String value) {
+            addCriterion("RES_CUT_2 <>", value, "resCut2");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2GreaterThan(String value) {
+            addCriterion("RES_CUT_2 >", value, "resCut2");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2GreaterThanOrEqualTo(String value) {
+            addCriterion("RES_CUT_2 >=", value, "resCut2");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2LessThan(String value) {
+            addCriterion("RES_CUT_2 <", value, "resCut2");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2LessThanOrEqualTo(String value) {
+            addCriterion("RES_CUT_2 <=", value, "resCut2");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2Like(String value) {
+            addCriterion("RES_CUT_2 like", value, "resCut2");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2NotLike(String value) {
+            addCriterion("RES_CUT_2 not like", value, "resCut2");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2In(List<String> values) {
+            addCriterion("RES_CUT_2 in", values, "resCut2");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2NotIn(List<String> values) {
+            addCriterion("RES_CUT_2 not in", values, "resCut2");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2Between(String value1, String value2) {
+            addCriterion("RES_CUT_2 between", value1, value2, "resCut2");
+            return (Criteria) this;
+        }
+
+        public Criteria andResCut2NotBetween(String value1, String value2) {
+            addCriterion("RES_CUT_2 not between", value1, value2, "resCut2");
+            return (Criteria) this;
+        }
+
         public Criteria andAddTimeIsNull() {
             addCriterion("ADD_TIME is null");
             return (Criteria) this;

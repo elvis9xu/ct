@@ -14,8 +14,10 @@ import com.xjd.ct.app.view.View;
 import com.xjd.ct.app.view.ViewUtil;
 import com.xjd.ct.app.view.body.BannerListBody;
 import com.xjd.ct.app.view.body.ObjectListBody;
+import com.xjd.ct.app.view.body.ResourceBody;
 import com.xjd.ct.app.view.vo.BannerVo;
 import com.xjd.ct.app.view.vo.ObjectVo;
+import com.xjd.ct.app.view.vo.ResourceVo;
 import com.xjd.ct.utl.valid.ValidationUtil;
 
 /**
@@ -29,6 +31,21 @@ import com.xjd.ct.utl.valid.ValidationUtil;
 public class IndexPageController10 {
 	@Autowired
 	IndexPageBiz indexPageBiz;
+
+	@RequestMapping("/getLaunchPic")
+	@ResponseBody
+	public View getLaunchPic() {
+		// 业务调用
+		ResourceVo resourceVo = indexPageBiz.getLaunchPic();
+
+		// 返回结果
+		ResourceBody body = new ResourceBody();
+		body.setResource(resourceVo);
+
+		View view = ViewUtil.defaultView();
+		view.setBody(body);
+		return view;
+	}
 
 	@RequestMapping("/listBanners")
 	@ResponseBody

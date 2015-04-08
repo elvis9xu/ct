@@ -15,6 +15,12 @@ public class ResourceBo extends BaseBo {
 
 	private String resMd5;
 
+	private Long resSize;
+
+	private String resCut1;
+
+	private String resCut2;
+
 	private Date addTime;
 
 	private Date updTime;
@@ -97,6 +103,36 @@ public class ResourceBo extends BaseBo {
 	/** @param updTime the updTime to set */
 	public void setUpdTime(Date updTime) {
 		this.updTime = updTime;
+	}
+
+	/** @return the resSize */
+	public Long getResSize() {
+		return resSize;
+	}
+
+	/** @param resSize the resSize to set */
+	public void setResSize(Long resSize) {
+		this.resSize = resSize;
+	}
+
+	/** @return the resCut1 */
+	public String getResCut1() {
+		return resCut1;
+	}
+
+	/** @param resCut1 the resCut1 to set */
+	public void setResCut1(String resCut1) {
+		this.resCut1 = resCut1;
+	}
+
+	/** @return the resCut2 */
+	public String getResCut2() {
+		return resCut2;
+	}
+
+	/** @param resCut2 the resCut2 to set */
+	public void setResCut2(String resCut2) {
+		this.resCut2 = resCut2;
 	}
 
 }
