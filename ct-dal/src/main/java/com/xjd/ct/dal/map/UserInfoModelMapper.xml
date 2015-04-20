@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjd.ct.dal.map.UserInfoModelMapper" >
+  <resultMap id="BaseResultMap" type="com.xjd.ct.dal.dos.UserInfoModel" >
+    <id column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="USER_TYPE" property="userType" jdbcType="TINYINT" />
+    <result column="GRADE_EXP" property="gradeExp" jdbcType="INTEGER" />
+    <result column="GRADE_LEVEL" property="gradeLevel" jdbcType="TINYINT" />
+    <result column="POINT" property="point" jdbcType="INTEGER" />
+    <result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="TINYINT" />
+    <result column="BIRTH" property="birth" jdbcType="TIMESTAMP" />
+    <result column="MOOD_WORDS" property="moodWords" jdbcType="VARCHAR" />
+    <result column="MOOD_WORDS_TIME" property="moodWordsTime" jdbcType="TIMESTAMP" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_TYPE, GRADE_EXP, GRADE_LEVEL, POINT, NICKNAME, SEX, BIRTH, MOOD_WORDS, 
+    MOOD_WORDS_TIME, ADD_TIME, UPD_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.UserInfoModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_USER_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="MysqlPageSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_USER_INFO
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_USER_INFO
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.UserInfoModelExample" >
+    delete from T_USER_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xjd.ct.dal.dos.UserInfoModel" >
+    insert into T_USER_INFO (USER_ID, USER_TYPE, GRADE_EXP, 
+      GRADE_LEVEL, POINT, NICKNAME, 
+      SEX, BIRTH, MOOD_WORDS, 
+      MOOD_WORDS_TIME, ADD_TIME, UPD_TIME
+      )
+    values (#{userId,jdbcType=BIGINT}, #{userType,jdbcType=TINYINT}, #{gradeExp,jdbcType=INTEGER}, 
+      #{gradeLevel,jdbcType=TINYINT}, #{point,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=TINYINT}, #{birth,jdbcType=TIMESTAMP}, #{moodWords,jdbcType=VARCHAR}, 
+      #{moodWordsTime,jdbcType=TIMESTAMP}, #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.UserInfoModel" >
+    insert into T_USER_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userType != null" >
+        USER_TYPE,
+      </if>
+      <if test="gradeExp != null" >
+        GRADE_EXP,
+      </if>
+      <if test="gradeLevel != null" >
+        GRADE_LEVEL,
+      </if>
+      <if test="point != null" >
+        POINT,
+      </if>
+      <if test="nickname != null" >
+        NICKNAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="birth != null" >
+        BIRTH,
+      </if>
+      <if test="moodWords != null" >
+        MOOD_WORDS,
+      </if>
+      <if test="moodWordsTime != null" >
+        MOOD_WORDS_TIME,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="gradeExp != null" >
+        #{gradeExp,jdbcType=INTEGER},
+      </if>
+      <if test="gradeLevel != null" >
+        #{gradeLevel,jdbcType=TINYINT},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="birth != null" >
+        #{birth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moodWords != null" >
+        #{moodWords,jdbcType=VARCHAR},
+      </if>
+      <if test="moodWordsTime != null" >
+        #{moodWordsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xjd.ct.dal.dos.UserInfoModelExample" resultType="java.lang.Integer" >
+    select count(*) from T_USER_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_USER_INFO
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userType != null" >
+        USER_TYPE = #{record.userType,jdbcType=TINYINT},
+      </if>
+      <if test="record.gradeExp != null" >
+        GRADE_EXP = #{record.gradeExp,jdbcType=INTEGER},
+      </if>
+      <if test="record.gradeLevel != null" >
+        GRADE_LEVEL = #{record.gradeLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.point != null" >
+        POINT = #{record.point,jdbcType=INTEGER},
+      </if>
+      <if test="record.nickname != null" >
+        NICKNAME = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        SEX = #{record.sex,jdbcType=TINYINT},
+      </if>
+      <if test="record.birth != null" >
+        BIRTH = #{record.birth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.moodWords != null" >
+        MOOD_WORDS = #{record.moodWords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moodWordsTime != null" >
+        MOOD_WORDS_TIME = #{record.moodWordsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.addTime != null" >
+        ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updTime != null" >
+        UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_USER_INFO
+    set USER_ID = #{record.userId,jdbcType=BIGINT},
+      USER_TYPE = #{record.userType,jdbcType=TINYINT},
+      GRADE_EXP = #{record.gradeExp,jdbcType=INTEGER},
+      GRADE_LEVEL = #{record.gradeLevel,jdbcType=TINYINT},
+      POINT = #{record.point,jdbcType=INTEGER},
+      NICKNAME = #{record.nickname,jdbcType=VARCHAR},
+      SEX = #{record.sex,jdbcType=TINYINT},
+      BIRTH = #{record.birth,jdbcType=TIMESTAMP},
+      MOOD_WORDS = #{record.moodWords,jdbcType=VARCHAR},
+      MOOD_WORDS_TIME = #{record.moodWordsTime,jdbcType=TIMESTAMP},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.UserInfoModel" >
+    update T_USER_INFO
+    <set >
+      <if test="userType != null" >
+        USER_TYPE = #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="gradeExp != null" >
+        GRADE_EXP = #{gradeExp,jdbcType=INTEGER},
+      </if>
+      <if test="gradeLevel != null" >
+        GRADE_LEVEL = #{gradeLevel,jdbcType=TINYINT},
+      </if>
+      <if test="point != null" >
+        POINT = #{point,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null" >
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="birth != null" >
+        BIRTH = #{birth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moodWords != null" >
+        MOOD_WORDS = #{moodWords,jdbcType=VARCHAR},
+      </if>
+      <if test="moodWordsTime != null" >
+        MOOD_WORDS_TIME = #{moodWordsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.UserInfoModel" >
+    update T_USER_INFO
+    set USER_TYPE = #{userType,jdbcType=TINYINT},
+      GRADE_EXP = #{gradeExp,jdbcType=INTEGER},
+      GRADE_LEVEL = #{gradeLevel,jdbcType=TINYINT},
+      POINT = #{point,jdbcType=INTEGER},
+      NICKNAME = #{nickname,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=TINYINT},
+      BIRTH = #{birth,jdbcType=TIMESTAMP},
+      MOOD_WORDS = #{moodWords,jdbcType=VARCHAR},
+      MOOD_WORDS_TIME = #{moodWordsTime,jdbcType=TIMESTAMP},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+  <sql id="MysqlPageSuffix" >
+    <if test="page != null" >
+      <![CDATA[ limit #{page.offset}, #{page.limit} ]]>
+    </if>
+  </sql>
+</mapper>
