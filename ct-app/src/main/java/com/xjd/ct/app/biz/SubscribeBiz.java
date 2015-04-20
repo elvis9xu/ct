@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.xjd.ct.app.view.vo.AgeBracketVo;
 import com.xjd.ct.app.view.vo.SubscribeVo;
-import com.xjd.ct.dal.dao.SubscribeBizDao;
+import com.xjd.ct.dal.dao.AppSubscribeDao;
 import com.xjd.ct.dal.dos.AgeBracketModel;
 import com.xjd.ct.dal.dos.SubscribeModel;
 
@@ -22,10 +22,10 @@ import com.xjd.ct.dal.dos.SubscribeModel;
 @Service
 public class SubscribeBiz {
 	@Autowired
-	SubscribeBizDao subscribeBizDao;
+	AppSubscribeDao appSubscribeDao;
 
 	public List<SubscribeVo> listSubscriptions() {
-		List<SubscribeModel> subscribeModelList = subscribeBizDao.selectSubscribeModel();
+		List<SubscribeModel> subscribeModelList = appSubscribeDao.selectSubscribeModel();
 
 		List<SubscribeVo> subscribeVoList = new ArrayList<SubscribeVo>(subscribeModelList.size());
 		for (SubscribeModel subscribeModel : subscribeModelList) {
@@ -37,7 +37,7 @@ public class SubscribeBiz {
 	}
 
 	public List<AgeBracketVo> listAgeBrackets() {
-		List<AgeBracketModel> ageBracketModelList = subscribeBizDao.selectAgeBracketModel();
+		List<AgeBracketModel> ageBracketModelList = appSubscribeDao.selectAgeBracketModel();
 
 		List<AgeBracketVo> ageBracketVoList = new ArrayList<AgeBracketVo>(ageBracketModelList.size());
 		for (AgeBracketModel ageBracketModel : ageBracketModelList) {
@@ -49,7 +49,7 @@ public class SubscribeBiz {
 	}
 
 	public List<SubscribeVo> listSubscriptionsOfUser(Long userId) {
-		List<SubscribeModel> subscribeModelList = subscribeBizDao.selectSubscribeModelOfUser(userId);
+		List<SubscribeModel> subscribeModelList = appSubscribeDao.selectSubscribeModelOfUser(userId);
 
 		List<SubscribeVo> subscribeVoList = new ArrayList<SubscribeVo>(subscribeModelList.size());
 		for (SubscribeModel subscribeModel : subscribeModelList) {
@@ -61,7 +61,7 @@ public class SubscribeBiz {
 	}
 
 	public List<AgeBracketVo> listAgeBracketsOfUser(Long userId) {
-		List<AgeBracketModel> ageBracketModelList = subscribeBizDao.selectAgeBracketModelOfUser(userId);
+		List<AgeBracketModel> ageBracketModelList = appSubscribeDao.selectAgeBracketModelOfUser(userId);
 
 		List<AgeBracketVo> ageBracketVoList = new ArrayList<AgeBracketVo>(ageBracketModelList.size());
 		for (AgeBracketModel ageBracketModel : ageBracketModelList) {

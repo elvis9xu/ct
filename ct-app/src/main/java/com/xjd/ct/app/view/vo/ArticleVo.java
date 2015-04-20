@@ -1,5 +1,7 @@
 package com.xjd.ct.app.view.vo;
 
+import java.util.List;
+
 /**
  * 用户发表对象
  * 
@@ -15,7 +17,7 @@ public class ArticleVo extends ObjectVo {
 
 	private String articleLink;
 
-	private ResourceVo articleImgResource;
+	private List<ObjectResourceVo> objectResourceList;
 
 	public Long getArticleId() {
 		return articleId;
@@ -49,11 +51,11 @@ public class ArticleVo extends ObjectVo {
 		this.articleLink = articleLink;
 	}
 
-	public ResourceVo getArticleImgResource() {
-		return articleImgResource;
+	public List<ObjectResourceVo> getObjectResourceList() {
+		return objectResourceList;
 	}
 
-	public void setArticleImgResource(ResourceVo articleImgResource) {
-		this.articleImgResource = articleImgResource;
+	public void setObjectResourceList(List<ObjectResourceVo> objectResourceList) {
+		this.objectResourceList = objectResourceList;
 	}
 }

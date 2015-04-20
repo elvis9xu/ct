@@ -13,22 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xjd.ct.biz.bo.TokenBo;
 import com.xjd.ct.biz.bo.UserBo;
 import com.xjd.ct.biz.util.BeanTansferUtil;
+import com.xjd.ct.dal.dao.ObjectResourceDao;
 import com.xjd.ct.dal.dao.SequenceDao;
 import com.xjd.ct.dal.dao.TokenDao;
 import com.xjd.ct.dal.dao.UserDao;
-import com.xjd.ct.dal.dos.TokenModel;
-import com.xjd.ct.dal.dos.UserBabyModel;
-import com.xjd.ct.dal.dos.UserInfoModel;
-import com.xjd.ct.dal.dos.UserModel;
-import com.xjd.ct.dal.dos.UserSummaryModel;
+import com.xjd.ct.dal.dos.*;
 import com.xjd.ct.utl.AppUtil;
 import com.xjd.ct.utl.DateUtil;
 import com.xjd.ct.utl.DigestUtil;
 import com.xjd.ct.utl.constant.AppConstant;
-import com.xjd.ct.utl.enums.BoolEnum;
-import com.xjd.ct.utl.enums.UserSexEnum;
-import com.xjd.ct.utl.enums.UserStatusEnum;
-import com.xjd.ct.utl.enums.UserTypeEnum;
+import com.xjd.ct.utl.enums.*;
 import com.xjd.ct.utl.exception.BusinessException;
 import com.xjd.ct.utl.respcode.RespCode;
 
@@ -50,6 +44,8 @@ public class UserService {
 	TokenDao tokenDao;
 	@Autowired
 	UserDao userDao;
+	@Autowired
+	ObjectResourceDao objectResourceDao;
 
 	// ===============TOKEN=============== //
 
@@ -227,7 +223,7 @@ public class UserService {
 		userDo.setSinaWeiboBindFlag(BoolEnum.FALSE.getCode());
 		userDo.setTecentWeiboFlag(BoolEnum.FALSE.getCode());
 		userDo.setFailTimes((short) 0);
-		userDo.setUserStatus(UserStatusEnum.NORMAL.getCode());
+		userDo.setUserStatus(UserStatusEnum.NO_INFO.getCode());
 		userDo.setAddTime(now);
 		userDao.insertUser(userDo);
 
@@ -239,7 +235,6 @@ public class UserService {
 		userInfoModel.setGradeLevel((byte) 0);
 		userInfoModel.setPoint(0);
 		userInfoModel.setNickname(generateNickname(UserSexEnum.FEMALE));
-		userInfoModel.setHeadImgRes(null);
 		userInfoModel.setSex(UserSexEnum.FEMALE.getCode());
 		userInfoModel.setAddTime(now);
 		userInfoModel.setUpdTime(now);
@@ -276,10 +271,10 @@ public class UserService {
 		}
 
 		UserStatusEnum statusEnum = UserStatusEnum.valueOfCode(userModel.getUserStatus());
-		if (statusEnum == UserStatusEnum.LOCKED) {
-			throw new BusinessException(RespCode.RESP_0114);
-
-		} else if (statusEnum == UserStatusEnum.NON_ACTIVE) {
+//		if (statusEnum == UserStatusEnum.LOCKED) {
+//			throw new BusinessException(RespCode.RESP_0114);
+//		}
+		if (statusEnum == UserStatusEnum.NON_ACTIVE) {
 			throw new BusinessException(RespCode.RESP_0115);
 		}
 
@@ -351,6 +346,7 @@ public class UserService {
 	@Transactional
 	public void setUserInfo(Long userId, String headImgRes, String nickname, Byte sex, String moodWords,
 			Date babyBirth, Byte babySex) {
+		// 更新用户信息
 		UserInfoModel userInfoModel = userDao.selectUserInfoByUserId(userId);
 
 		if (userInfoModel == null) {
@@ -358,7 +354,6 @@ public class UserService {
 		}
 
 		Date now = DateUtil.now();
-		userInfoModel.setHeadImgRes(headImgRes);
 		userInfoModel.setNickname(nickname);
 		userInfoModel.setSex(sex);
 		userInfoModel.setMoodWords(moodWords);
@@ -366,6 +361,25 @@ public class UserService {
 		userInfoModel.setUpdTime(now);
 		userDao.updateUserInfoByUserId(userInfoModel);
 
+		// 更新用户头像信息
+		objectResourceDao.deleteByObjectTypeAndObjectRefId(ObjectTypeEnum.USER.getCode(), userId);
+		if (StringUtils.isNotBlank(headImgRes)) {
+			String[] headImgArray = headImgRes.split(";");
+			for (String headImg : headImgArray) {
+				headImg = StringUtils.trim(headImg);
+				String[] parts = headImg.split(",");
+				ObjectResourceModel objectResourceModel = new ObjectResourceModel();
+				objectResourceModel.setObjectType(ObjectTypeEnum.USER.getCode());
+				objectResourceModel.setObjectRefId(userId);
+				objectResourceModel.setResId(parts[0].trim());
+				objectResourceModel.setForClass(ResForClassEnum.HEAD_IMG.getCode());
+				objectResourceModel.setForSubclass(parts.length > 1 ? parts[1].trim() : "");
+				objectResourceModel.setAddTime(now);
+				objectResourceDao.insert(objectResourceDao);
+			}
+		}
+
+		// 更新用户宝宝信息
 		List<UserBabyModel> babyModelList = userDao.selectUserBabyByUserId(userId);
 		if (babyModelList.size() > 0) {
 			// 更新
@@ -384,6 +398,17 @@ public class UserService {
 			babyModel.setAddTime(now);
 			babyModel.setUpdTime(now);
 			userDao.insertUserBaby(babyModel);
+		}
+
+		// 查看用户的状态是否为未设置个人信息
+		UserModel userModel = userDao.selectUserByUserId(userId);
+
+		if (userModel == null) {
+			throw new BusinessException(RespCode.RESP_0110);
+		}
+
+		if (UserStatusEnum.valueOfCode(userModel.getUserStatus()) == UserStatusEnum.NO_INFO) {
+			userDao.updateUserStatusByUserId(UserStatusEnum.NORMAL.getCode(), userId);
 		}
 	}
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xjd.ct.app.view.vo.MsgInformVo;
-import com.xjd.ct.dal.dao.MsgBizDao;
+import com.xjd.ct.dal.dao.AppMsgDao;
 import com.xjd.ct.dal.dos.MsgInformModel;
 
 /**
@@ -21,11 +21,11 @@ import com.xjd.ct.dal.dos.MsgInformModel;
 @Service
 public class MsgBiz {
 	@Autowired
-	MsgBizDao msgBizDao;
+	AppMsgDao appMsgDao;
 
 	@Transactional(readOnly = true)
 	public List<MsgInformVo> listMsgs(Long userId, long offset, int limit) {
-		List<MsgInformModel> msgInformModelList = msgBizDao.selectMsgInformByUserIdAndPage(userId, offset, limit);
+		List<MsgInformModel> msgInformModelList = appMsgDao.selectMsgInformByUserIdAndPage(userId, offset, limit);
 
 		List<MsgInformVo> msgInformVoList = new ArrayList<MsgInformVo>(msgInformModelList.size());
 		for (MsgInformModel msgInformModel : msgInformModelList) {

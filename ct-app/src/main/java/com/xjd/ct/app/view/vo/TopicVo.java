@@ -1,5 +1,7 @@
 package com.xjd.ct.app.view.vo;
 
+import java.util.List;
+
 /**
  * 用户发表对象
  * 
@@ -13,7 +15,7 @@ public class TopicVo extends ObjectVo {
 
 	private String topicDesc;
 
-	private ResourceVo topicImgResource;
+	private List<ObjectResourceVo> objectResourceList;
 
 	public Long getTopicId() {
 		return topicId;
@@ -39,11 +41,11 @@ public class TopicVo extends ObjectVo {
 		this.topicDesc = topicDesc;
 	}
 
-	public ResourceVo getTopicImgResource() {
-		return topicImgResource;
+	public List<ObjectResourceVo> getObjectResourceList() {
+		return objectResourceList;
 	}
 
-	public void setTopicImgResource(ResourceVo topicImgResource) {
-		this.topicImgResource = topicImgResource;
+	public void setObjectResourceList(List<ObjectResourceVo> objectResourceList) {
+		this.objectResourceList = objectResourceList;
 	}
 }

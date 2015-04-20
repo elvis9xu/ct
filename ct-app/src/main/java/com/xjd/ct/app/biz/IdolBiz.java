@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xjd.ct.app.view.vo.UserForOtherVo;
-import com.xjd.ct.dal.dao.IdolBizDao;
+import com.xjd.ct.dal.dao.AppIdolDao;
 import com.xjd.ct.dal.dos.UserIdolModel;
 
 /**
@@ -19,7 +19,7 @@ import com.xjd.ct.dal.dos.UserIdolModel;
 @Service
 public class IdolBiz {
 	@Autowired
-	IdolBizDao idolBizDao;
+	AppIdolDao appIdolDao;
 	@Autowired
 	UserBiz userBiz;
 
@@ -32,7 +32,7 @@ public class IdolBiz {
 	 * @return
 	 */
 	public List<UserForOtherVo> listIdols(Long userId, long offset, int limit) {
-		List<UserIdolModel> userIdolModelList = idolBizDao.selectUserIdolByUserIdAndPage(userId, offset, limit);
+		List<UserIdolModel> userIdolModelList = appIdolDao.selectUserIdolByUserIdAndPage(userId, offset, limit);
 
 		List<UserForOtherVo> userForOtherVoList = new ArrayList<UserForOtherVo>(userIdolModelList.size());
 		for (UserIdolModel userIdolModel : userIdolModelList) {

@@ -18,7 +18,7 @@ public class PublishVo extends ObjectVo {
 	private String publishText;
 
 	// resource
-	private List<ResourceVo> resourceList;
+	private List<ObjectResourceVo> objectResourceList;
 
 	public Long getPublishId() {
 		return publishId;
@@ -44,19 +44,19 @@ public class PublishVo extends ObjectVo {
 		this.publishText = publishText;
 	}
 
-	public List<ResourceVo> getResourceList() {
-		return resourceList;
-	}
-
-	public void setResourceList(List<ResourceVo> resourceList) {
-		this.resourceList = resourceList;
-	}
-
 	public Long getUserId() {
 		return userId;
 	}
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public List<ObjectResourceVo> getObjectResourceList() {
+		return objectResourceList;
+	}
+
+	public void setObjectResourceList(List<ObjectResourceVo> objectResourceList) {
+		this.objectResourceList = objectResourceList;
 	}
 }

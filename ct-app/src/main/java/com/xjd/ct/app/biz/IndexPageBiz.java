@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import com.xjd.ct.app.view.vo.BannerVo;
 import com.xjd.ct.app.view.vo.ObjectVo;
 import com.xjd.ct.app.view.vo.ResourceVo;
-import com.xjd.ct.dal.dao.IndexPageBizDao;
-import com.xjd.ct.dal.dao.ResourceBizDao;
+import com.xjd.ct.dal.dao.AppIndexPageDao;
+import com.xjd.ct.dal.dao.AppResourceDao;
 import com.xjd.ct.dal.dos.BannerModel;
 import com.xjd.ct.dal.dos.RecommendModel;
 import com.xjd.ct.dal.dos.ResourceModel;
@@ -26,12 +26,12 @@ public class IndexPageBiz {
 	@Autowired
 	ObjectBiz objectBiz;
 	@Autowired
-	IndexPageBizDao indexPageBizDao;
+	AppIndexPageDao appIndexPageDao;
 	@Autowired
-	ResourceBizDao resourceBizDao;
+	AppResourceDao resourceBizDao;
 
 	public List<BannerVo> listBanners() {
-		List<BannerModel> bannerModelList = indexPageBizDao.selectBannerModel();
+		List<BannerModel> bannerModelList = appIndexPageDao.selectBannerModel();
 
 		List<BannerVo> list = new ArrayList<BannerVo>(bannerModelList.size());
 		for (BannerModel bannerModel : bannerModelList) {
@@ -49,7 +49,7 @@ public class IndexPageBiz {
 	}
 
 	public List<ObjectVo> listRecommendObjects() {
-		List<RecommendModel> recommendModelList = indexPageBizDao.selectRecommendModel();
+		List<RecommendModel> recommendModelList = appIndexPageDao.selectRecommendModel();
 
 		List<ObjectVo> list = new ArrayList<ObjectVo>(recommendModelList.size());
 		for (RecommendModel recommendModel : recommendModelList) {

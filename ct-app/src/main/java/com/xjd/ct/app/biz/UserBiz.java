@@ -14,7 +14,7 @@ import com.xjd.ct.app.view.vo.UserBindAccountForOtherVo;
 import com.xjd.ct.app.view.vo.UserBindAccountForSelfVo;
 import com.xjd.ct.app.view.vo.UserForOtherVo;
 import com.xjd.ct.app.view.vo.UserForSelfVo;
-import com.xjd.ct.dal.dao.UserBizDao;
+import com.xjd.ct.dal.dao.AppUserDao;
 import com.xjd.ct.dal.dos.UserBabyModel;
 import com.xjd.ct.dal.dos.UserBindAccountModel;
 import com.xjd.ct.dal.dos.UserInfoModel;
@@ -30,7 +30,7 @@ import com.xjd.ct.dal.dos.UserSummaryModel;
 @Service
 public class UserBiz {
 	@Autowired
-	UserBizDao userBizDao;
+	AppUserDao appUserDao;
 
 	/**
 	 * 组装用户数据给用户自己
@@ -39,7 +39,7 @@ public class UserBiz {
 	 * @return
 	 */
 	public UserForSelfVo getUserInfoForSelf(Long userId) {
-		UserModel userModel = userBizDao.selectUserByUserId(userId);
+		UserModel userModel = appUserDao.selectUserByUserId(userId);
 		if (userModel == null) {
 			return null;
 		}
@@ -47,13 +47,13 @@ public class UserBiz {
 		UserForSelfVo userForSelfVo = new UserForSelfVo();
 		BeanUtils.copyProperties(userModel, userForSelfVo);
 
-		UserInfoModel userInfoModel = userBizDao.selectUserInfoByUserId(userId);
+		UserInfoModel userInfoModel = appUserDao.selectUserInfoByUserId(userId);
 		BeanUtils.copyProperties(userInfoModel, userForSelfVo);
 
-		UserSummaryModel userSummaryModel = userBizDao.selectUserSummarybyUserId(userId);
+		UserSummaryModel userSummaryModel = appUserDao.selectUserSummarybyUserId(userId);
 		BeanUtils.copyProperties(userSummaryModel, userForSelfVo);
 
-		List<UserBabyModel> userBabyModelList = userBizDao.selectUserBabyByUserId(userId);
+		List<UserBabyModel> userBabyModelList = appUserDao.selectUserBabyByUserId(userId);
 		if (CollectionUtils.isNotEmpty(userBabyModelList)) {
 			List<UserBabyForSelfVo> babyForSelfVoList = new ArrayList<UserBabyForSelfVo>(userBabyModelList.size());
 			for (UserBabyModel userBabyModel : userBabyModelList) {
@@ -64,7 +64,7 @@ public class UserBiz {
 			userForSelfVo.setBabyList(babyForSelfVoList);
 		}
 
-		List<UserBindAccountModel> bindAccountModelList = userBizDao.selectUserBindAccountByUserId(userId);
+		List<UserBindAccountModel> bindAccountModelList = appUserDao.selectUserBindAccountByUserId(userId);
 		if (CollectionUtils.isNotEmpty(bindAccountModelList)) {
 			List<UserBindAccountForSelfVo> bindAccountForSelfVoList = new ArrayList<UserBindAccountForSelfVo>(
 					bindAccountModelList.size());

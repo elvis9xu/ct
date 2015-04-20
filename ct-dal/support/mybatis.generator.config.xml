@@ -5,8 +5,8 @@
 
 <generatorConfiguration>
   <!-- 修改：jdbc jar包 -->
-  <classPathEntry location="C:/Program Files (x86)/MySQL/MySQL Tools for 5.0/java/lib/mysql-connector-java-5.0.4-bin.jar" />
-  <!-- <classPathEntry location="/Users/XJD/360yunpan/repo/maven_repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar"/> -->
+  <!--<classPathEntry location="C:/Program Files (x86)/MySQL/MySQL Tools for 5.0/java/lib/mysql-connector-java-5.0.4-bin.jar" />-->
+   <classPathEntry location="/Users/XJD/360yunpan/repo/maven_repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar"/>
   <!-- 生成的class所在的根路径 -->
   <classPathEntry location="target/classes" />
 
@@ -39,41 +39,40 @@
       <property name="enableSubPackages" value="true" />
     </javaClientGenerator>
 
-    <!--<table tableName="t_age_bracket" domainObjectName="AgeBracketModel" />-->
-    <!--<table tableName="t_biz_article" domainObjectName="ArticleModel" />-->
-    <!--<table tableName="t_biz_banner" domainObjectName="BannerModel" />-->
-    <!-- <table tableName="t_biz_publish" domainObjectName="PublishModel" /> -->
-    <!--<table tableName="t_biz_publish_res_rs" domainObjectName="PublishResRsModel" />-->
-    <!--<table tableName="t_biz_recommend" domainObjectName="RecommendModel" />-->
-    <!--<table tableName="t_biz_topic" domainObjectName="TopicModel" />-->
-    <!--<table tableName="t_gw_app_version" domainObjectName="AppVersionModel" />-->
-    <!--<table tableName="t_gw_feedback" domainObjectName="FeedbackModel" />-->
-    <!--<table tableName="t_gw_service" domainObjectName="ServiceModel" />-->
-    <!--<table tableName="t_gw_service_log" domainObjectName="ServiceLogModel" />-->
-    <!--<table tableName="t_msg_inform" domainObjectName="MsgInformModel" />-->
-    <!--<table tableName="t_object" domainObjectName="ObjectModel" />-->
-    <!--<table tableName="t_object_comment" domainObjectName="ObjectCommentModel" />-->
-    <!--<table tableName="t_object_comment_like" domainObjectName="ObjectCommentLikeModel" />-->
-    <!--<table tableName="t_object_favor" domainObjectName="ObjectFavorModel" />-->
-    <!--<table tableName="t_object_like" domainObjectName="ObjectLikeModel" />-->
-    <!--<table tableName="t_object_tag" domainObjectName="ObjectTagModel" />-->
-    <!--<table tableName="t_object_tag_rs" domainObjectName="ObjectTagRsModel" />-->
-    <!--<table tableName="t_object_vote" domainObjectName="ObjectVoteModel" />-->
-    <!--<table tableName="t_object_vote_opt" domainObjectName="ObjectVoteOptModel" />-->
-    <!--<table tableName="t_report" domainObjectName="ReportModel" />-->
-    <table tableName="t_resource" domainObjectName="ResourceModel" />
-    <!--<table tableName="t_sequence" domainObjectName="SequenceModel" />-->
-    <!--<table tableName="t_subscribe" domainObjectName="SubscribeModel" />-->
-    <!--<table tableName="t_token" domainObjectName="TokenModel" />-->
-    <!--<table tableName="t_user" domainObjectName="UserModel" />-->
-    <!--<table tableName="t_user_age_bracket_res" domainObjectName="UserAgeBracketResModel" />-->
-    <!--<table tableName="t_user_baby" domainObjectName="UserBabyModel" />-->
-    <!--<table tableName="t_user_bind_account" domainObjectName="UserBindAccountModel" />-->
-    <!--<table tableName="t_user_idol" domainObjectName="UserIdolModel" />-->
-    <!--<table tableName="t_user_info" domainObjectName="UserInfoModel" />-->
-    <!--<table tableName="t_user_resource_rs" domainObjectName="UserResourceRsModel" />-->
-    <!--<table tableName="t_user_subscribe" domainObjectName="UserSubscribeModel" />-->
-    <!--<table tableName="t_user_summary" domainObjectName="UserSummaryModel" />-->
+    <table tableName="T_AGE_BRACKET" domainObjectName="AgeBracketModel" />
+    <table tableName="T_BIZ_ARTICLE" domainObjectName="ArticleModel" />
+    <table tableName="T_BIZ_BANNER" domainObjectName="BannerModel" />
+    <table tableName="T_BIZ_PUBLISH" domainObjectName="PublishModel" />
+    <table tableName="T_BIZ_RECOMMEND" domainObjectName="RecommendModel" />
+    <table tableName="T_BIZ_TOPIC" domainObjectName="TopicModel" />
+    <table tableName="T_GW_APP_VERSION" domainObjectName="AppVersionModel" />
+    <table tableName="T_GW_FEEDBACK" domainObjectName="FeedbackModel" />
+    <table tableName="T_GW_SERVICE" domainObjectName="ServiceModel" />
+    <table tableName="T_GW_SERVICE_LOG" domainObjectName="ServiceLogModel" />
+    <table tableName="T_MSG_INFORM" domainObjectName="MsgInformModel" />
+    <table tableName="T_OBJECT" domainObjectName="ObjectModel" />
+    <table tableName="T_OBJECT_COMMENT" domainObjectName="ObjectCommentModel" />
+    <table tableName="T_OBJECT_COMMENT_LIKE" domainObjectName="ObjectCommentLikeModel" />
+    <table tableName="T_OBJECT_FAVOR" domainObjectName="ObjectFavorModel" />
+    <table tableName="T_OBJECT_LIKE" domainObjectName="ObjectLikeModel" />
+    <table tableName="T_OBJECT_RESOURCE" domainObjectName="ObjectResourceModel" />
+    <table tableName="T_OBJECT_TAG" domainObjectName="ObjectTagModel" />
+    <table tableName="T_OBJECT_TAG_RS" domainObjectName="ObjectTagRsModel" />
+    <table tableName="T_OBJECT_VOTE" domainObjectName="ObjectVoteModel" />
+    <table tableName="T_OBJECT_VOTE_OPT" domainObjectName="ObjectVoteOptModel" />
+    <table tableName="T_REPORT" domainObjectName="ReportModel" />
+    <table tableName="T_RESOURCE" domainObjectName="ResourceModel" />
+    <table tableName="T_SUBSCRIBE" domainObjectName="SubscribeModel" />
+    <table tableName="T_TOKEN" domainObjectName="TokenModel" />
+    <table tableName="T_USER" domainObjectName="UserModel" />
+    <table tableName="T_USER_AGE_BRACKET_RES" domainObjectName="UserAgeBracketResModel" />
+    <table tableName="T_USER_BABY" domainObjectName="UserBabyModel" />
+    <table tableName="T_USER_BIND_ACCOUNT" domainObjectName="UserBindAccountModel" />
+    <table tableName="T_USER_IDOL" domainObjectName="UserIdolModel" />
+    <table tableName="T_USER_INFO" domainObjectName="UserInfoModel" />
+    <table tableName="T_USER_RESOURCE_RS" domainObjectName="UserResourceRsModel" />
+    <table tableName="T_USER_SUBSCRIBE" domainObjectName="UserSubscribeModel" />
+    <table tableName="T_USER_SUMMARY" domainObjectName="UserSummaryModel" />
 
   </context>
 

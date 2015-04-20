@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xjd.ct.app.view.vo.*;
-import com.xjd.ct.dal.dao.ObjectBizDao;
-import com.xjd.ct.dal.dao.ResourceBizDao;
+import com.xjd.ct.dal.dao.AppObjectDao;
+import com.xjd.ct.dal.dao.AppResourceDao;
 import com.xjd.ct.dal.dos.*;
 import com.xjd.ct.utl.enums.ObjectTypeEnum;
 import com.xjd.ct.utl.exception.BusinessException;
@@ -24,12 +24,12 @@ import com.xjd.ct.utl.respcode.RespCode;
 @Service
 public class ObjectBiz {
 	@Autowired
-	ResourceBizDao resourceBizDao;
+	AppResourceDao resourceBizDao;
 	@Autowired
-	ObjectBizDao objectBizDao;
+	AppObjectDao appObjectDao;
 
 	public List<PublishVo> listPublishs(Long userId, long offset, int limit) {
-		List<PublishModel> publishModelList = objectBizDao.selectPublishByUserIdAndPage(userId, offset, limit);
+		List<PublishModel> publishModelList = appObjectDao.selectPublishByUserIdAndPage(userId, offset, limit);
 
 		List<PublishVo> publishVoList = new ArrayList<PublishVo>(publishModelList.size());
 
@@ -39,7 +39,7 @@ public class ObjectBiz {
 			BeanUtils.copyProperties(publishModel, publishVo);
 
 			// 查询资源
-			List<PublishResRsModel> publishResRsModelList = objectBizDao
+			List<PublishResRsModel> publishResRsModelList = appObjectDao
 					.selectPublishResRsModelByPublishId(publishModel.getPublishId());
 			List<ResourceVo> resourceVoList = new ArrayList<ResourceVo>(publishResRsModelList.size());
 			for (PublishResRsModel publishResRsModel : publishResRsModelList) {
@@ -51,7 +51,7 @@ public class ObjectBiz {
 			publishVo.setResourceList(resourceVoList);
 
 			// 组装对象信息
-			ObjectModel objectModel = objectBizDao.selectObjectModelByObjectTypeAndObjectRefId(
+			ObjectModel objectModel = appObjectDao.selectObjectModelByObjectTypeAndObjectRefId(
 					ObjectTypeEnum.PUBLISH.getCode(), publishModel.getPublishId());
 			BeanUtils.copyProperties(objectModel, publishVo);
 
@@ -62,13 +62,13 @@ public class ObjectBiz {
 	}
 
 	public List<ObjectVo> listFavors(Long userId, long offset, int count) {
-		List<ObjectFavorModel> objectFavorModelList = objectBizDao.selectObjectFavorModelByUserIdAndPage(userId,
+		List<ObjectFavorModel> objectFavorModelList = appObjectDao.selectObjectFavorModelByUserIdAndPage(userId,
 				offset, count);
 
 		List<ObjectVo> objectVoList = new ArrayList<ObjectVo>(objectFavorModelList.size());
 
 		for (ObjectFavorModel objectFavorModel : objectFavorModelList) {
-			ObjectModel objectModel = objectBizDao.selectObjectModelByObjectId(objectFavorModel.getObjectId());
+			ObjectModel objectModel = appObjectDao.selectObjectModelByObjectId(objectFavorModel.getObjectId());
 			ObjectVo objectVo = assemble(objectModel.getObjectType(), objectModel.getObjectRefId());
 			objectVoList.add(objectVo);
 		}
@@ -77,13 +77,13 @@ public class ObjectBiz {
 	}
 
 	public List<ObjectVo> listLikes(Long userId, long offset, int count) {
-		List<ObjectLikeModel> objectLikeModelList = objectBizDao.selectObjectLikeModelByUserIdAndPage(userId, offset,
+		List<ObjectLikeModel> objectLikeModelList = appObjectDao.selectObjectLikeModelByUserIdAndPage(userId, offset,
 				count);
 
 		List<ObjectVo> objectVoList = new ArrayList<ObjectVo>(objectLikeModelList.size());
 
 		for (ObjectLikeModel objectLikeModel : objectLikeModelList) {
-			ObjectModel objectModel = objectBizDao.selectObjectModelByObjectId(objectLikeModel.getObjectId());
+			ObjectModel objectModel = appObjectDao.selectObjectModelByObjectId(objectLikeModel.getObjectId());
 			ObjectVo objectVo = assemble(objectModel.getObjectType(), objectModel.getObjectRefId());
 			objectVoList.add(objectVo);
 		}
@@ -96,7 +96,7 @@ public class ObjectBiz {
 
 		ObjectTypeEnum objectTypeEnum = ObjectTypeEnum.valueOfCode(objectType);
 		if (objectTypeEnum == ObjectTypeEnum.PUBLISH) {
-			PublishModel publishModel = objectBizDao.selectPublishByPublishId(refId);
+			PublishModel publishModel = appObjectDao.selectPublishByPublishId(refId);
 			if (publishModel == null) {
 				return null;
 			}
@@ -105,7 +105,7 @@ public class ObjectBiz {
 			BeanUtils.copyProperties(publishModel, publishVo);
 
 			// 查询资源
-			List<PublishResRsModel> publishResRsModelList = objectBizDao
+			List<PublishResRsModel> publishResRsModelList = appObjectDao
 					.selectPublishResRsModelByPublishId(publishModel.getPublishId());
 			List<ResourceVo> resourceVoList = new ArrayList<ResourceVo>(publishResRsModelList.size());
 			for (PublishResRsModel publishResRsModel : publishResRsModelList) {
@@ -117,7 +117,7 @@ public class ObjectBiz {
 			publishVo.setResourceList(resourceVoList);
 
 		} else if (objectTypeEnum == ObjectTypeEnum.ARTICLE) {
-			ArticleModel articleModel = objectBizDao.selectArticleByArticleId(refId);
+			ArticleModel articleModel = appObjectDao.selectArticleByArticleId(refId);
 			if (articleModel == null) {
 				return null;
 			}
@@ -132,7 +132,7 @@ public class ObjectBiz {
 			articleVo.setArticleImgResource(resourceVo);
 
 		} else if (objectTypeEnum == ObjectTypeEnum.TOPIC) {
-			TopicModel topicModel = objectBizDao.selectTopicByTopicId(refId);
+			TopicModel topicModel = appObjectDao.selectTopicByTopicId(refId);
 			if (topicModel == null) {
 				return null;
 			}
@@ -149,7 +149,7 @@ public class ObjectBiz {
 
 		if (objectVo != null) {
 			// 组装对象信息
-			ObjectModel objectModel = objectBizDao.selectObjectModelByObjectTypeAndObjectRefId(
+			ObjectModel objectModel = appObjectDao.selectObjectModelByObjectTypeAndObjectRefId(
 					objectTypeEnum.getCode(), refId);
 			BeanUtils.copyProperties(objectModel, objectVo);
 		}
@@ -157,7 +157,7 @@ public class ObjectBiz {
 	}
 
 	public CommentVo queryComment(Long commentId) {
-		ObjectCommentModel commentModel = objectBizDao.selectObjectCommentModelByCommentId(commentId);
+		ObjectCommentModel commentModel = appObjectDao.selectObjectCommentModelByCommentId(commentId);
 		if (commentModel == null) {
 			return null;
 		}
@@ -167,12 +167,12 @@ public class ObjectBiz {
 	}
 
 	public List<CommentVo> listComments(Byte objectType, Long objectRefId) {
-		ObjectModel objectModel = objectBizDao.selectObjectModelByObjectTypeAndObjectRefId(objectType, objectRefId);
+		ObjectModel objectModel = appObjectDao.selectObjectModelByObjectTypeAndObjectRefId(objectType, objectRefId);
 		if (objectModel == null) {
 			throw new BusinessException(RespCode.RESP_0201);
 		}
 
-		List<ObjectCommentModel> commentModelList = objectBizDao.selectObjectCommentModelByObjectId(objectModel
+		List<ObjectCommentModel> commentModelList = appObjectDao.selectObjectCommentModelByObjectId(objectModel
 				.getObjectId());
 		List<CommentVo> list = new ArrayList<CommentVo>(commentModelList.size());
 		for (ObjectCommentModel commentModel : commentModelList) {
@@ -185,7 +185,7 @@ public class ObjectBiz {
 
 	public List<ObjectVo> listArticles(Byte orderBy, Long offset, Integer count) {
 		// 目前仅支持时间倒序
-		List<ArticleModel> articleModelList = objectBizDao.selectArticleByPageOrderByAddTimeDesc(offset, count);
+		List<ArticleModel> articleModelList = appObjectDao.selectArticleByPageOrderByAddTimeDesc(offset, count);
 
 		List<ObjectVo> list = new ArrayList<ObjectVo>(articleModelList.size());
 		for (ArticleModel articleModel : articleModelList) {
@@ -199,7 +199,7 @@ public class ObjectBiz {
 	}
 
 	public List<ObjectVo> listPublishs(Byte orderBy, Long offset, Integer count) {
-		List<PublishModel> publishModelList = objectBizDao.selectPublishByPageOrderByAddTimeDesc(offset, count);
+		List<PublishModel> publishModelList = appObjectDao.selectPublishByPageOrderByAddTimeDesc(offset, count);
 
 		List<ObjectVo> list = new ArrayList<ObjectVo>(publishModelList.size());
 		for (PublishModel publishModel : publishModelList) {
@@ -212,7 +212,7 @@ public class ObjectBiz {
 	}
 
 	public List<ObjectVo> listPublishs(Long userId, Byte orderBy, Long offset, Integer count) {
-		List<PublishModel> publishModelList = objectBizDao.selectPublishByUserIdListAndPageOrderByAddTimeDesc(userId,
+		List<PublishModel> publishModelList = appObjectDao.selectPublishByUserIdListAndPageOrderByAddTimeDesc(userId,
 				offset, count);
 
 		List<ObjectVo> list = new ArrayList<ObjectVo>(publishModelList.size());

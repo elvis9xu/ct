@@ -1,19 +1,19 @@
 package com.xjd.ct.utl.enums;
 
 /**
- * 对象类型
+ * 资源用途大类
  * 
  * @author elvis.xu
  * @since 2014-9-18
  */
-public enum ObjectTypeEnum {
+public enum ResForClassEnum {
 
-	ARTICLE((byte) 1, "文章"), PUBLISH((byte) 2, "用户发表"), TOPIC((byte) 3, "话题"), USER((byte) 4, "用户");
+	HEAD_IMG((byte) 1, "头像"), LIST_IMG((byte) 2, "列表封面"), DETAIL_IMG((byte) 3, "详情图片");
 
 	byte code;
 	String desc;
 
-	ObjectTypeEnum(byte code, String desc) {
+	ResForClassEnum(byte code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}
@@ -27,14 +27,14 @@ public enum ObjectTypeEnum {
 	}
 
 	public String toString() {
-		return ObjectTypeEnum.class.getSimpleName() + "[code=" + code + ", desc=" + desc + "]";
+		return ResForClassEnum.class.getSimpleName() + "[code=" + code + ", desc=" + desc + "]";
 	}
 
-	public static ObjectTypeEnum valueOfCode(Byte code) {
+	public static ResForClassEnum valueOfCode(Byte code) {
 		if (code == null) {
 			return null;
 		}
-		for (ObjectTypeEnum e : ObjectTypeEnum.values()) {
+		for (ResForClassEnum e : ResForClassEnum.values()) {
 			if (e.getCode() == code.byteValue()) {
 				return e;
 			}

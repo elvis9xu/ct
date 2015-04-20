@@ -8,7 +8,7 @@ package com.xjd.ct.utl.enums;
  */
 public enum UserStatusEnum {
 
-	NORMAL((byte) 0, "正常"), LOCKED((byte) 1, "锁定"), NON_ACTIVE((byte) 2, "未激活");
+	NORMAL((byte) 0, "正常"), NO_INFO((byte) 1, "未设置个人信息"), NON_ACTIVE((byte) 2, "未激活");
 
 	byte code;
 	String desc;

@@ -149,6 +149,16 @@ public class UserDao {
 		return userModelMapper.updateByPrimaryKeySelective(upd);
 	}
 
+	public int updateUserStatusByUserId(byte userStatus, Long userId) {
+		UserModel upd = new UserModel();
+		upd.setUserId(userId);
+		upd.setUserStatus(userStatus);
+		upd.setUpdTime(DateUtil.now());
+
+		return userModelMapper.updateByPrimaryKeySelective(upd);
+
+	}
+
 	// ==============用户信息=============== //
 
 	/**
