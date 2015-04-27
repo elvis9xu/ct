@@ -1,14 +1,12 @@
 package com.xjd.ct.app.view.vo;
 
-import java.util.List;
-
 /**
  * 用户发表对象
  * 
  * @author elvis.xu
  * @since 2015-03-26 22:53
  */
-public class PublishVo extends ObjectVo {
+public class PublishVo extends ObjectWithResourceVo {
 	private Long publishId;
 
 	private Long userId;
@@ -16,9 +14,6 @@ public class PublishVo extends ObjectVo {
 	private String publishTitle;
 
 	private String publishText;
-
-	// resource
-	private List<ObjectResourceVo> objectResourceList;
 
 	public Long getPublishId() {
 		return publishId;
@@ -52,11 +47,4 @@ public class PublishVo extends ObjectVo {
 		this.userId = userId;
 	}
 
-	public List<ObjectResourceVo> getObjectResourceList() {
-		return objectResourceList;
-	}
-
-	public void setObjectResourceList(List<ObjectResourceVo> objectResourceList) {
-		this.objectResourceList = objectResourceList;
-	}
 }

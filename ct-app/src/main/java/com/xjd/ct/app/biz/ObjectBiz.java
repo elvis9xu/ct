@@ -28,6 +28,69 @@ public class ObjectBiz {
 	@Autowired
 	AppObjectDao appObjectDao;
 
+	protected ObjectVo getObject(Byte objectType, Long objectRefId) {
+		ObjectTypeEnum objectTypeEnum = ObjectTypeEnum.valueOfCode(objectType);
+		switch (objectTypeEnum) {
+		case ARTICLE:
+			ArticleVo articleVo = new ArticleVo();
+			ArticleModel articleModel = appObjectDao.selectArticleByArticleId(objectRefId);
+			BeanUtils.copyProperties(articleModel, articleVo);
+			assemble(articleVo);
+			return articleVo;
+		case PUBLISH:
+			PublishVo publishVo = new PublishVo();
+			PublishModel publishModel = appObjectDao.selectPublishByPublishId(objectRefId);
+			BeanUtils.copyProperties(publishModel, publishVo);
+			assemble(publishVo);
+			return publishVo;
+		case TOPIC:
+			TopicVo topicVo = new TopicVo();
+			TopicModel topicModel = appObjectDao.selectTopicByTopicId(objectRefId);
+			BeanUtils.copyProperties(topicModel, topicVo);
+			assemble(topicVo);
+			return topicVo;
+		}
+		return null;
+	}
+
+	protected void assemble(ObjectVo objectVo) {
+		if (objectVo instanceof TopicVo) {
+			TopicVo topicVo = (TopicVo) objectVo;
+			assembleObject(topicVo, ObjectTypeEnum.TOPIC.getCode(), topicVo.getTopicId());
+			assembleResource(topicVo, ObjectTypeEnum.TOPIC.getCode(), topicVo.getTopicId());
+
+		} else if (objectVo instanceof PublishVo) {
+			PublishVo publishVo = (PublishVo) objectVo;
+			assembleObject(publishVo, ObjectTypeEnum.PUBLISH.getCode(), publishVo.getPublishId());
+			assembleResource(publishVo, ObjectTypeEnum.PUBLISH.getCode(), publishVo.getPublishId());
+
+		} else if (objectVo instanceof ArticleVo) {
+			ArticleVo articleVo = (ArticleVo) objectVo;
+			assembleObject(articleVo, ObjectTypeEnum.ARTICLE.getCode(), articleVo.getArticleId());
+			assembleResource(articleVo, ObjectTypeEnum.ARTICLE.getCode(), articleVo.getArticleId());
+		}
+	}
+
+	protected void assembleResource(ObjectWithResourceVo objectWithResourceVo, Byte objectType, Long objectRefId) {
+		List<ObjectResourceModel> objectResourceModelList = appObjectDao
+				.selectObjectResourceByObjectTypeAndObjectRefId(objectType, objectRefId);
+		List<ObjectResourceVo> objectResourceVoList = new ArrayList<ObjectResourceVo>(objectResourceModelList.size());
+		for (ObjectResourceModel objectResourceModel : objectResourceModelList) {
+			ObjectResourceVo objectResourceVo = new ObjectResourceVo();
+			ResourceModel resourceModel = resourceBizDao.selectResourceModelByResId(objectResourceModel.getResId());
+			BeanUtils.copyProperties(resourceModel, objectResourceVo);
+			BeanUtils.copyProperties(objectResourceModel, objectResourceVo);
+			objectResourceVoList.add(objectResourceVo);
+		}
+
+		objectWithResourceVo.setObjectResourceList(objectResourceVoList);
+	}
+
+	protected void assembleObject(ObjectVo objectVo, Byte objectType, Long objectRefId) {
+		ObjectModel objectModel = appObjectDao.selectObjectModelByObjectTypeAndObjectRefId(objectType, objectRefId);
+		BeanUtils.copyProperties(objectModel, objectVo);
+	}
+
 	public List<PublishVo> listPublishs(Long userId, long offset, int limit) {
 		List<PublishModel> publishModelList = appObjectDao.selectPublishByUserIdAndPage(userId, offset, limit);
 
@@ -35,26 +98,8 @@ public class ObjectBiz {
 
 		for (PublishModel publishModel : publishModelList) {
 			PublishVo publishVo = new PublishVo();
-
 			BeanUtils.copyProperties(publishModel, publishVo);
-
-			// 查询资源
-			List<PublishResRsModel> publishResRsModelList = appObjectDao
-					.selectPublishResRsModelByPublishId(publishModel.getPublishId());
-			List<ResourceVo> resourceVoList = new ArrayList<ResourceVo>(publishResRsModelList.size());
-			for (PublishResRsModel publishResRsModel : publishResRsModelList) {
-				ResourceModel resourceModel = resourceBizDao.selectResourceModelByResId(publishResRsModel.getResId());
-				ResourceVo resourceVo = new ResourceVo();
-				BeanUtils.copyProperties(resourceModel, resourceVo);
-				resourceVoList.add(resourceVo);
-			}
-			publishVo.setResourceList(resourceVoList);
-
-			// 组装对象信息
-			ObjectModel objectModel = appObjectDao.selectObjectModelByObjectTypeAndObjectRefId(
-					ObjectTypeEnum.PUBLISH.getCode(), publishModel.getPublishId());
-			BeanUtils.copyProperties(objectModel, publishVo);
-
+			assemble(publishVo);
 			publishVoList.add(publishVo);
 		}
 
@@ -69,7 +114,7 @@ public class ObjectBiz {
 
 		for (ObjectFavorModel objectFavorModel : objectFavorModelList) {
 			ObjectModel objectModel = appObjectDao.selectObjectModelByObjectId(objectFavorModel.getObjectId());
-			ObjectVo objectVo = assemble(objectModel.getObjectType(), objectModel.getObjectRefId());
+			ObjectVo objectVo = getObject(objectModel.getObjectType(), objectModel.getObjectRefId());
 			objectVoList.add(objectVo);
 		}
 
@@ -84,76 +129,11 @@ public class ObjectBiz {
 
 		for (ObjectLikeModel objectLikeModel : objectLikeModelList) {
 			ObjectModel objectModel = appObjectDao.selectObjectModelByObjectId(objectLikeModel.getObjectId());
-			ObjectVo objectVo = assemble(objectModel.getObjectType(), objectModel.getObjectRefId());
+			ObjectVo objectVo = getObject(objectModel.getObjectType(), objectModel.getObjectRefId());
 			objectVoList.add(objectVo);
 		}
 
 		return objectVoList;
-	}
-
-	public ObjectVo assemble(Byte objectType, Long refId) {
-		ObjectVo objectVo = null;
-
-		ObjectTypeEnum objectTypeEnum = ObjectTypeEnum.valueOfCode(objectType);
-		if (objectTypeEnum == ObjectTypeEnum.PUBLISH) {
-			PublishModel publishModel = appObjectDao.selectPublishByPublishId(refId);
-			if (publishModel == null) {
-				return null;
-			}
-
-			PublishVo publishVo = new PublishVo();
-			BeanUtils.copyProperties(publishModel, publishVo);
-
-			// 查询资源
-			List<PublishResRsModel> publishResRsModelList = appObjectDao
-					.selectPublishResRsModelByPublishId(publishModel.getPublishId());
-			List<ResourceVo> resourceVoList = new ArrayList<ResourceVo>(publishResRsModelList.size());
-			for (PublishResRsModel publishResRsModel : publishResRsModelList) {
-				ResourceModel resourceModel = resourceBizDao.selectResourceModelByResId(publishResRsModel.getResId());
-				ResourceVo resourceVo = new ResourceVo();
-				BeanUtils.copyProperties(resourceModel, resourceVo);
-				resourceVoList.add(resourceVo);
-			}
-			publishVo.setResourceList(resourceVoList);
-
-		} else if (objectTypeEnum == ObjectTypeEnum.ARTICLE) {
-			ArticleModel articleModel = appObjectDao.selectArticleByArticleId(refId);
-			if (articleModel == null) {
-				return null;
-			}
-
-			ArticleVo articleVo = new ArticleVo();
-			BeanUtils.copyProperties(articleModel, articleVo);
-
-			// 查询资源
-			ResourceModel resourceModel = resourceBizDao.selectResourceModelByResId(articleModel.getArticleImgRes());
-			ResourceVo resourceVo = new ResourceVo();
-			BeanUtils.copyProperties(resourceModel, resourceVo);
-			articleVo.setArticleImgResource(resourceVo);
-
-		} else if (objectTypeEnum == ObjectTypeEnum.TOPIC) {
-			TopicModel topicModel = appObjectDao.selectTopicByTopicId(refId);
-			if (topicModel == null) {
-				return null;
-			}
-
-			TopicVo topicVo = new TopicVo();
-			BeanUtils.copyProperties(topicModel, topicVo);
-
-			// 查询资源
-			ResourceModel resourceModel = resourceBizDao.selectResourceModelByResId(topicModel.getTopicImgRes());
-			ResourceVo resourceVo = new ResourceVo();
-			BeanUtils.copyProperties(resourceModel, resourceVo);
-			topicVo.setTopicImgResource(resourceVo);
-		}
-
-		if (objectVo != null) {
-			// 组装对象信息
-			ObjectModel objectModel = appObjectDao.selectObjectModelByObjectTypeAndObjectRefId(
-					objectTypeEnum.getCode(), refId);
-			BeanUtils.copyProperties(objectModel, objectVo);
-		}
-		return objectVo;
 	}
 
 	public CommentVo queryComment(Long commentId) {
@@ -189,9 +169,10 @@ public class ObjectBiz {
 
 		List<ObjectVo> list = new ArrayList<ObjectVo>(articleModelList.size());
 		for (ArticleModel articleModel : articleModelList) {
-			ObjectVo vo = assemble(ObjectTypeEnum.ARTICLE.getCode(), articleModel.getArticleId());
-
-			list.add(vo);
+			ArticleVo articleVo = new ArticleVo();
+			BeanUtils.copyProperties(articleModel, articleVo);
+			assemble(articleVo);
+			list.add(articleVo);
 		}
 
 		return list;
@@ -203,9 +184,10 @@ public class ObjectBiz {
 
 		List<ObjectVo> list = new ArrayList<ObjectVo>(publishModelList.size());
 		for (PublishModel publishModel : publishModelList) {
-			ObjectVo vo = assemble(ObjectTypeEnum.PUBLISH.getCode(), publishModel.getPublishId());
-
-			list.add(vo);
+			PublishVo publishVo = new PublishVo();
+			BeanUtils.copyProperties(publishModel, publishVo);
+			assemble(publishVo);
+			list.add(publishVo);
 		}
 
 		return list;
@@ -217,9 +199,10 @@ public class ObjectBiz {
 
 		List<ObjectVo> list = new ArrayList<ObjectVo>(publishModelList.size());
 		for (PublishModel publishModel : publishModelList) {
-			ObjectVo vo = assemble(ObjectTypeEnum.PUBLISH.getCode(), publishModel.getPublishId());
-
-			list.add(vo);
+			PublishVo publishVo = new PublishVo();
+			BeanUtils.copyProperties(publishModel, publishVo);
+			assemble(publishVo);
+			list.add(publishVo);
 		}
 
 		return list;

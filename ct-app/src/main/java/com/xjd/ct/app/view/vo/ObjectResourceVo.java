@@ -1,7 +1,5 @@
 package com.xjd.ct.app.view.vo;
 
-import java.util.Date;
-
 /**
  * @author elvis.xu
  * @since 2015-04-20 23:53
@@ -14,8 +12,6 @@ public class ObjectResourceVo extends ResourceVo {
 	private Byte forClass;
 
 	private String forSubclass;
-
-	private Date addTime;
 
 	public Byte getObjectType() {
 		return objectType;
@@ -49,13 +45,4 @@ public class ObjectResourceVo extends ResourceVo {
 		this.forSubclass = forSubclass;
 	}
 
-	@Override
-	public Date getAddTime() {
-		return addTime;
-	}
-
-	@Override
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
 }

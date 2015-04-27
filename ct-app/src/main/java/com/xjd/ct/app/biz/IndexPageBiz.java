@@ -53,7 +53,7 @@ public class IndexPageBiz {
 
 		List<ObjectVo> list = new ArrayList<ObjectVo>(recommendModelList.size());
 		for (RecommendModel recommendModel : recommendModelList) {
-			ObjectVo vo = objectBiz.assemble(recommendModel.getObjectType(), recommendModel.getRecommendRefId());
+			ObjectVo vo = objectBiz.getObject(recommendModel.getObjectType(), recommendModel.getObjectRefId());
 			list.add(vo);
 		}
 

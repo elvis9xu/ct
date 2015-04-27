@@ -34,7 +34,7 @@ public class AppObjectDao {
 	@Autowired
 	PublishModelMapper publishModelMapper;
 	@Autowired
-	PublishResRsModelMapper publishResRsModelMapper;
+	ObjectResourceModelMapper objectResourceModelMapper;
 	@Autowired
 	ArticleModelMapper articleModelMapper;
 	@Autowired
@@ -105,12 +105,6 @@ public class AppObjectDao {
 		return publishModelMapper.selectByExample(example);
 	}
 
-	public List<PublishResRsModel> selectPublishResRsModelByPublishId(Long publishId) {
-		PublishResRsModelExample example = new PublishResRsModelExample();
-		example.or().andPublishIdEqualTo(publishId);
-
-		return publishResRsModelMapper.selectByExample(example);
-	}
 
 	public ObjectCommentModel selectObjectCommentModelByCommentId(Long commentId) {
 		return objectCommentModelMapper.selectByPrimaryKey(commentId);
@@ -162,5 +156,11 @@ public class AppObjectDao {
 		example.setOffsetAndLimit(offset, count);
 
 		return publishModelMapper.selectByExample(example);
+	}
+
+	public List<ObjectResourceModel> selectObjectResourceByObjectTypeAndObjectRefId(Byte objectType, Long objectRefId) {
+		ObjectResourceModelExample example = new ObjectResourceModelExample();
+		example.or().andObjectTypeEqualTo(objectType).andObjectRefIdEqualTo(objectRefId);
+		return objectResourceModelMapper.selectByExample(example);
 	}
 }
