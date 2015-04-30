@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xjd.ct.dal.dos.ObjectResourceModel;
 import com.xjd.ct.dal.dos.ObjectResourceModelExample;
 import com.xjd.ct.dal.map.ObjectResourceModelMapper;
 
@@ -24,7 +25,7 @@ public class ObjectResourceDao {
 		return objectResourceModelMapper.deleteByExample(example);
 	}
 
-	public int insert(ObjectResourceDao objectResourceDao) {
-		return objectResourceModelMapper.insert(objectResourceDao);
+	public int insert(ObjectResourceModel objectResourceModel) {
+		return objectResourceModelMapper.insert(objectResourceModel);
 	}
 }

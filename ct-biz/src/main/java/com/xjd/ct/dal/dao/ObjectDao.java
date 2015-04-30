@@ -6,7 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xjd.ct.dal.dos.*;
+import com.xjd.ct.dal.dos.ObjectCommentModel;
+import com.xjd.ct.dal.dos.ObjectFavorModel;
+import com.xjd.ct.dal.dos.ObjectFavorModelKey;
+import com.xjd.ct.dal.dos.ObjectLikeModel;
+import com.xjd.ct.dal.dos.ObjectLikeModelKey;
+import com.xjd.ct.dal.dos.ObjectModel;
+import com.xjd.ct.dal.dos.ObjectModelExample;
 import com.xjd.ct.dal.map.ObjectCommentModelMapper;
 import com.xjd.ct.dal.map.ObjectFavorModelMapper;
 import com.xjd.ct.dal.map.ObjectLikeModelMapper;
@@ -168,5 +174,9 @@ public class ObjectDao {
 		upd.setCommentCount(objectModel.getCommentCount() - 1);
 		upd.setUpdTime(DateUtil.now());
 		return objectModelMapper.updateByPrimaryKeySelective(upd);
+	}
+
+	public int insert(ObjectModel objectModel) {
+		return objectModelMapper.insert(objectModel);
 	}
 }

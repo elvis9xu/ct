@@ -375,7 +375,7 @@ public class UserService {
 				objectResourceModel.setForClass(ResForClassEnum.HEAD_IMG.getCode());
 				objectResourceModel.setForSubclass(parts.length > 1 ? parts[1].trim() : "");
 				objectResourceModel.setAddTime(now);
-				objectResourceDao.insert(objectResourceDao);
+				objectResourceDao.insert(objectResourceModel);
 			}
 		}
 

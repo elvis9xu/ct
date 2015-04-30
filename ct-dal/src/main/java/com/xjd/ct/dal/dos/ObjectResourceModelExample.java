@@ -449,6 +449,66 @@ public class ObjectResourceModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andFinishProcessIsNull() {
+            addCriterion("FINISH_PROCESS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinishProcessIsNotNull() {
+            addCriterion("FINISH_PROCESS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinishProcessEqualTo(Byte value) {
+            addCriterion("FINISH_PROCESS =", value, "finishProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinishProcessNotEqualTo(Byte value) {
+            addCriterion("FINISH_PROCESS <>", value, "finishProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinishProcessGreaterThan(Byte value) {
+            addCriterion("FINISH_PROCESS >", value, "finishProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinishProcessGreaterThanOrEqualTo(Byte value) {
+            addCriterion("FINISH_PROCESS >=", value, "finishProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinishProcessLessThan(Byte value) {
+            addCriterion("FINISH_PROCESS <", value, "finishProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinishProcessLessThanOrEqualTo(Byte value) {
+            addCriterion("FINISH_PROCESS <=", value, "finishProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinishProcessIn(List<Byte> values) {
+            addCriterion("FINISH_PROCESS in", values, "finishProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinishProcessNotIn(List<Byte> values) {
+            addCriterion("FINISH_PROCESS not in", values, "finishProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinishProcessBetween(Byte value1, Byte value2) {
+            addCriterion("FINISH_PROCESS between", value1, value2, "finishProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andFinishProcessNotBetween(Byte value1, Byte value2) {
+            addCriterion("FINISH_PROCESS not between", value1, value2, "finishProcess");
+            return (Criteria) this;
+        }
+
         public Criteria andAddTimeIsNull() {
             addCriterion("ADD_TIME is null");
             return (Criteria) this;
@@ -506,6 +566,66 @@ public class ObjectResourceModelExample {
 
         public Criteria andAddTimeNotBetween(Date value1, Date value2) {
             addCriterion("ADD_TIME not between", value1, value2, "addTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeIsNull() {
+            addCriterion("UPD_TIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeIsNotNull() {
+            addCriterion("UPD_TIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeEqualTo(Date value) {
+            addCriterion("UPD_TIME =", value, "updTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeNotEqualTo(Date value) {
+            addCriterion("UPD_TIME <>", value, "updTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeGreaterThan(Date value) {
+            addCriterion("UPD_TIME >", value, "updTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("UPD_TIME >=", value, "updTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeLessThan(Date value) {
+            addCriterion("UPD_TIME <", value, "updTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeLessThanOrEqualTo(Date value) {
+            addCriterion("UPD_TIME <=", value, "updTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeIn(List<Date> values) {
+            addCriterion("UPD_TIME in", values, "updTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeNotIn(List<Date> values) {
+            addCriterion("UPD_TIME not in", values, "updTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeBetween(Date value1, Date value2) {
+            addCriterion("UPD_TIME between", value1, value2, "updTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdTimeNotBetween(Date value1, Date value2) {
+            addCriterion("UPD_TIME not between", value1, value2, "updTime");
             return (Criteria) this;
         }
     }

@@ -20,6 +20,7 @@ import com.xjd.ct.app.view.vo.CommentVo;
 import com.xjd.ct.app.view.vo.ObjectVo;
 import com.xjd.ct.app.view.vo.PublishVo;
 import com.xjd.ct.biz.service.BizObjectService;
+import com.xjd.ct.biz.service.PublishService;
 import com.xjd.ct.utl.enums.YesNoEnum;
 import com.xjd.ct.utl.valid.ValidationUtil;
 
@@ -36,6 +37,8 @@ public class ObjectController10 {
 	ObjectBiz objectBiz;
 	@Autowired
 	BizObjectService bizObjectService;
+	@Autowired
+	PublishService publishService;
 
 	@RequestMapping("/listMyPublishs")
 	@ResponseBody
@@ -337,6 +340,28 @@ public class ObjectController10 {
 
 		View view = ViewUtil.defaultView();
 		view.setBody(body);
+		return view;
+	}
+	
+	@RequestMapping("/addPublish")
+	@ResponseBody
+	public View addPublish(@RequestParam(value = "publishTitle", required = false) String publishTitle,
+			@RequestParam(value = "publishText", required = false) String publishText,
+			@RequestParam(value = "resources", required = false) String resources) {
+		// 参数校验
+//		ValidationUtil.check(ValidationUtil.RANGE, range, ValidationUtil.ORDER_BY, orderBy, ValidationUtil.OFFSET,
+//				offset, ValidationUtil.COUNT, count);
+//		
+//		Byte orderByB = Byte.valueOf(orderBy);
+//		Long offsetL = Long.valueOf(offset);
+//		Integer countI = Integer.valueOf(count);
+		
+		// 业务调用
+		publishService.addPublish(RequestContext.checkAndGetUserId(), publishTitle, publishText, resources);
+		
+		// 返回结果
+		
+		View view = ViewUtil.defaultView();
 		return view;
 	}
 }

@@ -7,7 +7,9 @@
     <id column="OBJECT_REF_ID" property="objectRefId" jdbcType="BIGINT" />
     <id column="FOR_CLASS" property="forClass" jdbcType="TINYINT" />
     <result column="FOR_SUBCLASS" property="forSubclass" jdbcType="VARCHAR" />
+    <result column="FINISH_PROCESS" property="finishProcess" jdbcType="TINYINT" />
     <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    RES_ID, OBJECT_TYPE, OBJECT_REF_ID, FOR_CLASS, FOR_SUBCLASS, ADD_TIME
+    RES_ID, OBJECT_TYPE, OBJECT_REF_ID, FOR_CLASS, FOR_SUBCLASS, FINISH_PROCESS, ADD_TIME, 
+    UPD_TIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ObjectResourceModelExample" >
     select
@@ -76,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from T_OBJECT_RESOURCE
+    from t_object_resource
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,35 +91,35 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjd.ct.dal.dos.ObjectResourceModelKey" >
     select 
     <include refid="Base_Column_List" />
-    from T_OBJECT_RESOURCE
+    from t_object_resource
     where RES_ID = #{resId,jdbcType=CHAR}
       and OBJECT_TYPE = #{objectType,jdbcType=TINYINT}
       and OBJECT_REF_ID = #{objectRefId,jdbcType=BIGINT}
       and FOR_CLASS = #{forClass,jdbcType=TINYINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ObjectResourceModelKey" >
-    delete from T_OBJECT_RESOURCE
+    delete from t_object_resource
     where RES_ID = #{resId,jdbcType=CHAR}
       and OBJECT_TYPE = #{objectType,jdbcType=TINYINT}
       and OBJECT_REF_ID = #{objectRefId,jdbcType=BIGINT}
       and FOR_CLASS = #{forClass,jdbcType=TINYINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.xjd.ct.dal.dos.ObjectResourceModelExample" >
-    delete from T_OBJECT_RESOURCE
+    delete from t_object_resource
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.xjd.ct.dal.dos.ObjectResourceModel" >
-    insert into T_OBJECT_RESOURCE (RES_ID, OBJECT_TYPE, OBJECT_REF_ID, 
-      FOR_CLASS, FOR_SUBCLASS, ADD_TIME
-      )
+    insert into t_object_resource (RES_ID, OBJECT_TYPE, OBJECT_REF_ID, 
+      FOR_CLASS, FOR_SUBCLASS, FINISH_PROCESS, 
+      ADD_TIME, UPD_TIME)
     values (#{resId,jdbcType=CHAR}, #{objectType,jdbcType=TINYINT}, #{objectRefId,jdbcType=BIGINT}, 
-      #{forClass,jdbcType=TINYINT}, #{forSubclass,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}
-      )
+      #{forClass,jdbcType=TINYINT}, #{forSubclass,jdbcType=VARCHAR}, #{finishProcess,jdbcType=TINYINT}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xjd.ct.dal.dos.ObjectResourceModel" >
-    insert into T_OBJECT_RESOURCE
+    insert into t_object_resource
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="resId != null" >
         RES_ID,
@@ -133,8 +136,14 @@
       <if test="forSubclass != null" >
         FOR_SUBCLASS,
       </if>
+      <if test="finishProcess != null" >
+        FINISH_PROCESS,
+      </if>
       <if test="addTime != null" >
         ADD_TIME,
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -153,19 +162,25 @@
       <if test="forSubclass != null" >
         #{forSubclass,jdbcType=VARCHAR},
       </if>
+      <if test="finishProcess != null" >
+        #{finishProcess,jdbcType=TINYINT},
+      </if>
       <if test="addTime != null" >
         #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.xjd.ct.dal.dos.ObjectResourceModelExample" resultType="java.lang.Integer" >
-    select count(*) from T_OBJECT_RESOURCE
+    select count(*) from t_object_resource
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update T_OBJECT_RESOURCE
+    update t_object_resource
     <set >
       <if test="record.resId != null" >
         RES_ID = #{record.resId,jdbcType=CHAR},
@@ -182,8 +197,14 @@
       <if test="record.forSubclass != null" >
         FOR_SUBCLASS = #{record.forSubclass,jdbcType=VARCHAR},
       </if>
+      <if test="record.finishProcess != null" >
+        FINISH_PROCESS = #{record.finishProcess,jdbcType=TINYINT},
+      </if>
       <if test="record.addTime != null" >
         ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updTime != null" >
+        UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -191,25 +212,33 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update T_OBJECT_RESOURCE
+    update t_object_resource
     set RES_ID = #{record.resId,jdbcType=CHAR},
       OBJECT_TYPE = #{record.objectType,jdbcType=TINYINT},
       OBJECT_REF_ID = #{record.objectRefId,jdbcType=BIGINT},
       FOR_CLASS = #{record.forClass,jdbcType=TINYINT},
       FOR_SUBCLASS = #{record.forSubclass,jdbcType=VARCHAR},
-      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP}
+      FINISH_PROCESS = #{record.finishProcess,jdbcType=TINYINT},
+      ADD_TIME = #{record.addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{record.updTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.xjd.ct.dal.dos.ObjectResourceModel" >
-    update T_OBJECT_RESOURCE
+    update t_object_resource
     <set >
       <if test="forSubclass != null" >
         FOR_SUBCLASS = #{forSubclass,jdbcType=VARCHAR},
       </if>
+      <if test="finishProcess != null" >
+        FINISH_PROCESS = #{finishProcess,jdbcType=TINYINT},
+      </if>
       <if test="addTime != null" >
         ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where RES_ID = #{resId,jdbcType=CHAR}
@@ -218,9 +247,11 @@
       and FOR_CLASS = #{forClass,jdbcType=TINYINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xjd.ct.dal.dos.ObjectResourceModel" >
-    update T_OBJECT_RESOURCE
+    update t_object_resource
     set FOR_SUBCLASS = #{forSubclass,jdbcType=VARCHAR},
-      ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
+      FINISH_PROCESS = #{finishProcess,jdbcType=TINYINT},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
     where RES_ID = #{resId,jdbcType=CHAR}
       and OBJECT_TYPE = #{objectType,jdbcType=TINYINT}
       and OBJECT_REF_ID = #{objectRefId,jdbcType=BIGINT}

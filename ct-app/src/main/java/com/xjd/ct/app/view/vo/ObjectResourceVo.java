@@ -13,6 +13,8 @@ public class ObjectResourceVo extends ResourceVo {
 
 	private String forSubclass;
 
+	private Byte finishProcess;
+
 	public Byte getObjectType() {
 		return objectType;
 	}
@@ -43,6 +45,16 @@ public class ObjectResourceVo extends ResourceVo {
 
 	public void setForSubclass(String forSubclass) {
 		this.forSubclass = forSubclass;
+	}
+
+	/** @return the finishProcess */
+	public Byte getFinishProcess() {
+		return finishProcess;
+	}
+
+	/** @param finishProcess the finishProcess to set */
+	public void setFinishProcess(Byte finishProcess) {
+		this.finishProcess = finishProcess;
 	}
 
 }

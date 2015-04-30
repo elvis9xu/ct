@@ -5,8 +5,8 @@
 
 <generatorConfiguration>
   <!-- 修改：jdbc jar包 -->
-  <!--<classPathEntry location="C:/Program Files (x86)/MySQL/MySQL Tools for 5.0/java/lib/mysql-connector-java-5.0.4-bin.jar" />-->
-   <classPathEntry location="/Users/XJD/360yunpan/repo/maven_repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar"/>
+  <classPathEntry location="C:/Program Files (x86)/MySQL/MySQL Tools for 5.0/java/lib/mysql-connector-java-5.0.4-bin.jar" />
+   <!-- <classPathEntry location="/Users/XJD/360yunpan/repo/maven_repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar"/> -->
   <!-- 生成的class所在的根路径 -->
   <classPathEntry location="target/classes" />
 
@@ -39,7 +39,7 @@
       <property name="enableSubPackages" value="true" />
     </javaClientGenerator>
 
-    <table tableName="T_AGE_BRACKET" domainObjectName="AgeBracketModel" />
+    <!-- <table tableName="T_AGE_BRACKET" domainObjectName="AgeBracketModel" />
     <table tableName="T_BIZ_ARTICLE" domainObjectName="ArticleModel" />
     <table tableName="T_BIZ_BANNER" domainObjectName="BannerModel" />
     <table tableName="T_BIZ_PUBLISH" domainObjectName="PublishModel" />
@@ -55,7 +55,6 @@
     <table tableName="T_OBJECT_COMMENT_LIKE" domainObjectName="ObjectCommentLikeModel" />
     <table tableName="T_OBJECT_FAVOR" domainObjectName="ObjectFavorModel" />
     <table tableName="T_OBJECT_LIKE" domainObjectName="ObjectLikeModel" />
-    <table tableName="T_OBJECT_RESOURCE" domainObjectName="ObjectResourceModel" />
     <table tableName="T_OBJECT_TAG" domainObjectName="ObjectTagModel" />
     <table tableName="T_OBJECT_TAG_RS" domainObjectName="ObjectTagRsModel" />
     <table tableName="T_OBJECT_VOTE" domainObjectName="ObjectVoteModel" />
@@ -72,7 +71,8 @@
     <table tableName="T_USER_INFO" domainObjectName="UserInfoModel" />
     <table tableName="T_USER_RESOURCE_RS" domainObjectName="UserResourceRsModel" />
     <table tableName="T_USER_SUBSCRIBE" domainObjectName="UserSubscribeModel" />
-    <table tableName="T_USER_SUMMARY" domainObjectName="UserSummaryModel" />
+    <table tableName="T_USER_SUMMARY" domainObjectName="UserSummaryModel" /> -->
+    <table tableName="T_OBJECT_RESOURCE" domainObjectName="ObjectResourceModel" />
 
   </context>
 
