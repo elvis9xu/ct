@@ -50,12 +50,12 @@ public class IndexPageController10 {
 	@RequestMapping("/listBanners")
 	@ResponseBody
 	public View listBanners() {
+		BannerListBody body = new BannerListBody();
+		body.setBannerList(list);
 		// 业务调用
 		List<BannerVo> list = indexPageBiz.listBanners();
 
 		// 返回结果
-		BannerListBody body = new BannerListBody();
-		body.setBannerList(list);
 
 		View view = ViewUtil.defaultView();
 		view.setBody(body);
